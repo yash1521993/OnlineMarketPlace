@@ -10,7 +10,7 @@
  * BankClient. The BankServer must implement this method.
  *
  */
-public interface onlineMarket extends java.rmi.Remote {
+public interface OnlineMarket extends java.rmi.Remote {
 	/**
 	 * Gets the Transaction ID number.
 	 * 
@@ -18,4 +18,5 @@ public interface onlineMarket extends java.rmi.Remote {
 	 * @throws java.rmi.RemoteException
 	 */
 	int get_id() throws java.rmi.RemoteException;
+	String registerCustomer() throws java.rmi.RemoteException;
 }
