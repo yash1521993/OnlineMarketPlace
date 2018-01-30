@@ -10,9 +10,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- * BankServer - Must implement any and all methods found in the Bank
- * interface. The variable 'name' must include the location where the
- * BankServer is going to be registered with RMI to run.
+ * OnlineMarketModel acts as a server in RMI communication and as a model
+ *	for MVC design pattern
  */
 public class OnlineMarketModel {
 	
@@ -21,31 +20,28 @@ public class OnlineMarketModel {
 		System.out.println("Registration page. Register here");
 		return "Registered";
 	}
-
-	
 	
 	public static void main(String args[]) {
 		// Set the RMI Security Manager...
 		System.setSecurityManager(new SecurityManager());
-		
+		//try and catch block for exception handling
 		try {
 			System.out.println("You are now entering Online Market Place");
 			
-			// Location of BankServer
+			// Connection string to Online Market Server
 			String name = "//tesla.cs.iupui.edu:5555/home/yashkuru/OOAD/Assignment1/onlineMarketServer";
 			
-			// Create a new instance of a BankServer.
-			OnlineMarketController bank = new OnlineMarketController(name);
-			
+			// Create a new instance of a Online market server.
+			OnlineMarketController marketCntrlr = new OnlineMarketController(name);
 			System.out.println("Reaching server:" + name);
 			
-			// Binds the BankServer to the RMI Service.
-			Naming.rebind(name, bank);
+			// rebind binds the server and RMI Service
+			Naming.rebind(name, marketCntrlr);
 			
 			System.out.println("Interface is Ready!You can register, login and shop");
 		} 
 		catch (Exception e){
-			System.out.println("Exception: " + e.getMessage());
+			System.out.println("Online Market Server Exception: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
