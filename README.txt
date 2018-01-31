@@ -12,7 +12,7 @@ Makefiles
 
 1	-Download all the java source files, policy file and upload these to Tesla server.
 2	-Open a new instance of Putty and login to the server.
-3	-To implement RMI, port 5555 is used for RMI Registry instead of the default port. 
+3	-To implement RMI, port 5432 is used for RMI Registry instead of the default port. 
 		Execution rides using this port number for these java files.
 4	-For me source files are placed in home directory of my folder. Change path or port values as required.
 		//tesla.cs.iupui.edu:5432/onlineMarketServer
