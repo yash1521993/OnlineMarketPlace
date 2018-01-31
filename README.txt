@@ -33,9 +33,10 @@ Makefiles
 *************************************************
 	Execution using Makefiles
 *************************************************
-1	-Run the RMI registry either normally or in background. To do this in background use:	
+1	-Open a session of putty after uploading all java source files and makefiles to Tesla.
+2	-Run the RMI registry either normally or in background. To do this in background use:	
 		$rmiregistry 5432&
-2	-Run the makefileS.sh to run the server side files using
+3	-Run the makefileS.sh to run the server side files using
 		$sh makefileS.sh
-3	-Run the makefileC.sh to run the client side files using
+4	-Open another session of putty, then run the makefileC.sh to run the client side files using
 		$sh makefileC.sh
