@@ -21,7 +21,7 @@ public class OnlineMarketView {
 		//try and catch block for exception handling
 		try{
 			// Locate Online Market Server
-			String name = "//tesla.cs.iupui.edu:5555/home/yashkuru/OOAD/Assignment1/onlineMarketServer";
+			String name = "//tesla.cs.iupui.edu:5432/onlineMarketServer";
 			OnlineMarket marketApp = (OnlineMarket) Naming.lookup(name);
 			//calling interface implemented methods
 			regId = marketApp.regId();

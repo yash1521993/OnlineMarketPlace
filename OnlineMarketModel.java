@@ -29,7 +29,7 @@ public class OnlineMarketModel {
 			System.out.println("You are now entering Online Market Place");
 			
 			// Connection string to Online Market Server
-			String name = "//tesla.cs.iupui.edu:5555/home/yashkuru/OOAD/Assignment1/onlineMarketServer";
+			String name = "//tesla.cs.iupui.edu:5432/onlineMarketServer";
 			
 			// Create a new instance of a Online market server.
 			OnlineMarketController marketCntrlr = new OnlineMarketController(name);

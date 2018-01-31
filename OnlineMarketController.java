@@ -16,7 +16,7 @@ import java.rmi.server.UnicastRemoteObject;
 */
 public class OnlineMarketController extends UnicastRemoteObject implements OnlineMarket{
 	private String name;
-	private int id = 0;
+	private int regId = 0;
 
 	//constructor for controller
 	public OnlineMarketController(String name) throws RemoteException {
@@ -24,12 +24,14 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		this.name = name;
 	}
 
-	//
+	//this method returns a reigstration id for a customer
 	public synchronized int regId() throws RemoteException {
-		id++; 
-		return id;
+		regId++; 
+		return regId;
 	}
 	
+	//yet to be implemented
+	//these methods may be placed either in Model or Controller based on upcoming requirements.
 	public void loginToMarket() throws java.rmi.RemoteException{}
 	public void addItemsToMarket() throws java.rmi.RemoteException{}
 	public void removeItemsFromMarket() throws java.rmi.RemoteException{}
