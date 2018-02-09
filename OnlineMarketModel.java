@@ -9,6 +9,10 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+// Ryan: Here you are violating separation of concerns by mixing
+// Model and framework related code. Instead you should keep these
+// isolated by maintaining high cohesion.  
+
 /**
  * OnlineMarketModel acts as a server in RMI communication and as a model
  *	for MVC design pattern
