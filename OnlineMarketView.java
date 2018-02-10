@@ -12,7 +12,8 @@ import java.rmi.Naming;
 // isolated by maintaining high cohesion.  
 
 
-//Fixed:
+//Fixed: I have seperated the RMI part by adding it to another source file
+//this file contains the view
 
 /*
  *	OnlineMarketView - This acts as a client for rmi communication and 
@@ -22,6 +23,9 @@ public class OnlineMarketView {
 	
 	public void validateLogin(){
 		System.out.println("Verifying Login details");
+
+
 	}
+
 
 }
