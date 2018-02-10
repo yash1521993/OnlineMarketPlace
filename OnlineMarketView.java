@@ -20,5 +20,8 @@ import java.rmi.Naming;
  */
 public class OnlineMarketView {
 	
-	
+	public void validateLogin(){
+		System.out.println("Verifying Login details");
+	}
+
 }

@@ -26,7 +26,8 @@ public class MarketViewController{
 				
 				//login
 				OnlineMarketView view = new OnlineMarketView();
-				
+				view.validateLogin();
+
 			} 
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());
