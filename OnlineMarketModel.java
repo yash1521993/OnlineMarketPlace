@@ -13,6 +13,8 @@ import java.rmi.server.UnicastRemoteObject;
 // Model and framework related code. Instead you should keep these
 // isolated by maintaining high cohesion.  
 
+//Fixed:
+
 /**
  * OnlineMarketModel acts as a server in RMI communication and as a model
  *	for MVC design pattern
