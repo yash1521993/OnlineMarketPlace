@@ -19,7 +19,7 @@ import java.rmi.Naming;
  *	OnlineMarketView - This acts as a client for rmi communication and 
  *	view to present the model's data
  */
-public class OnlineMarketView {
+public class OnlineMarketAdmin {
 	
 	public void validateLogin(){
 		System.out.println("Verifying Login details");
@@ -27,5 +27,8 @@ public class OnlineMarketView {
 
 	}
 
+	public void showView() {
+		System.out.println("Welcome to the Admin Page!");
+	}
 
 }

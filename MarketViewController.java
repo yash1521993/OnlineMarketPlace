@@ -26,10 +26,17 @@ public class MarketViewController{
 				System.out.println("Registration ID: " + regId);	
 				System.out.println("Registration Status: "+register);
 				
-				//login
-				OnlineMarketView view = new OnlineMarketView();
-				view.validateLogin();
+				
 
+				// Create new instance of a Front Controller...
+				MarketFrontController frontController = new MarketFrontController();
+				
+				// Dispatch request for respective views...
+			    frontController.dispatchRequest("Admin");
+			    frontController.dispatchRequest("Customer");			    
+
+			    //login
+				
 			} 
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());
