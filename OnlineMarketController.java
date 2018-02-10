@@ -49,4 +49,31 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		// modelObj.viewMarketCart();
 		
 	}
+
+	//Added main method
+	public static void main(String args[]) {
+		// Set the RMI Security Manager...
+		System.setSecurityManager(new SecurityManager());
+		//try and catch block for exception handling
+		try {
+			System.out.println("You are now entering Online Market Place");
+			
+			// Connection string to Online Market Server
+			String name = "//tesla.cs.iupui.edu:5432/onlineMarketServer";
+			
+			// Create a new instance of a Online market server.
+			OnlineMarketController marketCntrlr = new OnlineMarketController(name);
+			System.out.println("Reaching server:" + name);
+			
+			// rebind binds the server and RMI Service
+			Naming.rebind(name, marketCntrlr);
+			
+			System.out.println("Interface is Ready!You can register, login and shop");
+		} 
+		catch (Exception e){
+			System.out.println("Online Market Server Exception: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
 }
