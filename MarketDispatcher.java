@@ -5,7 +5,7 @@ public class MarketDispatcher {
 	// Concrete Views...
 	
 	
-	public Dispatcher() {
+	public MarketDispatcher() {
 		private OnlineMarketAdmin adminView = new OnlineMarketAdmin();
 		private OnlineMarketCustomer customerView = new OnlineMarketCustomer();
 	   

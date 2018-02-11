@@ -6,15 +6,15 @@
 // yashkuru
 
 public class MarketFrontController{
-	
+
 	// Dispatcher instance...
-	private Dispatcher dispatcher;
+	private MarketDispatcher dispatcher;
 
 	/**
 	 * Front Controller Constructor
 	 */
-	public FrontController() {
-		dispatcher = new Dispatcher();
+	public MarketFrontController() {
+		dispatcher = new MarketDispatcher();
 	}
 
 	/**
