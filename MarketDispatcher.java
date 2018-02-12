@@ -6,8 +6,10 @@
 // yashkuru
 
 /**
- * Dispatcher Class
+ * MarketDispatcher class provides scope for reaching 
+ *	views based on the received request
  */
+
 public class MarketDispatcher {
 	// Concrete Views...
 	private OnlineMarketAdmin adminView;
@@ -16,7 +18,6 @@ public class MarketDispatcher {
 	public MarketDispatcher() {
 		adminView = new OnlineMarketAdmin();
 		customerView = new OnlineMarketCustomer();
-	   
 	}
 
 	

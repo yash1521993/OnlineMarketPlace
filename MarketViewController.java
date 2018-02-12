@@ -27,26 +27,8 @@ public class MarketViewController{
 				System.out.println("Registration ID: " + regId);	
 				System.out.println("Registration Status: "+register);
 	
-				
-				Scanner scanner = new Scanner(System.in);
-				System.out.println("Enter 'Admin' for Administrator login without quotes");
-				System.out.println("Enter 'Customer' for Customer login without quotes");
-				System.out.println("--------Enter one from above---------");
-				
-				String loginType = scanner.nextLine();
-				
-				// instantiating frontController class			
-				MarketFrontController frontController = new MarketFrontController();
-				
-				// calling respective views either admin or customer
-				if(loginType=="Admin"){
-					frontController.dispatchRequest(loginType);
-				}
-				else{
-					frontController.dispatchRequest(loginType);			    
-				}
-			    
-				scanner.close();
+				MarketCommonView marketView=new MarketCommonView();
+				marketView.validateLogin();
 			} 
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

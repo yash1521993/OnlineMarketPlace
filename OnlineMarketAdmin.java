@@ -23,8 +23,6 @@ public class OnlineMarketAdmin {
 	
 	public void validateLogin(){
 		System.out.println("Verifying Login details");
-
-
 	}
 
 	public void showView() {
