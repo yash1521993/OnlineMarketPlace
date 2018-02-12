@@ -6,6 +6,7 @@
 // yashkuru
 
 import java.rmi.Naming;
+import java.util.Scanner;
 
 public class MarketViewController{
 
@@ -25,18 +26,27 @@ public class MarketViewController{
 				register=marketApp.registerCustomer();
 				System.out.println("Registration ID: " + regId);	
 				System.out.println("Registration Status: "+register);
+	
 				
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("Enter 'Admin' for Administrator login without quotes");
+				System.out.println("Enter 'Customer' for Customer login without quotes");
+				System.out.println("--------Enter one from above---------");
 				
-
-				// Create new instance of a Front Controller...
+				String loginType = scanner.nextLine();
+				
+				// instantiating frontController class			
 				MarketFrontController frontController = new MarketFrontController();
 				
-				// Dispatch request for respective views...
-			    frontController.dispatchRequest("Admin");
-			    frontController.dispatchRequest("Customer");			    
-
-			    //login
-				
+				// calling respective views either admin or customer
+				if(loginType=="Admin"){
+					frontController.dispatchRequest(loginType);
+				}
+				else{
+					frontController.dispatchRequest(loginType);			    
+				}
+			    
+				scanner.close();
 			} 
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

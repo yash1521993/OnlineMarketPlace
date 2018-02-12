@@ -1,13 +1,21 @@
+// Honor Pledge:
+//
+// I pledge that I have neither given nor 
+// received any help on this assignment.
+//
+// yashkuru
+
 /**
  * Dispatcher Class
  */
 public class MarketDispatcher {
 	// Concrete Views...
-	
+	private OnlineMarketAdmin adminView;
+	private OnlineMarketCustomer customerView;
 	
 	public MarketDispatcher() {
-		private OnlineMarketAdmin adminView = new OnlineMarketAdmin();
-		private OnlineMarketCustomer customerView = new OnlineMarketCustomer();
+		adminView = new OnlineMarketAdmin();
+		customerView = new OnlineMarketCustomer();
 	   
 	}
 
