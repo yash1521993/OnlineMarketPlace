@@ -24,6 +24,8 @@ public class MarketFrontController{
 	 * @return T/F
 	 */
 	private boolean isAuthenticUser() {
+		//MarketViewController clientController = new MarketViewController();
+		//clientController.validateUserLogin();
 		System.out.println("User is authenticated successfully.");	    
 		return true;
 	}

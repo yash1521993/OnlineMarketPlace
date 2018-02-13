@@ -8,15 +8,9 @@
 public class OnlineMarketCustomer implements MarketCustomerInterface{
 	//overriding
 	public void customerInfo(){
-		System.out.println("Welcome to the Customer Page!");
+		System.out.println("Welcome to the Customer Home Page!");
 	}
 	
-	public void validateLogin(){
-		System.out.println("Verifying Login details");
-
-
-	}
-
 	public void showView() {
 		System.out.println("Welcome to the Customer Page!");
 	}

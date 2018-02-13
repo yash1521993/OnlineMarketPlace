@@ -9,6 +9,22 @@ import java.rmi.Naming;
 import java.util.Scanner;
 
 public class MarketViewController{
+	
+	public void validateUserLogin(){
+		
+		MarketCommonView marketView=new MarketCommonView();
+		String loginType=marketView.getLoginType();
+		String inputId=marketView.getInputLoginId();
+		String inputPwd=marketView.getInputLoginPwd();
+		
+		System.out.println("Registration ID: " + inputId+inputPwd);
+		
+		// instantiating frontController class			
+		MarketFrontController frontController = new MarketFrontController();
+		
+		// calling respective views either admin or customer
+		frontController.dispatchRequest(loginType);
+	}
 
 	public static void main(String args[]){
 			// creates a security manager for RMI
@@ -27,8 +43,8 @@ public class MarketViewController{
 				System.out.println("Registration ID: " + regId);	
 				System.out.println("Registration Status: "+register);
 	
-				MarketCommonView marketView=new MarketCommonView();
-				marketView.validateLogin();
+				MarketViewController marketController=new MarketViewController();
+				marketController.validateUserLogin();
 			} 
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

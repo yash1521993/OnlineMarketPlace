@@ -9,19 +9,28 @@ import java.util.Scanner;
 
 public class MarketCommonView{
 
-	public void validateLogin(){
+	public String getLoginType(){
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter 'Admin' for Administrator login without quotes");
 		System.out.println("Enter 'Customer' for Customer login without quotes");
 		System.out.println("--------Enter one from above---------");
-		
 		String loginType = scanner.nextLine();
 		
-		// instantiating frontController class			
-		MarketFrontController frontController = new MarketFrontController();
 		
-		// calling respective views either admin or customer
-		frontController.dispatchRequest(loginType);
-		scanner.close();
+		return loginType;
+	}
+	
+	public String getInputLoginId(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter Login ID:");
+		String inputLoginId = scanner.nextLine();
+		return inputLoginId;
+	}
+	
+	public String getInputLoginPwd(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter Password:");
+		String inputLoginPwd = scanner.nextLine();
+		return inputLoginPwd;
 	}
 }

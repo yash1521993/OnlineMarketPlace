@@ -22,12 +22,9 @@ import java.rmi.Naming;
 public class OnlineMarketAdmin implements MarketAdminInterface{
 	//overriding
 	public void adminInfo(){
-		System.out.println("Welcome to the Admin Page!");
+		System.out.println("Welcome to the Admin Home Page!");
 	}
 	
-	public void validateLogin(){
-		System.out.println("Verifying Login details");
-	}
 
 	public void showView() {
 		System.out.println("Welcome to the Admin Page!");

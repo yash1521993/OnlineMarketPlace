@@ -28,5 +28,15 @@ public class OnlineMarketModel {
 		return "Registered";
 	}
 	
+	// String loginId="test";
+		// String loginPwd="testing";
+		
+		
+		// if(loginId.equals(inputLoginId) && loginPwd.equals(inputLoginPwd)){
+			// System.out.println("Success");
+		// }
+		// else{
+			// System.out.println("Denied");
+		// }
 	
 }
