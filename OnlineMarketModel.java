@@ -28,15 +28,33 @@ public class OnlineMarketModel {
 		return "Registered";
 	}
 	
-	// String loginId="test";
-		// String loginPwd="testing";
+	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		
+		boolean loginCheck=false;
 		
-		// if(loginId.equals(inputLoginId) && loginPwd.equals(inputLoginPwd)){
-			// System.out.println("Success");
-		// }
-		// else{
-			// System.out.println("Denied");
-		// }
+		if(loginType.equalsIgnoreCase("admin")){
+			if(inputId.equals("admin") && inputPwd.equals("test")){
+				System.out.println("Success");
+				loginCheck=true;
+			}
+			else{
+				System.out.println("Denied");
+				loginCheck=false;
+			}
+		}
+		
+		if(loginType.equalsIgnoreCase("customer")){
+			if(inputId.equals("customer") && inputPwd.equals("test")){
+				System.out.println("Success");
+				loginCheck=true;
+			}
+			else{
+				System.out.println("Denied");
+				loginCheck=false;
+			}
+		}
+		return loginCheck;
+	}
+	
 	
 }

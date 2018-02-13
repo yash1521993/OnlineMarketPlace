@@ -49,6 +49,12 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		// modelObj.viewMarketCart();
 		
 	}
+	
+	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
+		OnlineMarketModel modelObj= new OnlineMarketModel();
+		return modelObj.validateLogin(inputId,inputPwd,loginType);
+	
+	}
 
 	//Added main method
 	public static void main(String args[]) {
