@@ -5,7 +5,11 @@
 //
 // yashkuru
 
-public class OnlineMarketCustomer {
+public class OnlineMarketCustomer implements MarketCustomerInterface{
+	//overriding
+	public void customerInfo(){
+		System.out.println("Welcome to the Customer Page!");
+	}
 	
 	public void validateLogin(){
 		System.out.println("Verifying Login details");

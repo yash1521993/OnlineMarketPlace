@@ -4,3 +4,7 @@
 // received any help on this assignment.
 //
 // yashkuru
+
+public interface MarketAdminInterface{
+	public void adminInfo();
+}

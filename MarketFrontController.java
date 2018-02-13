@@ -34,7 +34,7 @@ public class MarketFrontController{
 	 * @param request
 	 */
 	public void dispatchRequest(String request) {
-		System.out.println("Page Requested: " + request);   
+		System.out.println("You are now accessing market application as: " + request);   
 		
 		// If the user has been authenticated - dispatch request...
 		if(isAuthenticUser()) {

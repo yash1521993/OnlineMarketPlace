@@ -11,24 +11,27 @@
  */
 
 public class MarketDispatcher {
-	// Concrete Views...
-	private OnlineMarketAdmin adminView;
-	private OnlineMarketCustomer customerView;
+	// Concrete Views
+	MarketAbstractFactory adminCreator;
+	MarketAbstractFactory custCreator;
 	
 	public MarketDispatcher() {
-		adminView = new OnlineMarketAdmin();
-		customerView = new OnlineMarketCustomer();
+		adminCreator = MarketFactoryCreator.getLoginType("AdminFact");
+		custCreator = MarketFactoryCreator.getLoginType("CustFact");
 	}
 
 	
 	public void dispatch(String request) {
 
-		// Faculty or Student Views...
+		// Admin or Customer View
 		if(request.equalsIgnoreCase("Admin")) {
-			adminView.showView();
+			MarketAdminInterface marketAdmin = adminCreator.getAdminInfo(request);
+			marketAdmin.adminInfo();
 	    }
 	    else{
-	    	customerView.showView();
+			MarketCustomerInterface marketCustomer = custCreator.getCustomerInfo(request);
+			marketCustomer.customerInfo();
+	    	
 	    }
 
 	}

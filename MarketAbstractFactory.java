@@ -4,3 +4,8 @@
 // received any help on this assignment.
 //
 // yashkuru
+
+public abstract class MarketAbstractFactory {
+   abstract MarketAdminInterface getAdminInfo(String loginType);
+   abstract MarketCustomerInterface getCustomerInfo(String loginType) ;
+}
