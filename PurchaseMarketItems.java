@@ -5,6 +5,9 @@
 //
 // yashkuru
 
+/*
+*	PurchaseMarketItems implements from Customer command interface.
+*/
 public class PurchaseMarketItems implements CustomerCmdInterface{
 	private OnlineMarketCustomer custCommand;
 	
@@ -13,6 +16,7 @@ public class PurchaseMarketItems implements CustomerCmdInterface{
       this.custCommand = custCommand;
 	}
 	
+	//overridden method further calls purchaseItems() method
 	public void customerTasks(){
 		custCommand.purchaseItems();
 	}

@@ -15,12 +15,13 @@ public class MarketDispatcher {
 	MarketAbstractFactory adminCreator;
 	MarketAbstractFactory custCreator;
 	
+	//Constructor
 	public MarketDispatcher() {
 		adminCreator = MarketFactoryCreator.getLoginType("AdminFact");
 		custCreator = MarketFactoryCreator.getLoginType("CustFact");
 	}
 
-	
+	//disptach renders a view based on received request
 	public void dispatch(String request) {
 
 		// Admin or Customer View
@@ -29,20 +30,21 @@ public class MarketDispatcher {
 			marketAdmin.adminInfo();
 	    }
 	    else{
+			
 			MarketCustomerInterface marketCustomer = custCreator.getCustomerInfo(request);
 			marketCustomer.customerInfo();
 			
 			//command pattern implementation
-			OnlineMarketCustomer abcStock = new OnlineMarketCustomer();
+			OnlineMarketCustomer customerTask = new OnlineMarketCustomer();
 
-			BrowseMarketItems buyStockOrder = new BrowseMarketItems(abcStock);
-			PurchaseMarketItems sellStockOrder = new PurchaseMarketItems(abcStock);
+			BrowseMarketItems browseItems = new BrowseMarketItems(customerTask);
+			PurchaseMarketItems buyItems = new PurchaseMarketItems(customerTask);
 
-			CustomerInvoker broker = new CustomerInvoker();
-			broker.tasksList(buyStockOrder);
-			broker.tasksList(sellStockOrder);
+			CustomerInvoker invoker = new CustomerInvoker();
+			invoker.tasksList(browseItems);
+			invoker.tasksList(buyItems);
 
-			broker.executeCustomerTasks();
+			invoker.executeCustomerTasks();
 	    }
 
 	}

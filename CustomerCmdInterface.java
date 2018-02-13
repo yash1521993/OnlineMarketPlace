@@ -5,6 +5,9 @@
 //
 // yashkuru
 
+/*
+	Interface for executing customer commands
+*/
 public interface CustomerCmdInterface {
    void customerTasks();
 }
