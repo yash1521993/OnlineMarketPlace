@@ -24,7 +24,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		this.name = name;
 	}
 
-	//this method returns a reigstration id for a customer
+	//this method returns a registration id for a customer
 	public synchronized int regId() throws RemoteException {
 		regId++; 
 		return regId;
@@ -32,7 +32,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	
 	//yet to be implemented
 	//these methods may be placed either in Model or Controller based on upcoming requirements.
-	public void loginToMarket() throws java.rmi.RemoteException{}
+	
 	public void addItemsToMarket() throws java.rmi.RemoteException{}
 	public void removeItemsFromMarket() throws java.rmi.RemoteException{}
 	public void updateItems() throws java.rmi.RemoteException{}
@@ -50,6 +50,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		
 	}
 	
+	//OnlineMarketModel object calls for validateLogin function which has business logic
 	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.validateLogin(inputId,inputPwd,loginType);

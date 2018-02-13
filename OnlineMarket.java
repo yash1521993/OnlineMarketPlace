@@ -7,7 +7,7 @@
 
 /**
  *	Below is the interface declaration OnlineMarket which will be implemented
- *	by OnlineMarketModelController.
+ *	by OnlineMarketController.
  */
 public interface OnlineMarket extends java.rmi.Remote {
 	//interface should extend from Remote super class
@@ -15,7 +15,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 	int regId() throws java.rmi.RemoteException;
 	//this method registers a new customer
 	String registerCustomer() throws java.rmi.RemoteException;
-	//admin related functions
+	//this method verifies for a valid user
 	boolean validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 	
 	void addItemsToMarket() throws java.rmi.RemoteException;

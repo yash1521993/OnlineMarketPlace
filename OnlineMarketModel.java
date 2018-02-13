@@ -13,7 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
 // Model and framework related code. Instead you should keep these
 // isolated by maintaining high cohesion.  
 
-//Fixed:seperated rmi part and model part by moving the server code 
+//FIXED:seperated rmi part and model part by moving the server code 
 //to another source file
 
 /**
@@ -28,10 +28,12 @@ public class OnlineMarketModel {
 		return "Registered";
 	}
 	
+	//this method checks for a valid customer or user
 	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		
 		boolean loginCheck=false;
-		
+		//admin validation
+		//works for id: admin and password: test
 		if(loginType.equalsIgnoreCase("admin")){
 			if(inputId.equals("admin") && inputPwd.equals("test")){
 				System.out.println("Success");
@@ -43,6 +45,8 @@ public class OnlineMarketModel {
 			}
 		}
 		
+		//customer validation
+		//works for id: customer and password: test
 		if(loginType.equalsIgnoreCase("customer")){
 			if(inputId.equals("customer") && inputPwd.equals("test")){
 				System.out.println("Success");

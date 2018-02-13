@@ -5,43 +5,40 @@
 //
 // yashkuru
 
-
+/**
+ * Front Controller which dispatches respective view based on request
+ */
 public class MarketFrontController{
 
-	// Dispatcher instance...
+	// Dispatcher instance
 	private MarketDispatcher dispatcher;
 
-	/**
-	 * Front Controller Constructor
-	 */
+	//constructor
 	public MarketFrontController() {
 		dispatcher = new MarketDispatcher();
 	}
 
-	/**
-	 * Attempt to authentic user login.
-	 * 
-	 * @return T/F
-	 */
-	private boolean isAuthenticUser() {
-		//MarketViewController clientController = new MarketViewController();
-		//clientController.validateUserLogin();
-		System.out.println("User is authenticated successfully.");	    
-		return true;
+	
+	// authenticates user based on server logic check
+	//returns a  boolean value
+	private boolean isAuthenticUser(boolean loginStatus) {
+		if(loginStatus)
+			return true;	
+		else
+			return false;
 	}
 
-	/**
-	 * Responsible for dispatching the request to the Dispatcher.
-	 * 
-	 * @param request
-	 */
-	public void dispatchRequest(String request) {
-		System.out.println("You are now accessing market application as: " + request);   
+	//calls dispatcher if authentication is successful
+	public void dispatchRequest(String request, boolean loginStatus) {
 		
 		// If the user has been authenticated - dispatch request...
-		if(isAuthenticUser()) {
+		if(isAuthenticUser(loginStatus)) {
+			System.out.println("You are now accessing market application as: " + request); 
 			dispatcher.dispatch(request);
 	    }	
+		else{
+			System.out.println("Authorization denied for user type: " + request); 
+		}
 	}
 
 }

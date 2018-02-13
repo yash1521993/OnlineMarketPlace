@@ -10,9 +10,10 @@ import java.util.Scanner;
 
 public class MarketViewController{
 	static OnlineMarket marketApp;
-	//OnlineMarketController serverController = new OnlineMarketController();
 	boolean loginStatus=false;
 	
+	//validateUserLogin method calls interface which further 
+	//communicates with Server side controller and model
 	public void validateUserLogin(){
 		
 		MarketCommonView marketView=new MarketCommonView();
@@ -20,7 +21,6 @@ public class MarketViewController{
 		String inputId=marketView.getInputLoginId();
 		String inputPwd=marketView.getInputLoginPwd();
 		
-		//System.out.println("Registration ID: " + inputId+inputPwd);
 		try{
 			loginStatus=marketApp.validateLogin(inputId,inputPwd,loginType);
 			//System.out.println("Login Status" + inputId);
@@ -30,19 +30,17 @@ public class MarketViewController{
 				e.printStackTrace();
 		}
 		
-		if(loginStatus){
-			System.out.println("Authorization Success for user:" + inputId);
-			// instantiating frontController class			
-			MarketFrontController frontController = new MarketFrontController();
-			
-			// calling respective views either admin or customer
-			frontController.dispatchRequest(loginType);
-		}
-		else{
-			System.out.println("Authorization Denied for user:" + inputId);
-		}
+		
+		// instantiating frontController class			
+		MarketFrontController frontController = new MarketFrontController();
+		
+		// calling respective views either admin or customer
+		frontController.dispatchRequest(loginType,loginStatus);
+		
+		
 	}
 
+	//main method
 	public static void main(String args[]){
 			// creates a security manager for RMI
 			System.setSecurityManager(new SecurityManager( ));
