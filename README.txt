@@ -23,7 +23,7 @@
 9	-When both these are run, kill the background running process by pulling this to foreground using:
 		$fg
 10	-After pulling this to foreground, use Ctrl+C to kill the process.
-11	-I have implemented registerCustomer() method, but as of now anyone can register to OnlineMarket Place
+
 
 **************************************************************************************************
 					Execution using Makefiles
