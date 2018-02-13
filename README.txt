@@ -1,14 +1,6 @@
-*******************************Contents*******************************
-Source files	->	OnlineMarket.java
-			OnlineMarketView.java
-			OnlineMarketModel.java
-			OnlineMarketController.java
-Project Report
-Makefiles
-
-*************************************************
-	Execution without using Makefiles
-*************************************************
+**************************************************************************************************
+				Execution without using Makefiles
+**************************************************************************************************
 
 1	-Download all the java source files, policy file and upload these to Tesla server.
 2	-Open a new instance of Putty and login to the server.
@@ -21,18 +13,21 @@ Makefiles
 6	-Run the RMI registry either normally or in background. To do this in background use:	
 		$rmiregistry 5432&
 			Remove & to run in foreground.
-7	-After RMI starts running in the background, use this command to run the server file(in this case OnlineMarketModel.java).
-		$java -Djava.security.policy=policy OnlineMarketModel
-8	-Now open another instance of Putty to run the client file(in this case OnlineMarketView.java)
-		$java -Djava.security.policy=policy OnlineMarketView
+7	-After RMI starts running in the background, use this command to run the server side controller file(in this case OnlineMarketController.java).
+		$java -Djava.security.policy=policy OnlineMarketController
+8	-Now open another instance of Putty to run the client side controller file(in this case MarketViewController.java)
+		$java -Djava.security.policy=policy MarketViewController
+	-Follow instructions on the interface and enter either admin or customer
+	-Login details for admin	-> id: admin, password: test
+	-Login details for customer	-> id: customer, password: test
 9	-When both these are run, kill the background running process by pulling this to foreground using:
 		$fg
 10	-After pulling this to foreground, use Ctrl+C to kill the process.
 11	-I have implemented registerCustomer() method, but as of now anyone can register to OnlineMarket Place
 
-*************************************************
-	Execution using Makefiles
-*************************************************
+**************************************************************************************************
+					Execution using Makefiles
+**************************************************************************************************
 1	-Open a session of putty after uploading all java source files and makefiles to Tesla.
 2	-Run the RMI registry either normally or in background. To do this in background use:	
 		$rmiregistry 5432&
