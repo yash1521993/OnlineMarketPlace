@@ -1,2 +1,2 @@
 javac *.java
-java -Djava.security.policy=policy OnlineMarketModel
+java -Djava.security.policy=policy OnlineMarketController

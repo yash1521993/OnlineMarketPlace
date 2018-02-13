@@ -1,1 +1,1 @@
-java -Djava.security.policy=policy OnlineMarketView
+java -Djava.security.policy=policy MarketViewController
