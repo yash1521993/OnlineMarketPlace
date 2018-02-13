@@ -31,7 +31,18 @@ public class MarketDispatcher {
 	    else{
 			MarketCustomerInterface marketCustomer = custCreator.getCustomerInfo(request);
 			marketCustomer.customerInfo();
-	    	
+			
+			//command pattern implementation
+			OnlineMarketCustomer abcStock = new OnlineMarketCustomer();
+
+			BrowseMarketItems buyStockOrder = new BrowseMarketItems(abcStock);
+			PurchaseMarketItems sellStockOrder = new PurchaseMarketItems(abcStock);
+
+			CustomerInvoker broker = new CustomerInvoker();
+			broker.tasksList(buyStockOrder);
+			broker.tasksList(sellStockOrder);
+
+			broker.executeCustomerTasks();
 	    }
 
 	}

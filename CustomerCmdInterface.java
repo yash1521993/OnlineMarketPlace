@@ -5,3 +5,6 @@
 //
 // yashkuru
 
+public interface CustomerCmdInterface {
+   void customerTasks();
+}
