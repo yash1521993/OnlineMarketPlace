@@ -16,18 +16,16 @@ import java.rmi.Naming;
 //this file contains the view
 
 /*
- *	OnlineMarketView - This acts as a client for rmi communication and 
- *	view to present the model's data
+ *	OnlineMarketAdmin - Creates admin view
  */
 public class OnlineMarketAdmin implements MarketAdminInterface{
 	//overriding
 	public void adminInfo(){
-		System.out.println("Welcome to the Admin Home Page!");
+		System.out.println("------------------------------------");
+		System.out.println("---Welcome to the Admin Home Page---");
+		System.out.println("------------------------------------");
+		System.out.println("You can now Browse, Add, Delete, Update");
 	}
 	
-
-	public void showView() {
-		System.out.println("Welcome to the Admin Page!");
-	}
 
 }

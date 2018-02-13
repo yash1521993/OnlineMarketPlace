@@ -13,7 +13,9 @@
 public class OnlineMarketCustomer implements MarketCustomerInterface{
 	//overriding interface method
 	public void customerInfo(){
-		System.out.println("Welcome to the Customer Home Page!");
+		System.out.println("------------------------------------");
+		System.out.println("-Welcome to the Customer Home Page-");
+		System.out.println("------------------------------------");
 	}
 	//member method- purchaseItems helps a customer to purchase items
 	public void purchaseItems(){

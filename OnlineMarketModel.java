@@ -21,7 +21,7 @@ import java.rmi.server.UnicastRemoteObject;
  *	for MVC design pattern
  */
 public class OnlineMarketModel {
-	
+	//registering a customer
 	public String registerCustomer() throws RemoteException{
 		//yet to implement
 		System.out.println("Registration page. Register here");
@@ -59,6 +59,5 @@ public class OnlineMarketModel {
 		}
 		return loginCheck;
 	}
-	
-	
+		
 }

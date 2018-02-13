@@ -11,9 +11,10 @@ public class MarketCommonView{
 
 	public String getLoginType(){
 		Scanner scanner = new Scanner(System.in);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("Enter 'Admin' for Administrator login without quotes");
 		System.out.println("Enter 'Customer' for Customer login without quotes");
-		System.out.println("--------Enter one from above---------");
+		System.out.println("------------Enter one from above------------------");
 		String loginType = scanner.nextLine();
 		
 		
