@@ -5,6 +5,9 @@
 //
 // yashkuru
 
+/*
+	MarketAbstractFactory class provides scope to create admin or customer factories
+*/
 public abstract class MarketAbstractFactory {
    abstract MarketAdminInterface getAdminInfo(String loginType);
    abstract MarketCustomerInterface getCustomerInfo(String loginType) ;

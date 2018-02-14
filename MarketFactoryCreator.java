@@ -5,6 +5,10 @@
 //
 // yashkuru
 
+/*
+*	MarketFactoryCreator creates a factory based on type of account
+	admin factory or customer factory
+*/
 public class MarketFactoryCreator {
 	public static MarketAbstractFactory getLoginType(String account){
    

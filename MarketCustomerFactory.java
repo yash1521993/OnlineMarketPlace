@@ -5,10 +5,14 @@
 //
 // yashkuru
 
+/*
+	MarketCustomerFactory creates customer factiries extending 
+	MarketAbstractFactory class
+*/
 public class MarketCustomerFactory extends MarketAbstractFactory {
 	//overriding
 	public MarketCustomerInterface getCustomerInfo(String loginType){
-	   
+	  
       if(loginType.equalsIgnoreCase("Customer")){
          return new OnlineMarketCustomer();
 	  }

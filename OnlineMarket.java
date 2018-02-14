@@ -18,10 +18,5 @@ public interface OnlineMarket extends java.rmi.Remote {
 	//this method verifies for a valid user
 	boolean validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 	
-	void addItemsToMarket() throws java.rmi.RemoteException;
-	void removeItemsFromMarket() throws java.rmi.RemoteException;
-	void updateItems() throws java.rmi.RemoteException;
-	void viewMarketItems() throws java.rmi.RemoteException;
-	void viewMarketCart() throws java.rmi.RemoteException;
-	
+		
 }

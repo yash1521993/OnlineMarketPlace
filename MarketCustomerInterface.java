@@ -5,6 +5,11 @@
 //
 // yashkuru
 
+/*
+	MarketCustomerInterface has a customerInfo() method
+	which will be implemented by its concrete classes
+	Abstract factory pattern
+*/
 public interface MarketCustomerInterface{
 	public void customerInfo();
 }

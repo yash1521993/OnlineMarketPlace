@@ -5,6 +5,10 @@
 //
 // yashkuru
 
+/*
+	MarketAdminFactory inherits MarketAbstractFactory and overrides
+	adminInfo method. Creates new admin view
+*/
 public class MarketAdminFactory extends MarketAbstractFactory {
 	//overriding
 	public MarketAdminInterface getAdminInfo(String loginType){

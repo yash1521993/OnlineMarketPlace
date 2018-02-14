@@ -8,6 +8,10 @@
 import java.rmi.Naming;
 import java.util.Scanner;
 
+/*
+	MarketViewController acts as a client controller and provides communication
+	between client and server side controller
+*/
 public class MarketViewController{
 	static OnlineMarket marketApp;
 	boolean loginStatus=false;
@@ -15,7 +19,7 @@ public class MarketViewController{
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
 	public void validateUserLogin(){
-		
+		//Object creation for generic view
 		MarketCommonView marketView=new MarketCommonView();
 		String loginType=marketView.getLoginType();
 		String inputId=marketView.getInputLoginId();
@@ -35,9 +39,7 @@ public class MarketViewController{
 		MarketFrontController frontController = new MarketFrontController();
 		
 		// calling respective views either admin or customer
-		frontController.dispatchRequest(loginType,loginStatus);
-		
-		
+		frontController.dispatchRequest(loginType,loginStatus);		
 	}
 
 	//main method

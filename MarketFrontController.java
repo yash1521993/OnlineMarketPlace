@@ -18,7 +18,6 @@ public class MarketFrontController{
 		dispatcher = new MarketDispatcher();
 	}
 
-	
 	// authenticates user based on server logic check
 	//returns a  boolean value
 	private boolean isAuthenticUser(boolean loginStatus) {

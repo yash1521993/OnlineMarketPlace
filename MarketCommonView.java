@@ -7,6 +7,10 @@
 
 import java.util.Scanner;
 
+/*
+	MarketCommonView - this provides a common user interface for
+	both admin and login. These details are captured .
+*/
 public class MarketCommonView{
 
 	public String getLoginType(){
@@ -21,13 +25,14 @@ public class MarketCommonView{
 		return loginType;
 	}
 	
+	//capturing user id
 	public String getInputLoginId(){
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Login ID:");
 		String inputLoginId = scanner.nextLine();
 		return inputLoginId;
 	}
-	
+	//capturing password
 	public String getInputLoginPwd(){
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Password:");

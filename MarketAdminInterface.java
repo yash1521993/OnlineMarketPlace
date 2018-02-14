@@ -5,6 +5,9 @@
 //
 // yashkuru
 
+/*
+	Admin interface containing adminINfo
+*/
 public interface MarketAdminInterface{
 	public void adminInfo();
 }

@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /*
-*	Controller class which acts as intermediate in between Model and View
+*	Controller class which acts as intermediate in between client controller and model
 *	Implements OnlineMarket interface and defines all the functions
 *
 */
@@ -30,14 +30,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		return regId;
 	}
 	
-	//yet to be implemented
-	//these methods may be placed either in Model or Controller based on upcoming requirements.
 	
-	public void addItemsToMarket() throws java.rmi.RemoteException{}
-	public void removeItemsFromMarket() throws java.rmi.RemoteException{}
-	public void updateItems() throws java.rmi.RemoteException{}
-	public void viewMarketItems() throws java.rmi.RemoteException{}
-	public void viewMarketCart() throws java.rmi.RemoteException{}
 	
 	public String registerCustomer() throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
