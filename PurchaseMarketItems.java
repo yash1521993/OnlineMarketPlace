@@ -9,10 +9,10 @@
 *	PurchaseMarketItems implements from Customer command interface.
 */
 public class PurchaseMarketItems implements CustomerCmdInterface{
-	private OnlineMarketCustomer custCommand;
+	private MarketCustomerInterface custCommand;
 	
 	//constructor
-	public PurchaseMarketItems(OnlineMarketCustomer custCommand){
+	public PurchaseMarketItems(MarketCustomerInterface custCommand){
       this.custCommand = custCommand;
 	}
 	

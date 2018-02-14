@@ -11,10 +11,10 @@
 */
 public class BrowseMarketItems implements CustomerCmdInterface{
 	//object declaration
-	private OnlineMarketCustomer custCommand;
+	private MarketCustomerInterface custCommand;
 	
 	//constructor
-	public BrowseMarketItems(OnlineMarketCustomer custCommand){
+	public BrowseMarketItems(MarketCustomerInterface custCommand){
       this.custCommand = custCommand;
 	}
 	

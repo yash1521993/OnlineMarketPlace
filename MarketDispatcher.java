@@ -37,10 +37,10 @@ public class MarketDispatcher {
 			marketCustomer.customerInfo();
 			
 			//command pattern implementation
-			OnlineMarketCustomer customerTask = new OnlineMarketCustomer();
+			
 			//invoking customer tasks
-			BrowseMarketItems browseItems = new BrowseMarketItems(customerTask);
-			PurchaseMarketItems buyItems = new PurchaseMarketItems(customerTask);
+			BrowseMarketItems browseItems = new BrowseMarketItems(marketCustomer);
+			PurchaseMarketItems buyItems = new PurchaseMarketItems(marketCustomer);
 			//creating invoker or broker object
 			CustomerInvoker invoker = new CustomerInvoker();
 			//read user input 
