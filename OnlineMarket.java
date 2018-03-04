@@ -16,7 +16,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 	//this method registers a new customer
 	String registerCustomer() throws java.rmi.RemoteException;
 	//this method verifies for a valid user
-	boolean validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
+	public Session validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 	
 		
 }
