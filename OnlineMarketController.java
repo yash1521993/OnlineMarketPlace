@@ -50,9 +50,9 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	
 	}
 
-	public void browseItems(){
+	public String browseItems(){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
-		modelObj.browseItems();
+		return modelObj.browseItems();
 		
 	}
 

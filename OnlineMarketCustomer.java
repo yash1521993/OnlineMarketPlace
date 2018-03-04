@@ -13,7 +13,7 @@
 public class OnlineMarketCustomer implements MarketCustomerInterface{
 
 	
-		 MarketViewController mvc=new MarketViewController();
+		MarketViewController mvc=new MarketViewController();
 		String samp;
 		//overriding interface method
 		public void customerInfo(){
@@ -29,7 +29,8 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		
 		public void browseItems(){
 			try{
-				mvc.browseItems();
+				samp=mvc.browseItems();
+				System.out.println(samp);
 			}
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

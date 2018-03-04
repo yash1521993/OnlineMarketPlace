@@ -77,11 +77,11 @@ public class OnlineMarketModel {
 	}
 
 
-	public void browseItems(){
+	public String browseItems(){
 		
-		System.out.println("======Browse Market App to shop======");
-		System.out.println("<-Your shopping items list here->");
-		//return "<-Your shopping items list here->";
+		System.out.println("======Your can Browse Market App to shop======");
+		//System.out.println("<-Your shopping items list here->");
+		return "<-------Your shopping items list here------->";
 	}
 		
 }

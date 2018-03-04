@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class MarketViewController{
 	static OnlineMarket marketApp;
 	Session loginStatus;
-	
+	String browseItems;
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
 	public void validateUserLogin(){
@@ -42,15 +42,17 @@ public class MarketViewController{
 		frontController.dispatchRequest(loginType,loginStatus.getloginStatus());		
 	}
 
-	public void browseItems(){
+	public String browseItems(){
+		
 		try{
-				marketApp.browseItems();
+				browseItems= marketApp.browseItems();
 			}
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());
 				e.printStackTrace();
 			}
 
+		return browseItems;
 	}
 
 	//main method
