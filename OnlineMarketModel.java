@@ -21,6 +21,8 @@ import java.rmi.server.UnicastRemoteObject;
  *	for MVC design pattern
  */
 public class OnlineMarketModel {
+
+	Session session;
 	//registering a customer
 	public String registerCustomer() throws RemoteException{
 		//yet to implement
@@ -32,6 +34,7 @@ public class OnlineMarketModel {
 	public Session validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		
 		boolean loginCheck=false;
+		
 		//admin validation
 		//works for id: admin and password: test
 		if(loginType.equalsIgnoreCase("admin")){
@@ -39,13 +42,16 @@ public class OnlineMarketModel {
 				System.out.println("Success");
 				loginCheck=true;
 
-				Session session = new Session(loginType);
+				session = new Session(loginType,loginCheck);
 				//return session;
 
 			}
 			else{
 				System.out.println("Denied");
 				loginCheck=false;
+
+				session = new Session(loginType,loginCheck);
+				//return session;
 			}
 		}
 		
@@ -56,12 +62,15 @@ public class OnlineMarketModel {
 				System.out.println("Success");
 				loginCheck=true;
 
-				Session session = new Session(loginType);
+				session = new Session(loginType,loginCheck);
 				//return session;
 			}
 			else{
 				System.out.println("Denied");
 				loginCheck=false;
+
+				session = new Session(loginType,loginCheck);
+				//return session;
 			}
 		}
 		return session;

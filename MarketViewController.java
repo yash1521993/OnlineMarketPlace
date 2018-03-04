@@ -14,7 +14,7 @@ import java.util.Scanner;
 */
 public class MarketViewController{
 	static OnlineMarket marketApp;
-	boolean loginStatus=false;
+	Session loginStatus;
 	
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
@@ -27,7 +27,7 @@ public class MarketViewController{
 		
 		try{
 			loginStatus=marketApp.validateLogin(inputId,inputPwd,loginType);
-			//System.out.println("Login Status" + inputId);
+			System.out.println("Login Status" + loginStatus);
 		}
 		catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());
@@ -39,7 +39,7 @@ public class MarketViewController{
 		MarketFrontController frontController = new MarketFrontController();
 		
 		// calling respective views either admin or customer
-		frontController.dispatchRequest(loginType,loginStatus);		
+		frontController.dispatchRequest(loginType,loginStatus.getloginStatus());		
 	}
 
 	//main method

@@ -4,13 +4,22 @@
 // received any help on this assignment.
 //
 // yashkuru
+import java.io.*;
 
-public class Session {
+public class Session implements java.io.Serializable{
 
 	String loginType;
-	public Session(String loginType){
-			this.loginType=loginType;
+	boolean loginStatus;
+	public Session(String loginType, boolean loginStatus){
+		this.loginType=loginType;
+		this.loginStatus=loginStatus;
 	}
 
-	
+	public String getLoginType(){
+		return loginType;
+	}
+
+	public boolean getloginStatus(){
+		return loginStatus;
+	}
 }
