@@ -21,5 +21,9 @@ public class BrowseMarketItems implements CustomerCmdInterface{
 	//calling browseItems() method
 	public void customerTasks(){
 		custCommand.browseItems();
+		
+		//MarketViewController mvc=new MarketViewController();
+
+
 	}
 }

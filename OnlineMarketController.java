@@ -50,6 +50,12 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	
 	}
 
+	public void browseItems(){
+		OnlineMarketModel modelObj= new OnlineMarketModel();
+		modelObj.browseItems();
+		
+	}
+
 	//Added main method
 	public static void main(String args[]) {
 		// Set the RMI Security Manager...

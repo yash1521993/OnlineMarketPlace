@@ -42,6 +42,17 @@ public class MarketViewController{
 		frontController.dispatchRequest(loginType,loginStatus.getloginStatus());		
 	}
 
+	public void browseItems(){
+		try{
+				marketApp.browseItems();
+			}
+			catch(Exception e){
+				System.out.println("Online Market App Exception: " +e.getMessage());
+				e.printStackTrace();
+			}
+
+	}
+
 	//main method
 	public static void main(String args[]){
 			// creates a security manager for RMI

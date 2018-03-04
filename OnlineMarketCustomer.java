@@ -11,20 +11,33 @@
 */
 
 public class OnlineMarketCustomer implements MarketCustomerInterface{
-	//overriding interface method
-	public void customerInfo(){
-		System.out.println("------------------------------------");
-		System.out.println("-Welcome to the Customer Home Page-");
-		System.out.println("------------------------------------");
-	}
-	//member method- purchaseItems helps a customer to purchase items
-	public void purchaseItems(){
-		System.out.println("Purchase your browsed items here");
-	}
-	//member method- browseItems helps a customer to browse items
-	public void browseItems(){
-		System.out.println("======Browse Market App to shop======");
-		System.out.println("<-Your shopping items list here->");
-	}
+
+	
+		 MarketViewController mvc=new MarketViewController();
+		String samp;
+		//overriding interface method
+		public void customerInfo(){
+			System.out.println("------------------------------------");
+			System.out.println("-Welcome to the Customer Home Page-");
+			System.out.println("------------------------------------");
+		}
+		//member method- purchaseItems helps a customer to purchase items
+		public void purchaseItems(){
+			System.out.println("Purchase your browsed items here");
+		}
+		//member method- browseItems helps a customer to browse items
+		
+		public void browseItems(){
+			try{
+				mvc.browseItems();
+			}
+			catch(Exception e){
+				System.out.println("Online Market App Exception: " +e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		
+	
+	
 
 }

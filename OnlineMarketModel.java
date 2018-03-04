@@ -75,5 +75,13 @@ public class OnlineMarketModel {
 		}
 		return session;
 	}
+
+
+	public void browseItems(){
+		
+		System.out.println("======Browse Market App to shop======");
+		System.out.println("<-Your shopping items list here->");
+		//return "<-Your shopping items list here->";
+	}
 		
 }
