@@ -10,14 +10,16 @@
 */
 public class PurchaseMarketItems implements CustomerCmdInterface{
 	private MarketCustomerInterface custCommand;
-	
+	Session session;
 	//constructor
-	public PurchaseMarketItems(MarketCustomerInterface custCommand){
+	public PurchaseMarketItems(MarketCustomerInterface custCommand,Session session){
       this.custCommand = custCommand;
+      this.session=session;
 	}
 	
 	//overridden method further calls purchaseItems() method
+	@Override
 	public void customerTasks(){
-		custCommand.purchaseItems();
+		custCommand.purchaseItems(session);
 	}
 }

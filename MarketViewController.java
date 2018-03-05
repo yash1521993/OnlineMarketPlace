@@ -16,7 +16,8 @@ public class MarketViewController{
 	static OnlineMarket marketApp;
 	boolean loginStatus;
 	Session session;
-	String browseItems;
+	String browseItems,purchaseItems;
+
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
 	public boolean validateUserLogin(Session session, String loginType){
@@ -71,6 +72,21 @@ public class MarketViewController{
 
 		return browseItems;
 	}
+
+
+	public String purchaseItems(Session session){
+		
+		try{
+				purchaseItems= marketApp.purchaseItems(session);
+			}
+			catch(Exception e){
+				System.out.println("Online Market App Exception: " +e.getMessage());
+				e.printStackTrace();
+			}
+
+		return purchaseItems;
+	}
+
 
 	//main method
 	public static void main(String args[]){

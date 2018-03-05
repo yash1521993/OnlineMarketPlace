@@ -74,6 +74,14 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	}
 
 	@Override
+	public String purchaseItems(Session session){
+		OnlineMarketModel modelObj= new OnlineMarketModel();
+		return modelObj.purchaseItems();
+		
+	}
+
+
+	@Override
 	public Session createSession(String userType) {
 		Session session = new Session(userType);
 		return session;

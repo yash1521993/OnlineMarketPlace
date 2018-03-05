@@ -70,4 +70,10 @@ public class OnlineMarketModel {
 		return "<---+++---Your shopping items list here----+++--->";
 	}
 		
+
+	public String purchaseItems(){
+		
+		return "Purchase your browsed items here. Below is your wish list"+"\n"+
+				"--------------------------------------------------------";
+	}
 }

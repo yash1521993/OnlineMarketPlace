@@ -22,8 +22,16 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 			System.out.println("------------------------------------");
 		}
 		//member method- purchaseItems helps a customer to purchase items
-		public void purchaseItems(){
-			System.out.println("Purchase your browsed items here");
+		public void purchaseItems(Session session){
+			try{
+				samp=mvc.browseItems(session);
+				System.out.println(samp);
+			}
+			catch(Exception e){
+				System.out.println("Online Market App Exception: " +e.getMessage());
+				e.printStackTrace();
+			}
+			
 		}
 		//member method- browseItems helps a customer to browse items
 		

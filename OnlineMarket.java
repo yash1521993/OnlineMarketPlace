@@ -15,17 +15,22 @@ public interface OnlineMarket extends java.rmi.Remote {
 	int regId() throws java.rmi.RemoteException;
 	//this method registers a new customer
 	String registerCustomer() throws java.rmi.RemoteException;
-	//this method verifies for a valid user
-	//public Session validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
+	
+	//this method verifies for a valid admin based on role
 	@AnnotateInterface("admin")
 	boolean validateAdminLogin(Session session,String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
+	//role based login verification for customer
 	@AnnotateInterface("customer")
 	boolean validateCustomerLogin(Session session,String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
-	@AnnotateInterface("admin")
+	//role based access for customer to browse items
+	@AnnotateInterface("customer")
 	public String browseItems(Session session) throws java.rmi.RemoteException;
 
+	@AnnotateInterface("customer")
+	public void purchaseItems(Session session) throws java.rmi.RemoteException;
+	
 	public Session createSession(String userType) throws java.rmi.RemoteException;
 
 }
