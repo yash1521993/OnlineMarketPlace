@@ -19,7 +19,7 @@ public class MarketViewController{
 	String browseItems;
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
-	public void validateUserLogin(Session session, String loginType){
+	public boolean validateUserLogin(Session session, String loginType){
 		//Object creation for generic view
 		MarketCommonView marketView=new MarketCommonView();
 		String inputId=marketView.getInputLoginId();
@@ -29,10 +29,12 @@ public class MarketViewController{
 			if(loginType=="admin"){
 				loginStatus=marketApp.validateAdminLogin(session,inputId,inputPwd,loginType);
 				System.out.println("Login Status" + loginStatus);
+				//return loginStatus;
 			}
 			else{
 				loginStatus=marketApp.validateCustomerLogin(session,inputId,inputPwd,loginType);
 				System.out.println("Login Status" + loginStatus);
+				//return loginStatus;
 			}
 		}
 		catch(Exception e){
@@ -40,12 +42,20 @@ public class MarketViewController{
 				e.printStackTrace();
 		}
 		
-		
+		return loginStatus;
 			
 	}
 
+	//this method calls createSession() via RMI interface
 	public Session createSession(String request){
-		return marketApp.createSession(request);
+		try{
+			session= marketApp.createSession(request);
+		}	
+		catch(Exception e){
+				System.out.println("Online Market App Session Exception: " +e.getMessage());
+				e.printStackTrace();
+		}
+		return session;
 	}
 
 	public String browseItems(){
