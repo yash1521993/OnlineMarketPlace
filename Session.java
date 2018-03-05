@@ -6,7 +6,9 @@
 // yashkuru
 
 import java.io.*;
-
+/*
+	Session class creates a new session for each user
+*/
 public class Session implements java.io.Serializable{
 
 	String loginType;

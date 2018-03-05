@@ -5,13 +5,18 @@
 //
 // yashkuru
 
+//import libraries required for annotations
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/*
+	AnnotateInterface provides interface for defining user defined annotations	
+*/
+
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RequiresRole {
+public @interface AnnotateInterface {
 	String value();
 }
