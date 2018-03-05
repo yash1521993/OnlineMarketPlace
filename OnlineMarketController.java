@@ -61,11 +61,11 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		
 	}
 
-	@Override
+	/*@Override
 	public Session processLogin(String userType) {
 		Session session = new Session(userType,userStatus);
 		return session.getLoginType();
-	}
+	}*/
 
 	//Added main method
 	public static void main(String args[]) {

@@ -20,9 +20,9 @@ public interface OnlineMarket extends java.rmi.Remote {
 
 	boolean validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
-	@RequiresRole("customer")
+	//@RequiresRole("customer")
 	public String browseItems() throws java.rmi.RemoteException;
 
-	public Session processLogin(String userType) throws java.rmi.RemoteException;
+	//public Session processLogin(String userType) throws java.rmi.RemoteException;
 
 }
