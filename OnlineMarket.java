@@ -17,10 +17,10 @@ public interface OnlineMarket extends java.rmi.Remote {
 	String registerCustomer() throws java.rmi.RemoteException;
 	//this method verifies for a valid user
 	//public Session validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
-	@AnnotateInterface("Admin")
+	@AnnotateInterface("admin")
 	boolean validateAdminLogin(Session session,String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
-	
-	@AnnotateInterface("Customer")
+
+	@AnnotateInterface("customer")
 	boolean validateCustomerLogin(Session session,String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
 	//@RequiresRole("customer")

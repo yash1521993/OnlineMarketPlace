@@ -36,7 +36,7 @@ public class MarketFrontController{
 		// If the user has been authenticated - dispatch request...
 		if(isAuthenticUser(loginType)) {
 			System.out.println("You are now accessing market application as: " + loginType); 
-			dispatcher.dispatch(loginType);
+			dispatcher.dispatch(loginType,session);
 	    }	
 		else{
 			System.out.println("Authorization denied for user type: " + loginType); 

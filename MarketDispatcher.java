@@ -24,7 +24,7 @@ public class MarketDispatcher {
 	}
 
 	//disptach renders a view based on received request
-	public void dispatch(String request) {
+	public void dispatch(String request, Session session) {
 
 		// Admin or Customer View
 		if(request.equalsIgnoreCase("Admin")) {

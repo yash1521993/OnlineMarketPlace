@@ -14,7 +14,7 @@ import java.util.Scanner;
 */
 public class MarketViewController{
 	static OnlineMarket marketApp;
-	boolean loginStatus=false;
+	boolean loginStatus;
 	Session session;
 	String browseItems;
 	//validateUserLogin method calls interface which further 
@@ -26,7 +26,7 @@ public class MarketViewController{
 		String inputPwd=marketView.getInputLoginPwd();
 		
 		try{
-			if(loginType=="admin"){
+			if(loginType.equalsIgnoreCase("admin")) {
 				loginStatus=marketApp.validateAdminLogin(session,inputId,inputPwd,loginType);
 				System.out.println("Login Status" + loginStatus);
 				//return loginStatus;
@@ -57,6 +57,7 @@ public class MarketViewController{
 		}
 		return session;
 	}
+
 
 	public String browseItems(){
 		

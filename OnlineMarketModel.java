@@ -36,7 +36,7 @@ public class OnlineMarketModel {
 		boolean loginCheck=false;
 		//admin validation
 		//works for id: admin and password: test
-		if(loginType.equalsIgnoreCase("admin")){
+		if(loginType.equalsIgnoreCase("Admin")){
 			if(inputId.equals("admin") && inputPwd.equals("test")){
 				System.out.println("Success");
 				loginCheck=true;
@@ -49,7 +49,7 @@ public class OnlineMarketModel {
 		
 		//customer validation
 		//works for id: customer and password: test
-		if(loginType.equalsIgnoreCase("customer")){
+		if(loginType.equalsIgnoreCase("Customer")){
 			if(inputId.equals("customer") && inputPwd.equals("test")){
 				System.out.println("Success");
 				loginCheck=true;
