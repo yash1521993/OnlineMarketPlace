@@ -5,32 +5,44 @@
 //
 // yashkuru
 
+/*
+	AuthenticateUserInvocationHandler is responsible for implementing invocation hanlder
+	contains a method invoke with three args
+*/
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-public class AuthorizationInvocationHandler implements InvocationHandler, Serializable {
+public class AuthenticateUserInvocationHandler implements InvocationHandler, Serializable {
 	private Object objectImpl;
 
-	public AuthorizationInvocationHandler(Object impl) {
+	//constructor with object initialization
+	public AuthenticateUserInvocationHandler(Object impl) {
 		this.objectImpl = impl;
 	}
 
+	//overriding superclass's Object 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		if (method.isAnnotationPresent(RequiresRole.class)) {
-			RequiresRole test = method.getAnnotation(RequiresRole.class);
+		//reflection implementation
+		if (method.isAnnotationPresent(AnnotateInterface.class)) {
+			//get annotation value using reflection
+			AnnotateInterface test = method.getAnnotation(AnnotateInterface.class);
+			//get session value
 			Session session = (Session) args[0];
 
-			if (session.getUser().getRoleType().equals(test.value())) {
+			//comparing annotation value and session value
+			if (session.getLoginType().equals(test.value())) {
 				return method.invoke(objectImpl, args);
 			} 
 			else {
-				throw new AuthorizationException(method.getName());
+				//throw an user defined exception if values doesn't match
+				throw new AuthenticateUserException(method.getName());
 			}
 		} 
 		else {
+			//if no annotation is present
 			return method.invoke(objectImpl, args);
 		}
 	}
