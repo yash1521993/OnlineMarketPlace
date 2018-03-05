@@ -31,27 +31,19 @@ public class OnlineMarketModel {
 	}
 	
 	//this method checks for a valid customer or user
-	public Session validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
+	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		
 		boolean loginCheck=false;
-		
 		//admin validation
 		//works for id: admin and password: test
 		if(loginType.equalsIgnoreCase("admin")){
 			if(inputId.equals("admin") && inputPwd.equals("test")){
 				System.out.println("Success");
 				loginCheck=true;
-
-				session = new Session(loginType,loginCheck);
-				//return session;
-
 			}
 			else{
 				System.out.println("Denied");
 				loginCheck=false;
-
-				session = new Session(loginType,loginCheck);
-				//return session;
 			}
 		}
 		
@@ -61,19 +53,13 @@ public class OnlineMarketModel {
 			if(inputId.equals("customer") && inputPwd.equals("test")){
 				System.out.println("Success");
 				loginCheck=true;
-
-				session = new Session(loginType,loginCheck);
-				//return session;
 			}
 			else{
 				System.out.println("Denied");
 				loginCheck=false;
-
-				session = new Session(loginType,loginCheck);
-				//return session;
 			}
 		}
-		return session;
+		return loginCheck;
 	}
 
 

@@ -14,7 +14,8 @@ import java.util.Scanner;
 */
 public class MarketViewController{
 	static OnlineMarket marketApp;
-	Session loginStatus;
+	boolean loginStatus=false;
+
 	String browseItems;
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
@@ -39,7 +40,7 @@ public class MarketViewController{
 		MarketFrontController frontController = new MarketFrontController();
 		
 		// calling respective views either admin or customer
-		frontController.dispatchRequest(loginType,loginStatus.getloginStatus());		
+		frontController.dispatchRequest(loginType,loginStatus);		
 	}
 
 	public String browseItems(){

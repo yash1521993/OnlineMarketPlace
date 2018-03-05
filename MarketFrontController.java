@@ -12,7 +12,7 @@ public class MarketFrontController{
 
 	// Dispatcher instance
 	private MarketDispatcher dispatcher;
-
+	
 	//constructor
 	public MarketFrontController() {
 		dispatcher = new MarketDispatcher();

@@ -35,25 +35,36 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	public String registerCustomer() throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.registerCustomer();
-		// modelObj.loginToMarket();
-		// modelObj.addItemsToMarket();
-		// modelObj.removeItemsFromMarket();
-		// modelObj.viewMarketItems();
-		// modelObj.viewMarketCart();
+		
 		
 	}
 	
+
 	//OnlineMarketModel object calls for validateLogin function which has business logic
-	public Session validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
+	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.validateLogin(inputId,inputPwd,loginType);
 	
 	}
+	
+	/*//OnlineMarketModel object calls for validateLogin function which has business logic
+	public Session validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
+		OnlineMarketModel modelObj= new OnlineMarketModel();
+		return modelObj.validateLogin(inputId,inputPwd,loginType);
+	
+	}*/
 
+	@Override
 	public String browseItems(){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.browseItems();
 		
+	}
+
+	@Override
+	public Session processLogin(String userType) {
+		Session session = new Session(userType,userStatus);
+		return session.getLoginType();
 	}
 
 	//Added main method
