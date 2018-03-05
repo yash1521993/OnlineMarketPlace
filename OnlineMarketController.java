@@ -9,6 +9,10 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+//import proxy 
+import java.lang.reflect.Proxy;
+
+
 /*
 *	Controller class which acts as intermediate in between client controller and model
 *	Implements OnlineMarket interface and defines all the functions
@@ -84,12 +88,16 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 			// Connection string to Online Market Server
 			String name = "//tesla.cs.iupui.edu:5432/onlineMarketServer";
 			
+			//creating a proxy with initializing it to a new AuthenticateUserInvocationHandler
+			OnlineMarket createProxy = (OnlineMarket)Proxy.newProxyInstance(OnlineMarket.class.getClassLoader(),
+	                new Class<?>[] {OnlineMarket.class}, new AuthenticateUserInvocationHandler(new OnlineMarketController(name)));
+
 			// Create a new instance of a Online market server.
-			OnlineMarketController marketCntrlr = new OnlineMarketController(name);
+			//OnlineMarketController marketCntrlr = new OnlineMarketController(name);
 			System.out.println("Reaching server:" + name);
 			
 			// rebind binds the server and RMI Service
-			Naming.rebind(name, marketCntrlr);
+			Naming.rebind(name, createProxy);
 			
 			System.out.println("Interface is Ready!You can register, login and shop");
 		} 
