@@ -33,7 +33,7 @@ public class AuthenticateUserInvocationHandler implements InvocationHandler, Ser
 			Session session = (Session) args[0];
 
 			//comparing annotation value and session value
-			if (session.getLoginType().equals(test.value())) {
+			if (session.getLoginType().equalsIgnoreCase(test.value())) {
 				return method.invoke(objectImpl, args);
 			} 
 			else {

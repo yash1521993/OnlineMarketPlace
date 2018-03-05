@@ -7,8 +7,8 @@
 
 public class AuthenticateUserException extends RuntimeException {
 
-	public AuthenticateUserException(String methodName) {
-		super("Invalid Authorization - Access Denined to " + methodName + "() 		function!");
+	public AuthenticateUserException(String property) {
+		super("Unauthorized access. "+ property+" access is restricted." );
 	}
-	
+
 }
