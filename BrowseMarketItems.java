@@ -20,6 +20,7 @@ public class BrowseMarketItems implements CustomerCmdInterface{
 	}
 	
 	//calling browseItems() method
+	@Override
 	public void customerTasks(){
 		custCommand.browseItems(session);
 		
