@@ -23,8 +23,8 @@ public interface OnlineMarket extends java.rmi.Remote {
 	@AnnotateInterface("customer")
 	boolean validateCustomerLogin(Session session,String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
-	//@RequiresRole("customer")
-	public String browseItems() throws java.rmi.RemoteException;
+	@AnnotateInterface("admin")
+	public String browseItems(Session session) throws java.rmi.RemoteException;
 
 	public Session createSession(String userType) throws java.rmi.RemoteException;
 

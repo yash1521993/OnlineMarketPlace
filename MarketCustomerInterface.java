@@ -13,5 +13,5 @@
 public interface MarketCustomerInterface{
 	public void customerInfo();
 	public void purchaseItems();
-	public void browseItems();
+	public void browseItems(Session session);
 }

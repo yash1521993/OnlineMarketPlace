@@ -12,15 +12,16 @@
 public class BrowseMarketItems implements CustomerCmdInterface{
 	//object declaration
 	private MarketCustomerInterface custCommand;
-	
+	Session session;
 	//constructor
-	public BrowseMarketItems(MarketCustomerInterface custCommand){
+	public BrowseMarketItems(MarketCustomerInterface custCommand, Session session){
       this.custCommand = custCommand;
+      this.session=session;
 	}
 	
 	//calling browseItems() method
 	public void customerTasks(){
-		custCommand.browseItems();
+		custCommand.browseItems(session);
 		
 		//MarketViewController mvc=new MarketViewController();
 

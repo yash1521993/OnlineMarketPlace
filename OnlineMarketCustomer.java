@@ -27,9 +27,9 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		}
 		//member method- browseItems helps a customer to browse items
 		
-		public void browseItems(){
+		public void browseItems(Session session){
 			try{
-				samp=mvc.browseItems();
+				samp=mvc.browseItems(session);
 				System.out.println(samp);
 			}
 			catch(Exception e){

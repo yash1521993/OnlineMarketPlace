@@ -47,9 +47,9 @@ public class MarketViewController{
 	}
 
 	//this method calls createSession() via RMI interface
-	public Session createSession(String request){
+	public Session createSession(String userType){
 		try{
-			session= marketApp.createSession(request);
+			session= marketApp.createSession(userType);
 		}	
 		catch(Exception e){
 				System.out.println("Online Market App Session Exception: " +e.getMessage());
@@ -59,10 +59,10 @@ public class MarketViewController{
 	}
 
 
-	public String browseItems(){
+	public String browseItems(Session session){
 		
 		try{
-				browseItems= marketApp.browseItems();
+				browseItems= marketApp.browseItems(session);
 			}
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

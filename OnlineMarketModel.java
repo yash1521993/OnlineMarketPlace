@@ -67,7 +67,7 @@ public class OnlineMarketModel {
 		
 		System.out.println("======Your can Browse Market App to shop======");
 		//System.out.println("<-Your shopping items list here->");
-		return "<-------Your shopping items list here------->";
+		return "<---+++---Your shopping items list here----+++--->";
 	}
 		
 }
