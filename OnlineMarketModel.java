@@ -72,8 +72,8 @@ public class OnlineMarketModel {
 		
 
 	public String purchaseItems(){
-		
-		return "Purchase your browsed items here. Below is your wish list"+"\n"+
-				"--------------------------------------------------------";
+		System.out.println("======Purchase======");
+		return "Purchase your browsed items here. Below is your wish list\n"+
+				"--------------------Empty list--------------------------";
 	}
 }

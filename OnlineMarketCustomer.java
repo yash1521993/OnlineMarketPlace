@@ -24,7 +24,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		//member method- purchaseItems helps a customer to purchase items
 		public void purchaseItems(Session session){
 			try{
-				samp=mvc.browseItems(session);
+				samp=mvc.purchaseItems(session);
 				System.out.println(samp);
 			}
 			catch(Exception e){

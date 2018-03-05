@@ -8,7 +8,9 @@
 /*
 *	PurchaseMarketItems implements from Customer command interface.
 */
+
 public class PurchaseMarketItems implements CustomerCmdInterface{
+	//object declaration
 	private MarketCustomerInterface custCommand;
 	Session session;
 	//constructor

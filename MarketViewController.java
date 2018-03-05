@@ -59,7 +59,7 @@ public class MarketViewController{
 		return session;
 	}
 
-
+	
 	public String browseItems(Session session){
 		
 		try{
@@ -77,6 +77,7 @@ public class MarketViewController{
 	public String purchaseItems(Session session){
 		
 		try{
+				//System.out.println("p fn");
 				purchaseItems= marketApp.purchaseItems(session);
 			}
 			catch(Exception e){
