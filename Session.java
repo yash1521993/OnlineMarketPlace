@@ -10,17 +10,17 @@ import java.io.*;
 public class Session implements java.io.Serializable{
 
 	String loginType;
-	boolean loginStatus;
-	public Session(String loginType, boolean loginStatus){
+	//boolean loginStatus;
+	public Session(String loginType){
 		this.loginType=loginType;
-		this.loginStatus=loginStatus;
+		//this.loginStatus=loginStatus;
 	}
 
 	public String getLoginType(){
 		return loginType;
 	}
 
-	public boolean getloginStatus(){
+	/*public boolean getloginStatus(){
 		return loginStatus;
-	}
+	}*/
 }

@@ -12,7 +12,7 @@ public class MarketFrontController{
 
 	// Dispatcher instance
 	private MarketDispatcher dispatcher;
-	
+	Session session;
 	//constructor
 	public MarketFrontController() {
 		dispatcher = new MarketDispatcher();
@@ -20,23 +20,26 @@ public class MarketFrontController{
 
 	// authenticates user based on server logic check
 	//returns a  boolean value
-	private boolean isAuthenticUser(boolean loginStatus) {
-		if(loginStatus)
+	private boolean isAuthenticUser(String loginType) {
+		/*if(loginStatus)
 			return true;	
 		else
-			return false;
+			return false;*/
+		MarketViewController marketController = new MarketViewController();
+		session = marketController.createSession(loginType);
+		return marketController.validateUserLogin(session,loginType);
 	}
 
 	//calls dispatcher if authentication is successful
-	public void dispatchRequest(String request, boolean loginStatus) {
+	public void dispatchRequest(String loginType) {
 		
 		// If the user has been authenticated - dispatch request...
-		if(isAuthenticUser(loginStatus)) {
-			System.out.println("You are now accessing market application as: " + request); 
-			dispatcher.dispatch(request);
+		if(isAuthenticUser(loginType)) {
+			System.out.println("You are now accessing market application as: " + loginType); 
+			dispatcher.dispatch(loginType);
 	    }	
 		else{
-			System.out.println("Authorization denied for user type: " + request); 
+			System.out.println("Authorization denied for user type: " + loginType); 
 		}
 	}
 

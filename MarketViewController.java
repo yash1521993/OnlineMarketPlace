@@ -15,20 +15,25 @@ import java.util.Scanner;
 public class MarketViewController{
 	static OnlineMarket marketApp;
 	boolean loginStatus=false;
-
+	Session session;
 	String browseItems;
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
-	public void validateUserLogin(){
+	public void validateUserLogin(Session session, String loginType){
 		//Object creation for generic view
 		MarketCommonView marketView=new MarketCommonView();
-		String loginType=marketView.getLoginType();
 		String inputId=marketView.getInputLoginId();
 		String inputPwd=marketView.getInputLoginPwd();
 		
 		try{
-			loginStatus=marketApp.validateLogin(inputId,inputPwd,loginType);
-			System.out.println("Login Status" + loginStatus);
+			if(loginType=="admin"){
+				loginStatus=marketApp.validateAdminLogin(session,inputId,inputPwd,loginType);
+				System.out.println("Login Status" + loginStatus);
+			}
+			else{
+				loginStatus=marketApp.validateCustomerLogin(session,inputId,inputPwd,loginType);
+				System.out.println("Login Status" + loginStatus);
+			}
 		}
 		catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());
@@ -36,11 +41,11 @@ public class MarketViewController{
 		}
 		
 		
-		// instantiating frontController class			
-		MarketFrontController frontController = new MarketFrontController();
-		
-		// calling respective views either admin or customer
-		frontController.dispatchRequest(loginType,loginStatus);		
+			
+	}
+
+	public Session createSession(String request){
+		return marketApp.createSession(request);
 	}
 
 	public String browseItems(){
@@ -73,9 +78,14 @@ public class MarketViewController{
 				register=marketApp.registerCustomer();
 				System.out.println("Registration ID: " + regId);	
 				System.out.println("Registration Status: "+register);
-	
-				MarketViewController marketController=new MarketViewController();
-				marketController.validateUserLogin();
+
+				MarketCommonView marketView=new MarketCommonView();
+
+				// instantiating frontController class			
+				MarketFrontController frontController = new MarketFrontController();
+				
+				// calling respective views either admin or customer
+				frontController.dispatchRequest(marketView.getLoginType());	
 			} 
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

@@ -18,11 +18,12 @@ public interface OnlineMarket extends java.rmi.Remote {
 	//this method verifies for a valid user
 	//public Session validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
-	boolean validateLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
+	boolean validateAdminLogin(Session session,String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
+	boolean validateCustomerLogin(Session session,String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
 	//@RequiresRole("customer")
 	public String browseItems() throws java.rmi.RemoteException;
 
-	//public Session processLogin(String userType) throws java.rmi.RemoteException;
+	public Session createSession(String userType) throws java.rmi.RemoteException;
 
 }

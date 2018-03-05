@@ -41,12 +41,18 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	
 
 	//OnlineMarketModel object calls for validateLogin function which has business logic
-	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
+	public boolean validateAdminLogin(Session session,String inputId,String inputPwd,String loginType) throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.validateLogin(inputId,inputPwd,loginType);
 	
 	}
+
+	public boolean validateCustomerLogin(Session session,String inputId,String inputPwd,String loginType) throws RemoteException{
+		OnlineMarketModel modelObj= new OnlineMarketModel();
+		return modelObj.validateLogin(inputId,inputPwd,loginType);
 	
+	}
+
 	/*//OnlineMarketModel object calls for validateLogin function which has business logic
 	public Session validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
@@ -61,11 +67,11 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		
 	}
 
-	/*@Override
-	public Session processLogin(String userType) {
-		Session session = new Session(userType,userStatus);
-		return session.getLoginType();
-	}*/
+	@Override
+	public Session createSession(String userType) {
+		Session session = new Session(userType);
+		return session;
+	}
 
 	//Added main method
 	public static void main(String args[]) {
