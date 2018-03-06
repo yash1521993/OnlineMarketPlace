@@ -16,7 +16,7 @@ public class MarketViewController{
 	static OnlineMarket marketApp;
 	boolean loginStatus;
 	Session session;
-	String browseItems,purchaseItems;
+	String browseItems,purchaseItems,addItems;
 
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
@@ -53,27 +53,28 @@ public class MarketViewController{
 			session= marketApp.createSession(userType);
 		}	
 		catch(Exception e){
-				System.out.println("Online Market App Session Exception: " +e.getMessage());
+				System.out.println("Online Market App- Session Exception: " +e.getMessage());
 				e.printStackTrace();
 		}
 		return session;
 	}
 
-	
+
+	//browseItems method which calls browseItems from interface
 	public String browseItems(Session session){
 		
 		try{
 				browseItems= marketApp.browseItems(session);
 			}
 			catch(Exception e){
-				System.out.println("Online Market App Exception: " +e.getMessage());
+				System.out.println("Online Market App-Browse Items Exception: " +e.getMessage());
 				e.printStackTrace();
 			}
 
 		return browseItems;
 	}
 
-
+	//purchaseItems method which calls purchaseItems from interface
 	public String purchaseItems(Session session){
 		
 		try{
@@ -81,11 +82,26 @@ public class MarketViewController{
 				purchaseItems= marketApp.purchaseItems(session);
 			}
 			catch(Exception e){
-				System.out.println("Online Market App Exception: " +e.getMessage());
+				System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
 				e.printStackTrace();
 			}
 
 		return purchaseItems;
+	}
+
+	//purchaseItems method which calls purchaseItems from interface
+	public String addItems(Session session){
+		
+		try{
+				//System.out.println("p fn");
+				addItems= marketApp.addItems(session);
+			}
+			catch(Exception e){
+				System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
+				e.printStackTrace();
+			}
+
+		return addItems;
 	}
 
 

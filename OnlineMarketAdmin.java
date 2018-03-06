@@ -19,7 +19,10 @@ import java.rmi.Naming;
  *	OnlineMarketAdmin - Creates admin view
  */
 public class OnlineMarketAdmin implements MarketAdminInterface{
+	MarketViewController mvc=new MarketViewController();
+	String samp;
 	//overriding
+	@Override
 	public void adminInfo(){
 		System.out.println("------------------------------------");
 		System.out.println("---Welcome to the Admin Home Page---");
@@ -27,5 +30,18 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 		System.out.println("You can now Browse, Add, Delete, Update");
 	}
 	
+	//member method- addItems helps a admin to add items to market app
+	@Override
+	public void addItems(Session session){
+		try{
+			System.out.println("add items fn");
+			samp=mvc.addItems(session);
+			System.out.println(samp);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App- Add Items Exception: " +e.getMessage());
+			e.printStackTrace();
+		}
+	}
 
 }

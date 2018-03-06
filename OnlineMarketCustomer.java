@@ -21,6 +21,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 			System.out.println("-Welcome to the Customer Home Page-");
 			System.out.println("------------------------------------");
 		}
+
 		//member method- purchaseItems helps a customer to purchase items
 		public void purchaseItems(Session session){
 			try{
@@ -33,8 +34,8 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 			}
 			
 		}
+
 		//member method- browseItems helps a customer to browse items
-		
 		public void browseItems(Session session){
 			try{
 				samp=mvc.browseItems(session);

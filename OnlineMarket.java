@@ -30,6 +30,9 @@ public interface OnlineMarket extends java.rmi.Remote {
 
 	@AnnotateInterface("customer")
 	public String purchaseItems(Session session) throws java.rmi.RemoteException;
+
+	@AnnotateInterface("admin")
+	public String addItems(Session session) throws java.rmi.RemoteException;
 	
 	public Session createSession(String userType) throws java.rmi.RemoteException;
 

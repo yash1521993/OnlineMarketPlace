@@ -39,8 +39,6 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	public String registerCustomer() throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.registerCustomer();
-		
-		
 	}
 	
 
@@ -77,6 +75,14 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	public String purchaseItems(Session session){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.purchaseItems();
+		
+	}
+
+
+	@Override
+	public String addItems(Session session){
+		OnlineMarketModel modelObj= new OnlineMarketModel();
+		return modelObj.addItems();
 		
 	}
 

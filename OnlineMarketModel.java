@@ -72,8 +72,14 @@ public class OnlineMarketModel {
 		
 
 	public String purchaseItems(){
-		System.out.println("======Purchase======");
+		System.out.println("======Accessed Customer Purchase Method======");
 		return "Purchase your browsed items here. Below is your wish list\n"+
 				"--------------------Empty list--------------------------";
+	}
+
+
+	public String addItems(){
+		System.out.println("======Accessed Admin add method======");
+		return "+++++++++++Add items here+++++++++++\n";		
 	}
 }
