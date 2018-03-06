@@ -25,4 +25,21 @@ public class CustomerInvoker{
 	  }
 	  taskList.clear();
 	}
+
+
+	private List<AdminCmdInterface> taskListAdmin = new ArrayList<AdminCmdInterface>(); 
+
+	public void tasksListAdmin(AdminCmdInterface adminCommands){
+	  taskListAdmin.add(adminCommands);
+	}
+
+	public void executeAdminTasks(){
+
+	  for (AdminCmdInterface adminCommands: taskListAdmin) {
+		 adminCommands.adminTasks();
+	  }
+	  taskListAdmin.clear();
+	}
+
+
 }
