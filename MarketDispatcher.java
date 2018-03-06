@@ -28,8 +28,34 @@ public class MarketDispatcher {
 
 		// Admin or Customer View
 		if(request.equalsIgnoreCase("Admin")) {
+
 			MarketAdminInterface marketAdmin = adminCreator.getAdminInfo(request);
 			marketAdmin.adminInfo();
+			
+			//command pattern implementation
+			
+			//invoking customer tasks
+			AddMarketItems addItems = new AddMarketItems(marketAdmin,session);
+			//PurchaseMarketItems buyItems = new PurchaseMarketItems(marketCustomer,session);
+
+			//creating invoker or broker object
+			CustomerInvoker invoker = new CustomerInvoker();
+			//read user input 
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Hi Admin! You have the following commands to perform");
+			System.out.println("---Enter 'Browse' ignoring quotes to shop");
+			System.out.println("---Enter 'Add' ignoring quotes to buy items");
+			String adminInput = scanner.nextLine();
+			//command invocation based on user input
+			if(adminInput.equalsIgnoreCase("add")){
+				invoker.tasksListAdmin(addItems);
+			}
+			/*else{
+				invoker.tasksList(browseItems);
+			}*/
+			//execute the customer tasks
+			invoker.executeAdminTasks();
+
 	    }
 	    else{
 			//abstract factory invocation
@@ -45,7 +71,7 @@ public class MarketDispatcher {
 			CustomerInvoker invoker = new CustomerInvoker();
 			//read user input 
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("Hi! You have the following commands to perform");
+			System.out.println("Hi Customer! You have the following commands to perform");
 			System.out.println("---Enter 'Browse' ignoring quotes to shop");
 			System.out.println("---Enter 'Purchase' ignoring quotes to buy items");
 			String custInput = scanner.nextLine();
