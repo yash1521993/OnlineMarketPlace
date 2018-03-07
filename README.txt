@@ -8,10 +8,12 @@
 		$sh makefileS.sh
 4	-Open another session of putty, then run the makefileC.sh to run the client side files using
 		$sh makefileC.sh
-		
+5	-When both these are run, kill the background running process by pulling this to foreground using:
+		$fg
+6	-After pulling this to foreground, use Ctrl+C to kill the process.
 		
 **************************************************************************************************
-				Execution without using Makefiles
+				Execution without using Makefiles(In case makefiles fail)
 **************************************************************************************************
 
 1	-Download all the java source files, policy file and upload these to Tesla server.
