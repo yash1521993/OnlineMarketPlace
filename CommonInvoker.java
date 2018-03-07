@@ -11,7 +11,7 @@ import java.util.List;
 /*
 * Acts as a broker class which maintains action queue for both admin and customer
 */
-public class CustomerInvoker{
+public class CommonInvoker{
 
 	/*
 		Customer realted invoker module
