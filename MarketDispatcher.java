@@ -39,7 +39,7 @@ public class MarketDispatcher {
 			//PurchaseMarketItems buyItems = new PurchaseMarketItems(marketCustomer,session);
 
 			//creating invoker or broker object
-			CustomerInvoker invoker = new CustomerInvoker();
+			CommonInvoker invoker = new CommonInvoker();
 			//read user input 
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Hi Admin! You have the following commands to perform");
@@ -68,7 +68,7 @@ public class MarketDispatcher {
 			BrowseMarketItems browseItems = new BrowseMarketItems(marketCustomer,session);
 			PurchaseMarketItems buyItems = new PurchaseMarketItems(marketCustomer,session);
 			//creating invoker or broker object
-			CustomerInvoker invoker = new CustomerInvoker();
+			CommonInvoker invoker = new CommonInvoker();
 			//read user input 
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Hi Customer! You have the following commands to perform");
