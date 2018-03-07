@@ -1,4 +1,16 @@
 **************************************************************************************************
+					Execution using Makefiles
+**************************************************************************************************
+1	-Open a session of putty after uploading all java source files and makefiles to Tesla.
+2	-Run the RMI registry either normally or in background. To do this in background use:	
+		$rmiregistry 5432&
+3	-Run the makefileS.sh to run the server side files using
+		$sh makefileS.sh
+4	-Open another session of putty, then run the makefileC.sh to run the client side files using
+		$sh makefileC.sh
+		
+		
+**************************************************************************************************
 				Execution without using Makefiles
 **************************************************************************************************
 
@@ -23,15 +35,3 @@
 9	-When both these are run, kill the background running process by pulling this to foreground using:
 		$fg
 10	-After pulling this to foreground, use Ctrl+C to kill the process.
-
-
-**************************************************************************************************
-					Execution using Makefiles
-**************************************************************************************************
-1	-Open a session of putty after uploading all java source files and makefiles to Tesla.
-2	-Run the RMI registry either normally or in background. To do this in background use:	
-		$rmiregistry 5432&
-3	-Run the makefileS.sh to run the server side files using
-		$sh makefileS.sh
-4	-Open another session of putty, then run the makefileC.sh to run the client side files using
-		$sh makefileC.sh
