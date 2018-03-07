@@ -20,7 +20,7 @@ public class MarketViewController{
 
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
-	public boolean validateUserLogin(Session session, String loginType){
+	public boolean validateUserLogin(String loginType){
 		//Object creation for generic view
 		MarketCommonView marketView=new MarketCommonView();
 		String inputId=marketView.getInputLoginId();
@@ -28,19 +28,19 @@ public class MarketViewController{
 		
 		try{
 			if(loginType.equalsIgnoreCase("admin")) {
-				loginStatus=marketApp.validateAdminLogin(session,inputId,inputPwd,loginType);
+				loginStatus=marketApp.validateAdminLogin(inputId,inputPwd,loginType);
 				System.out.println("Login Status" + loginStatus);
 				//return loginStatus;
 			}
 			else{
-				loginStatus=marketApp.validateCustomerLogin(session,inputId,inputPwd,loginType);
+				loginStatus=marketApp.validateCustomerLogin(inputId,inputPwd,loginType);
 				System.out.println("Login Status" + loginStatus);
 				//return loginStatus;
 			}
 		}
 		catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());
-				e.printStackTrace();
+				//e.printStackTrace();
 		}
 		
 		return loginStatus;
@@ -54,7 +54,7 @@ public class MarketViewController{
 		}	
 		catch(Exception e){
 				System.out.println("Online Market App- Session Exception: " +e.getMessage());
-				e.printStackTrace();
+				//e.printStackTrace();
 		}
 		return session;
 	}
@@ -68,7 +68,7 @@ public class MarketViewController{
 			}
 			catch(Exception e){
 				System.out.println("Online Market App-Browse Items Exception: " +e.getMessage());
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 		return browseItems;
@@ -83,7 +83,7 @@ public class MarketViewController{
 			}
 			catch(Exception e){
 				System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 		return purchaseItems;

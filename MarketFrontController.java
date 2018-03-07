@@ -12,6 +12,7 @@ public class MarketFrontController{
 
 	// Dispatcher instance
 	private MarketDispatcher dispatcher;
+	MarketViewController marketController = new MarketViewController();
 	Session session;
 	//constructor
 	public MarketFrontController() {
@@ -25,17 +26,16 @@ public class MarketFrontController{
 			return true;	
 		else
 			return false;*/
-		MarketViewController marketController = new MarketViewController();
-		session = marketController.createSession(loginType);
-		return marketController.validateUserLogin(session,loginType);
+		
+		return marketController.validateUserLogin(loginType);
 	}
 
 	//calls dispatcher if authentication is successful
 	public void dispatchRequest(String loginType) {
-		
 		// If the user has been authenticated - dispatch request...
 		if(isAuthenticUser(loginType)) {
-			System.out.println("You are now accessing market application as: " + loginType); 
+			System.out.println("You are now accessing market application as: " + loginType);
+			session = marketController.createSession(loginType); 
 			dispatcher.dispatch(loginType,session);
 	    }	
 		else{

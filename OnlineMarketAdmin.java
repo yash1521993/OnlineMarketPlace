@@ -34,7 +34,7 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 	@Override
 	public void addItems(Session session){
 		try{
-			System.out.println("add items fn");
+			//System.out.println("add items fn");
 			samp=mvc.addItems(session);
 			System.out.println(samp);
 		}
