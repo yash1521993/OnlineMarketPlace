@@ -43,7 +43,7 @@ public class MarketDispatcher {
 			//read user input 
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Hi Admin! You have the following commands to perform");
-			System.out.println("---Enter 'Browse' ignoring quotes to shop");
+			System.out.println("---Other commands coming soon.....----");
 			System.out.println("---Enter 'Add' ignoring quotes to buy items");
 			String adminInput = scanner.nextLine();
 			//command invocation based on user input
@@ -53,7 +53,7 @@ public class MarketDispatcher {
 			/*else{
 				invoker.tasksList(browseItems);
 			}*/
-			//execute the customer tasks
+			//execute the admin tasks
 			invoker.executeAdminTasks();
 
 	    }

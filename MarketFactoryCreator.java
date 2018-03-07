@@ -11,12 +11,13 @@
 */
 public class MarketFactoryCreator {
 	public static MarketAbstractFactory getLoginType(String account){
-   
+      //calls for admin factory
       if(account.equalsIgnoreCase("AdminFact")){
          return new MarketAdminFactory();
          
       }
-	  else if(account.equalsIgnoreCase("CustFact")){
+      //calls for customer factory
+	   else if(account.equalsIgnoreCase("CustFact")){
          return new MarketCustomerFactory();
       }
       

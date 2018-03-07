@@ -11,6 +11,7 @@
 */
 public class MarketAdminFactory extends MarketAbstractFactory {
 	//overriding
+	@Override
 	public MarketAdminInterface getAdminInfo(String loginType){
 	   
       if(loginType.equalsIgnoreCase("Admin")){
@@ -20,6 +21,7 @@ public class MarketAdminFactory extends MarketAbstractFactory {
 	}
 	
 	//overriding
+	@Override
 	public MarketCustomerInterface getCustomerInfo(String loginType){
 		return null;
 	}

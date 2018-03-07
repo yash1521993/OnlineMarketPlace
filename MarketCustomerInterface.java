@@ -11,6 +11,7 @@
 	Abstract factory pattern
 */
 public interface MarketCustomerInterface{
+	//customer related functions along with session object
 	public void customerInfo();
 	public void purchaseItems(Session session);
 	public void browseItems(Session session);

@@ -12,7 +12,7 @@ import java.util.Scanner;
 	both admin and login. These details are captured .
 */
 public class MarketCommonView{
-
+	//captures user type who's trying to access market app
 	public String getLoginType(){
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -20,8 +20,6 @@ public class MarketCommonView{
 		System.out.println("Enter 'Customer' for Customer login without quotes");
 		System.out.println("------------Enter one from above------------------");
 		String loginType = scanner.nextLine();
-		
-		
 		return loginType;
 	}
 	

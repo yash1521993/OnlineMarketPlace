@@ -16,6 +16,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		MarketViewController mvc=new MarketViewController();
 		String samp;
 		//overriding interface method
+		@Override
 		public void customerInfo(){
 			System.out.println("------------------------------------");
 			System.out.println("-Welcome to the Customer Home Page-");
@@ -23,6 +24,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		}
 
 		//member method- purchaseItems helps a customer to purchase items
+		@Override
 		public void purchaseItems(Session session){
 			try{
 				samp=mvc.purchaseItems(session);
@@ -36,6 +38,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		}
 
 		//member method- browseItems helps a customer to browse items
+		@Override
 		public void browseItems(Session session){
 			try{
 				samp=mvc.browseItems(session);
@@ -46,8 +49,4 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 				e.printStackTrace();
 			}
 		}
-		
-	
-	
-
 }

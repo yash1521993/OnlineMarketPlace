@@ -98,7 +98,7 @@ public class MarketViewController{
 			}
 			catch(Exception e){
 				System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 
 		return addItems;

@@ -22,11 +22,6 @@ public class MarketFrontController{
 	// authenticates user based on server logic check
 	//returns a  boolean value
 	private boolean isAuthenticUser(String loginType) {
-		/*if(loginStatus)
-			return true;	
-		else
-			return false;*/
-		
 		return marketController.validateUserLogin(loginType);
 	}
 
@@ -35,6 +30,7 @@ public class MarketFrontController{
 		// If the user has been authenticated - dispatch request...
 		if(isAuthenticUser(loginType)) {
 			System.out.println("You are now accessing market application as: " + loginType);
+			//appending session to the dispatcher
 			session = marketController.createSession(loginType); 
 			dispatcher.dispatch(loginType,session);
 	    }	

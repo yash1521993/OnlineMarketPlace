@@ -13,6 +13,10 @@ import java.util.List;
 */
 public class CustomerInvoker{
 
+	/*
+		Customer realted invoker module
+	*/
+
 	//taskList stores customer commands in a queue
 	private List<CustomerCmdInterface> taskList = new ArrayList<CustomerCmdInterface>(); 
 
@@ -28,6 +32,10 @@ public class CustomerInvoker{
 	  }
 	  taskList.clear();
 	}
+
+	/*
+		Admin realted invoker module
+	*/
 
 	//taskListAdmin stores admin commands in a queue
 	private List<AdminCmdInterface> taskListAdmin = new ArrayList<AdminCmdInterface>(); 

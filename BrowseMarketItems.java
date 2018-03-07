@@ -13,7 +13,7 @@ public class BrowseMarketItems implements CustomerCmdInterface{
 	//object declaration
 	private MarketCustomerInterface custCommand;
 	Session session;
-	//constructor
+	//constructor initalizing customer commands and session
 	public BrowseMarketItems(MarketCustomerInterface custCommand, Session session){
       this.custCommand = custCommand;
       this.session=session;

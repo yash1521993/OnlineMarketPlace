@@ -5,8 +5,11 @@
 //
 // yashkuru
 
+/*
+	User defined exception used for distributed exception handling
+*/
 public class AuthenticateUserException extends RuntimeException {
-
+	//constructor with error message
 	public AuthenticateUserException(String property) {
 		super("Unauthorized access. "+ property+" access is restricted." );
 	}

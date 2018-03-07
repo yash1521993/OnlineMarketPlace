@@ -63,21 +63,21 @@ public class OnlineMarketModel {
 	}
 
 
+	//browseItems allows a customer to browse over the app
 	public String browseItems(){
-		
 		System.out.println("======Your can Browse Market App to shop======");
 		//System.out.println("<-Your shopping items list here->");
 		return "<---+++---Your shopping items list here----+++--->";
 	}
 		
-
+	//customer can purchase browsed apps
 	public String purchaseItems(){
 		System.out.println("======Accessed Customer Purchase Method======");
 		return "Purchase your browsed items here. Below is your wish list\n"+
 				"--------------------Empty list--------------------------";
 	}
 
-
+	//admin can add items to the inventory
 	public String addItems(){
 		System.out.println("======Accessed Admin add method======");
 		return "+++++++++++Add items here+++++++++++\n";		

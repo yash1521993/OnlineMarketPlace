@@ -18,6 +18,7 @@ public class Session implements java.io.Serializable{
 		//this.loginStatus=loginStatus;
 	}
 
+	//returns login type
 	public String getLoginType(){
 		return loginType;
 	}

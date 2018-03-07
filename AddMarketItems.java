@@ -13,7 +13,7 @@ public class AddMarketItems implements AdminCmdInterface{
 	//object declaration
 	private MarketAdminInterface custCommand;
 	Session session;
-	//constructor
+	//constructor intializing session and customer commands
 	public AddMarketItems(MarketAdminInterface custCommand, Session session){
       this.custCommand = custCommand;
       this.session=session;
