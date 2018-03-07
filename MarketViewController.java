@@ -29,14 +29,16 @@ public class MarketViewController{
 		try{
 			if(loginType.equalsIgnoreCase("admin")) {
 				loginStatus=marketApp.validateAdminLogin(inputId,inputPwd,loginType);
-				System.out.println("Login Status" + loginStatus);
+				System.out.println("Login Status:" + loginStatus);
 				//return loginStatus;
 			}
-			else{
+			else if(loginType.equalsIgnoreCase("customer")){
 				loginStatus=marketApp.validateCustomerLogin(inputId,inputPwd,loginType);
-				System.out.println("Login Status" + loginStatus);
+				System.out.println("Login Status:" + loginStatus);
 				//return loginStatus;
 			}
+			else
+				System.out.println(">>>>>Input should be only from either of the above roles<<<<<<");
 		}
 		catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

@@ -16,7 +16,7 @@ public class MarketDispatcher {
 	// Concrete Views
 	MarketAbstractFactory adminCreator;
 	MarketAbstractFactory custCreator;
-	
+	//AuthenticateUserException errorMsg=new AuthenticateUserException("ssss");
 	//Constructor
 	public MarketDispatcher() {
 		adminCreator = MarketFactoryCreator.getLoginType("AdminFact");
@@ -50,6 +50,9 @@ public class MarketDispatcher {
 			if(adminInput.equalsIgnoreCase("add")){
 				invoker.tasksListAdmin(addItems);
 			}
+			else{
+				System.out.println("Invalid command input");
+			}
 			/*else{
 				invoker.tasksList(browseItems);
 			}*/
@@ -79,8 +82,11 @@ public class MarketDispatcher {
 			if(custInput.equalsIgnoreCase("purchase")){
 				invoker.tasksList(buyItems);
 			}
-			else{
+			else if(custInput.equalsIgnoreCase("browse")){
 				invoker.tasksList(browseItems);
+			}
+			else{
+				System.out.println("Invalid command input");
 			}
 			//execute the customer tasks
 			invoker.executeCustomerTasks();
