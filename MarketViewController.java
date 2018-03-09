@@ -13,6 +13,7 @@ import java.util.Scanner;
 	between client and server side controller
 */
 public class MarketViewController{
+	// Ryan: Should these really be publicly visible?
 	static OnlineMarket marketApp;
 	boolean loginStatus;
 	Session session;

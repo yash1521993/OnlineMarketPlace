@@ -12,6 +12,7 @@ public class MarketFrontController{
 
 	// Dispatcher instance
 	private MarketDispatcher dispatcher;
+	// Ryan: Should these really be publicly visible?
 	MarketViewController marketController = new MarketViewController();
 	Session session;
 	//constructor
