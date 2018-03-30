@@ -13,8 +13,10 @@ public class MarketFrontController{
 	// Dispatcher instance
 	private MarketDispatcher dispatcher;
 	// Ryan: Should these really be publicly visible?
-	MarketViewController marketController = new MarketViewController();
-	Session session;
+
+	// FIXED: Made the variable private
+	private MarketViewController marketController = new MarketViewController();
+	private Session session;
 	//constructor
 	public MarketFrontController() {
 		dispatcher = new MarketDispatcher();

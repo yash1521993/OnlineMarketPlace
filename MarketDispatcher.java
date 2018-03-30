@@ -15,9 +15,10 @@ import java.util.Scanner;
 public class MarketDispatcher {
 	// Ryan: Should these really be publicly visible?
 	
+	// FIXED: Made the variable private
 	// Concrete Views
-	MarketAbstractFactory adminCreator;
-	MarketAbstractFactory custCreator;
+	private MarketAbstractFactory adminCreator;
+	private MarketAbstractFactory custCreator;
 	//AuthenticateUserException errorMsg=new AuthenticateUserException("ssss");
 	//Constructor
 	public MarketDispatcher() {

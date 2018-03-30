@@ -14,10 +14,12 @@ import java.util.Scanner;
 */
 public class MarketViewController{
 	// Ryan: Should these really be publicly visible?
-	static OnlineMarket marketApp;
-	boolean loginStatus;
-	Session session;
-	String browseItems,purchaseItems,addItems;
+
+	// FIXED: Made the variable private
+	private static OnlineMarket marketApp;
+	private boolean loginStatus;
+	private Session session;
+	private String browseItems,purchaseItems,addItems;
 
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model

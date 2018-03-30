@@ -13,8 +13,10 @@ public class AddMarketItems implements AdminCmdInterface{
 	//object declaration
 	private MarketAdminInterface custCommand;
 	// Ryan: Should this really be publicly visible?
-	Session session;
-	//constructor intializing session and customer commands
+
+	// FIXED: Made the variable private
+	private Session session;
+	//constructor initializing session and customer commands
 	public AddMarketItems(MarketAdminInterface custCommand, Session session){
       this.custCommand = custCommand;
       this.session=session;

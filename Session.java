@@ -11,7 +11,9 @@ import java.io.*;
 */
 public class Session implements java.io.Serializable{
 	// Ryan: Should this really be publicly visible?
-	String loginType;
+
+	// FIXED: Made the variable private
+	private String loginType;
 	//boolean loginStatus;
 	public Session(String loginType){
 		this.loginType=loginType;
