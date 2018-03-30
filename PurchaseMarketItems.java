@@ -12,6 +12,7 @@
 public class PurchaseMarketItems implements CustomerCmdInterface{
 	//object declaration
 	private MarketCustomerInterface custCommand;
+	// Ryan: Should this really be publicly visible?
 	Session session;
 	//constructor intializing customer command and session object to purchase items
 	public PurchaseMarketItems(MarketCustomerInterface custCommand,Session session){

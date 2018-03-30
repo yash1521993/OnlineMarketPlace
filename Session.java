@@ -10,7 +10,7 @@ import java.io.*;
 	Session class creates a new session for each user
 */
 public class Session implements java.io.Serializable{
-
+	// Ryan: Should this really be publicly visible?
 	String loginType;
 	//boolean loginStatus;
 	public Session(String loginType){

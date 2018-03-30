@@ -12,6 +12,7 @@
 public class BrowseMarketItems implements CustomerCmdInterface{
 	//object declaration
 	private MarketCustomerInterface custCommand;
+	// Ryan: Should this really be publicly visible?
 	Session session;
 	//constructor initalizing customer commands and session
 	public BrowseMarketItems(MarketCustomerInterface custCommand, Session session){

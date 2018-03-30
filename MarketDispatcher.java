@@ -13,6 +13,8 @@ import java.util.Scanner;
  */
 
 public class MarketDispatcher {
+	// Ryan: Should these really be publicly visible?
+	
 	// Concrete Views
 	MarketAbstractFactory adminCreator;
 	MarketAbstractFactory custCreator;
