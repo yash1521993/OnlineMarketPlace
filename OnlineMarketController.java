@@ -102,7 +102,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 			System.out.println("You are now entering Online Market Place");
 			
 			// Connection string to Online Market Server
-			String name = "//in-csci-rrpc01.cs.iupui.edu/OnlineMarketServer";
+			String name = "//10.234.136.55:5432/OnlineMarketServer";
 			
 			//creating a proxy with initializing it to a new AuthenticateUserInvocationHandler
 			OnlineMarket createProxy = (OnlineMarket)Proxy.newProxyInstance(OnlineMarket.class.getClassLoader(),

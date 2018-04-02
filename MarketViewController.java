@@ -120,7 +120,7 @@ public class MarketViewController{
 			//try and catch block for exception handling
 			try{
 				// Locate Online Market Server
-				String name = "//in-csci-rrpc01.cs.iupui.edu/OnlineMarketServer";
+				String name = "//10.234.136.55:5432/OnlineMarketServer";
 				marketApp = (OnlineMarket) Naming.lookup(name);
 				//calling interface implemented methods
 				regId = marketApp.regId();
