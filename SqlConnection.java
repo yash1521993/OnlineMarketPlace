@@ -12,4 +12,8 @@ import java.sql.Connection;
 
 public class SqlConnection {
 	
+	private static final String Dbdriver = "com.mysql.jdbc.Driver";
+    private static final String ConnString = "jdbc:mysql://localhost:3306/yashkuru_db";
+    private static final String ConnId = "";
+	private static final String ConnPwd = "";
 }
