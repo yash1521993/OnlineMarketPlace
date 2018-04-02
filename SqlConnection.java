@@ -29,6 +29,20 @@ public class SqlConnection {
         return property;
     }
 
-    
+    //
+    public Connection connect() {
+        if (conn == null) {
+            try {
+                Class.forName(dbDriver);
+                conn = DriverManager.getConnection(connString, setProperties());
+            } 
+            catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return conn;
+    }
+
+    //
 
 }
