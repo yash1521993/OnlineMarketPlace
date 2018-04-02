@@ -5,6 +5,11 @@
 //
 // yashkuru
 
-public class SqlConnection {
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.util.Properties;
+import java.sql.Connection;
 
+public class SqlConnection {
+	
 }
