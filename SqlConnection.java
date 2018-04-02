@@ -30,7 +30,7 @@ public class SqlConnection {
     }
 
     //
-    public Connection connect() {
+    public Connection connectMySql() {
         if (conn == null) {
             try {
                 Class.forName(dbDriver);
@@ -44,5 +44,17 @@ public class SqlConnection {
     }
 
     //
+    public void closeConnection() {
+        if (conn != null) {
+        	
+            try {
+                conn.close();
+                conn = null;
+            } 
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }
