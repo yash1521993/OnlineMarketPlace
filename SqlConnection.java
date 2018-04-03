@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.sql.Connection;
 
 /*
-	SqlConnection class contains code realted to mysql connection details
+	SqlConnection class contains code related to mysql connection details
 */
 public class SqlConnection {
 	//variable for Connection

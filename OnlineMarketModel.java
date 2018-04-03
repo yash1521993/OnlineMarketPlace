@@ -104,6 +104,28 @@ public class OnlineMarketModel {
 	public String addItems(){
 		try{
 
+			/*Statement st = connectSql.connectMySql().createStatement();
+			ResultSet browsedItems=st.executeQuery("Select * from Items");
+			System.out.println("^^^^add");
+			while(browsedItems.next()){  
+				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
+			}*/
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.print("Enter Item Id: ");
+			String itemId = scanner.nextLine();
+
+			System.out.print("Enter Item Name: ");
+			String itemName = scanner.nextLine();
+
+			System.out.print("Enter Item Price: ");
+			String itemPrice = scanner.nextLine();
+
+			System.out.print("Enter Item Quantity: ");
+			String itemQuantity = scanner.nextLine();
+
+			
+
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception: " +e.getMessage());
