@@ -74,8 +74,9 @@ public class OnlineMarketModel {
 
 	//browseItems allows a customer to browse over the app
 	public ArrayList browseItems(){
-		
+		//exception handling block
 		try{
+			//retrieves all the items from db
 			statement = connectSql.connectMySql().prepareStatement("Select * from Items");
 			//System.out.println("statement"+statement);
 			ResultSet browsedItems=statement.executeQuery();  
@@ -90,7 +91,6 @@ public class OnlineMarketModel {
 		}
 		
 		System.out.println("======Your can Browse Market App to shop======");
-		//System.out.println("<-Your shopping items list here->");
 		return browsedList;
 	}
 		
@@ -103,6 +103,7 @@ public class OnlineMarketModel {
 
 	//admin can add items to the inventory
 	public String addItems(int itemId,String itemName,String itemPrice, int itemQuantity){
+		//exception handling block
 		try{
 
 			/*Statement st = connectSql.connectMySql().createStatement();
@@ -111,13 +112,13 @@ public class OnlineMarketModel {
 			while(browsedItems.next()){  
 				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
 			}*/
-
+			//insert admin input items into dataase
 			PreparedStatement insertItem = connectSql.connectMySql().prepareStatement("Insert into Items values(?,?,?,?)");
 			insertItem.setInt(1,itemId);
 			insertItem.setString(2,itemName);
 			insertItem.setString(3,itemPrice);
 			insertItem.setInt(4,itemQuantity);
-
+			//executes the insert statement with above params
 			insertItem.executeUpdate();
 
 		}
