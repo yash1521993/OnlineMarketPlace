@@ -18,10 +18,10 @@ public class SqlConnection {
 	//variable for Connection
 	private Connection conn;
 	//static variables initialized to respective url and connection details
-	private static final String dbDriver = "com.mysql.jdbc.Driver";
-    private static final String connString = "jdbc:mysql://localhost:3306/yashkuru_db";
-    private static final String connId = "yashkuru";
-    private static final String connPwd = "yashkuru";
+	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String CONN_STRING = "jdbc:mysql://localhost:3306/yashkuru_db";
+    private static final String CONN_ID = "yashkuru";
+    private static final String CONN_PWD = "yashkuru";
 
     //connectMySql() returns a connection instance
     public Connection connectMySql() {
@@ -30,8 +30,8 @@ public class SqlConnection {
         	//exception handling block
             try {
             	//lookup for sql driver
-                Class.forName(dbDriver);
-                conn = DriverManager.getConnection(connString, connId, connPwd);
+                Class.forName(DB_DRIVER);
+                conn = DriverManager.getConnection(CONN_STRING, CONN_ID, CONN_PWD);
                 System.out.println("Connecting to Market App Database........");
             } 
             catch (ClassNotFoundException | SQLException e) {
