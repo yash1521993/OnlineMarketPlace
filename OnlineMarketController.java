@@ -80,9 +80,9 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 
 
 	@Override
-	public synchronized String addItems(Session session){
+	public synchronized String addItems(Session session,int itemId,String itemName,String itemPrice, int itemQuant){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
-		return modelObj.addItems();
+		return modelObj.addItems(itemId,itemName,itemPrice,itemQuant);
 		
 	}
 
