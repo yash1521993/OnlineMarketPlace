@@ -31,11 +31,11 @@ public interface OnlineMarket extends java.rmi.Remote {
 
 	////role based access for customer to purchase items
 	@AnnotateInterface("customer")
-	public String purchaseItems(Session session) throws java.rmi.RemoteException;
+	public String purchaseItems(Session session,String itemName,int itemQuantity) throws java.rmi.RemoteException;
 
 	//role based access for admin to add items
 	@AnnotateInterface("admin")
-	public String addItems(Session session,int itemId,String itemName,String itemPrice, int itemQuant) throws java.rmi.RemoteException;
+	public String addItems(Session session,int itemId,String itemName,String itemPrice, int itemQuantity) throws java.rmi.RemoteException;
 	
 	//createSession() creates and returns a session based on userType
 	public Session createSession(String userType) throws java.rmi.RemoteException;

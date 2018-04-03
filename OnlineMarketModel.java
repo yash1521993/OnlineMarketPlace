@@ -95,7 +95,8 @@ public class OnlineMarketModel {
 	}
 		
 	//customer can purchase browsed apps
-	public String purchaseItems(){
+	public String purchaseItems(String itemName, int itemQuantity){
+		
 		System.out.println("======Accessed Customer Purchase Method======");
 		return "Purchase your browsed items here. Below is your wish list\n"+
 				"--------------------Empty list--------------------------";
