@@ -63,15 +63,13 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	public synchronized ArrayList browseItems(Session session){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.browseItems();
-		
 	}
 
 	////overridden sync method to purchase items
 	@Override
-	public synchronized String purchaseItems(Session session){
+	public synchronized String purchaseItems(Session session,String itemName,int itemQuantity){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.purchaseItems(itemName,itemQuantity);
-		
 	}
 
 	//overridden sync method to add items
@@ -79,7 +77,6 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	public synchronized String addItems(Session session,int itemId,String itemName,String itemPrice, int itemQuant){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.addItems(itemId,itemName,itemPrice,itemQuant);
-		
 	}
 
 	//overridden sync method to create session

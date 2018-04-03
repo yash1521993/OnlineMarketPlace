@@ -96,7 +96,11 @@ public class OnlineMarketModel {
 		
 	//customer can purchase browsed apps
 	public String purchaseItems(String itemName, int itemQuantity){
-		
+		Statement st = connectSql.connectMySql().createStatement();
+		ResultSet browsedItems=st.executeQuery("Select * from Items where ItemName="+itemName);
+		while(browsedItems.next()){  
+			System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
+		}
 		System.out.println("======Accessed Customer Purchase Method======");
 		return "Purchase your browsed items here. Below is your wish list\n"+
 				"--------------------Empty list--------------------------";
