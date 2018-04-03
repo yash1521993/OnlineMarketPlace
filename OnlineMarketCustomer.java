@@ -41,7 +41,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 				int itemQuantity = scanner.nextInt();
 
 				samp=mvc.purchaseItems(session,itemId,itemQuantity);
-				System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+				//System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
 				System.out.println(samp);
 			}
 			catch(Exception e){

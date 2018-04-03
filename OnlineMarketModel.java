@@ -96,21 +96,41 @@ public class OnlineMarketModel {
 		
 	//customer can purchase browsed apps
 	public String purchaseItems(int itemId, int itemQuantity){
+		int currentStock=0;
+		String itemName="";
 		//exception handling block
 		try{
+			System.out.println("======Accessed Customer Purchase Method======");
+			
 			Statement st = connectSql.connectMySql().createStatement();
-			System.out.println(itemId);
-			ResultSet browsedItems=st.executeQuery("Select * from Items where ItemName="+itemId);
-			while(browsedItems.next()){  
-				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
+			
+			ResultSet selectedItem=st.executeQuery("Select * from Items where ItemId="+itemId);
+			while(selectedItem.next()){  
+				//System.out.println("itemId");
+				System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
+				currentStock=selectedItem.getInt("IQuantity");
+				itemName=selectedItem.getString("ItemName");
+			}
+			if(itemQuantity<=currentStock){
+				statement=connectSql.connectMySql().prepareStatement("Update Items set IQuantity=? where ItemId=?");
+				//System.out.println("asgdgsdgadgasd"+(currentStock-itemQuantity));
+				statement.setInt(1,currentStock-itemQuantity);
+				statement.setInt(2,itemId);
+				
+				statement.executeUpdate();
+				
+			}
+			else{
+				return "----Requested quantity is more than current stock----";
 			}
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
-		System.out.println("======Accessed Customer Purchase Method======");
-		return "Purchase your browsed items here. Below is your wish list\n"+
-				"--------------------Empty list--------------------------";
+		
+		/*return "Purchase your browsed items here. Below is your wish list\n"+
+				"--------------------Empty list--------------------------";*/
+		return "Your item "+itemName+" has been purchased successfully";
 	}
 
 	//admin can add items to the inventory
