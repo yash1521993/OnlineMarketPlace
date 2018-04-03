@@ -45,7 +45,10 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 			try{
 				browseItem=mvc.browseItems(session);
 				System.out.println("<---+++---Your shopping items list here----+++--->");
-				System.out.println(browseItem);
+				System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+				for(int i = 0; i < browseItem.size(); i++) {
+		            System.out.println(browseItem.get(i));
+		        }
 			}
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

@@ -82,8 +82,7 @@ public class OnlineMarketModel {
 			while(browsedItems.next()){  
 				browsedItemData=browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity");
 				browsedList.add(rowNum,browsedItemData);rowNum++;
-				System.out.println("statement"+browsedList);
-
+				//System.out.println("statement"+browsedList);
 			}
 		}
 		catch (SQLException e) {
