@@ -19,11 +19,12 @@ import java.util.*;
  *	OnlineMarketAdmin - Creates admin view
  */
 public class OnlineMarketAdmin implements MarketAdminInterface{
-	MarketViewController mvc=new MarketViewController();
-	String samp;
+	private MarketViewController mvc=new MarketViewController();
+	private String samp;
 	//overriding
 	@Override
 	public void adminInfo(){
+		//prints this user info on screen
 		System.out.println("------------------------------------");
 		System.out.println("---Welcome to the Admin Home Page---");
 		System.out.println("------------------------------------");
@@ -35,8 +36,9 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 	public void addItems(Session session){
 		try{
 			System.out.print("+++++++++++Add items here+++++++++++\n");
+			//scanner class allows the admin to enter his/her input
 			Scanner scanner = new Scanner(System.in);
-
+			//read input item id, name, price and quantity
 			System.out.print("Enter Item Id: ");
 			int itemId = scanner.nextInt();
 
@@ -48,13 +50,13 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 
 			System.out.print("Enter Item Quantity: ");
 			int itemQuantity = scanner.nextInt();
-
+			//pass these input items to client controller
 			samp=mvc.addItems(session,itemId,itemName,itemPrice,itemQuantity);
 			System.out.println(samp);
 		}
 		catch(Exception e){
 			System.out.println("Online Market App- Add Items Exception: " +e.getMessage());
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
