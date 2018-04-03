@@ -95,11 +95,18 @@ public class OnlineMarketModel {
 	}
 		
 	//customer can purchase browsed apps
-	public String purchaseItems(String itemName, int itemQuantity){
-		Statement st = connectSql.connectMySql().createStatement();
-		ResultSet browsedItems=st.executeQuery("Select * from Items where ItemName="+itemName);
-		while(browsedItems.next()){  
-			System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
+	public String purchaseItems(int itemId, int itemQuantity){
+		//exception handling block
+		try{
+			Statement st = connectSql.connectMySql().createStatement();
+			System.out.println(itemName);
+			ResultSet browsedItems=st.executeQuery("Select * from Items where ItemName="+itemId);
+			while(browsedItems.next()){  
+				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
 		System.out.println("======Accessed Customer Purchase Method======");
 		return "Purchase your browsed items here. Below is your wish list\n"+
