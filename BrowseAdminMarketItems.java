@@ -6,8 +6,8 @@
 // yashkuru
 
 /*
-*	BrowseMarketItems implements Customer command interface
-	Also forwards a call to allow a customer to browse items
+*	BrowseAdminMarketItems implements admin command interface
+	Also forwards a call to allow a admin to browse items
 */
 public class BrowseAdminMarketItems implements AdminCmdInterface{
 	//object declaration

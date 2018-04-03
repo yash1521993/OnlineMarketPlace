@@ -45,6 +45,7 @@ public class MarketDispatcher {
 			CommonInvoker invoker = new CommonInvoker();
 			//read user input 
 			System.out.println("Hi Admin! You have the following commands to perform");
+			//while loop to provide continuous user input
 			while(true){
 				Scanner scanner = new Scanner(System.in);
 				System.out.println("---Enter 'Browse' ignoring quotes to shop");
@@ -84,6 +85,7 @@ public class MarketDispatcher {
 			CommonInvoker invoker = new CommonInvoker();
 			System.out.println("Hi Customer! You have the following commands to perform");
 			//read user input 
+			//while loop to provide continuous user input
 			while(true){
 				Scanner scanner = new Scanner(System.in);
 				

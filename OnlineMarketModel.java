@@ -104,9 +104,9 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			System.out.println("======Accessed Customer Purchase Method======");
-			//
+			//setup to execture a sql statement
 			Statement st = remoteConn.createStatement();
-			
+			//retrieves all items with given itemId
 			ResultSet selectedItem=st.executeQuery("Select * from Items where ItemId="+itemId);
 			while(selectedItem.next()){  
 				//System.out.println("itemId");
@@ -114,6 +114,7 @@ public class OnlineMarketModel {
 				currentStock=selectedItem.getInt("IQuantity");
 				itemName=selectedItem.getString("ItemName");
 			}
+			//condition check for item out of stock
 			if(itemQuantity<=currentStock){
 				statement=connectSql.connectMySql().prepareStatement("Update Items set IQuantity=? where ItemId=?");
 				//System.out.println("asgdgsdgadgasd"+(currentStock-itemQuantity));
@@ -143,6 +144,7 @@ public class OnlineMarketModel {
 
 			//insert admin input items into dataase
 			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into Items values(?,?,?,?)");
+			//set positional params
 			insertItem.setInt(1,itemId);
 			insertItem.setString(2,itemName);
 			insertItem.setString(3,itemPrice);

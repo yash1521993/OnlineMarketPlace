@@ -84,7 +84,7 @@ public class MarketViewController{
 	public String purchaseItems(Session session,int itemId,int itemQuant){
 		
 		try{
-				//System.out.println("p fn");
+				//send user input item id and quantity to query database
 				purchaseItems= marketApp.purchaseItems(session,itemId,itemQuant);
 			}
 			catch(Exception e){
@@ -99,7 +99,7 @@ public class MarketViewController{
 	public String addItems(Session session,int itemId,String itemName,String itemPrice, int itemQuant){
 		
 		try{
-				//System.out.println("p fn");
+				//send user input to store them to database
 				addItems= marketApp.addItems(session,itemId,itemName,itemPrice,itemQuant);
 			}
 			catch(Exception e){
@@ -128,7 +128,7 @@ public class MarketViewController{
 				register=marketApp.registerCustomer();
 				System.out.println("Registration ID: " + regId);	
 				System.out.println("Registration Status: "+register);
-
+				//market common view instance
 				MarketCommonView marketView=new MarketCommonView();
 
 				// instantiating frontController class			
