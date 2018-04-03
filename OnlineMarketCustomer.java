@@ -29,13 +29,23 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		@Override
 		public void purchaseItems(Session session){
 			try{
-				samp=mvc.purchaseItems(session);
+				System.out.print("+++++++++++Add items here+++++++++++\n");
+				//scanner class allows the admin to enter his/her input
+				Scanner scanner = new Scanner(System.in);
+				//read input item name and quantity
+				
+				System.out.print("Enter Item Name: ");
+				String itemName = scanner.next();
+
+				System.out.print("Enter Item Quantity: ");
+				int itemQuantity = scanner.nextInt();
+
+				samp=mvc.purchaseItems(session,itemName,ItemQuantity);
 				System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
 				System.out.println(samp);
 			}
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());
-				e.printStackTrace();
 			}
 			
 		}
