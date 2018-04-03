@@ -73,7 +73,11 @@ public class OnlineMarketModel {
 		String browseQuery = "Select * from Items";
 		try{
 			PreparedStatement statement = connectSql.connectMySql().prepareStatement(browseQuery);
-			System.out.println("statement"+statement);
+			//System.out.println("statement"+statement);
+			ResultSet browsedItems=statement.executeQuery();  
+			while(browsedItems.next()){  
+				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));  
+			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
