@@ -23,13 +23,14 @@ import java.util.*;
  *	for MVC design pattern
  */
 public class OnlineMarketModel {
-
+	//
 	private Session session;
 	private ArrayList browsedList = new ArrayList();
 	private int rowNum=0;
 	private String browsedItemData;
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
+	private remoteConn=connectSql.connectMySql();
 	private PreparedStatement statement;
 
 	//registering a customer
@@ -79,8 +80,9 @@ public class OnlineMarketModel {
 		try{
 			//retrieves all the items from db
 			statement = connectSql.connectMySql().prepareStatement("Select * from Items");
-			//System.out.println("statement"+statement);
-			ResultSet browsedItems=statement.executeQuery();  
+			//browsedItems stores the above executed query result
+			ResultSet browsedItems=statement.executeQuery(); 
+			//add each column data to browsed List
 			while(browsedItems.next()){  
 				browsedItemData=browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity");
 				browsedList.add(rowNum,browsedItemData);rowNum++;
@@ -102,7 +104,7 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			System.out.println("======Accessed Customer Purchase Method======");
-			
+			//
 			Statement st = connectSql.connectMySql().createStatement();
 			
 			ResultSet selectedItem=st.executeQuery("Select * from Items where ItemId="+itemId);

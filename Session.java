@@ -24,8 +24,4 @@ public class Session implements java.io.Serializable{
 	public String getLoginType(){
 		return loginType;
 	}
-
-	/*public boolean getloginStatus(){
-		return loginStatus;
-	}*/
 }

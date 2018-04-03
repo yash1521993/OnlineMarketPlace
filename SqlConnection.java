@@ -31,9 +31,11 @@ public class SqlConnection {
             try {
             	//lookup for sql driver
                 Class.forName(DB_DRIVER);
+                //connect to url using id and passwrod
                 conn = DriverManager.getConnection(CONN_STRING, CONN_ID, CONN_PWD);
                 System.out.println("Connecting to Market App Database........");
-            } 
+            }
+            //catches class not found and sql exceptions
             catch (ClassNotFoundException | SQLException e) {
                 System.out.println("Online Market App SQL Exception: " +e.getMessage());
             }
@@ -49,6 +51,7 @@ public class SqlConnection {
                 conn.close();
                 conn = null;
             } 
+            //catches sql exceptions
             catch (SQLException e) {
                 System.out.println("Online Market App SQL Exception: " +e.getMessage());
             }

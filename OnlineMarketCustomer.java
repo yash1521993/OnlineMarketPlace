@@ -54,6 +54,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 	public void browseItems(Session session){
 		try{
 			browseItem=mvc.browseItems(session);
+			//displaying items from database
 			System.out.println("<---+++---Your shopping items list here----+++--->");
 			System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
 			for(int i = 0; i < browseItem.size(); i++) {
