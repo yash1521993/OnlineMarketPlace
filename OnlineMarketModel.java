@@ -30,6 +30,7 @@ public class OnlineMarketModel {
 	private String browsedItemData;
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
+	private PreparedStatement statement;
 
 	//registering a customer
 	public String registerCustomer() throws RemoteException{
@@ -75,7 +76,7 @@ public class OnlineMarketModel {
 	public ArrayList browseItems(){
 		
 		try{
-			PreparedStatement statement = connectSql.connectMySql().prepareStatement("Select * from Items");
+			statement = connectSql.connectMySql().prepareStatement("Select * from Items");
 			//System.out.println("statement"+statement);
 			ResultSet browsedItems=statement.executeQuery();  
 			while(browsedItems.next()){  
@@ -124,6 +125,6 @@ public class OnlineMarketModel {
 			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
 		System.out.println("======Accessed Admin add method======");
-		return "+++++++++++Add items here+++++++++++\n";		
+		return "+++++++++++Above item has been added to database+++++++++++\n";		
 	}
 }

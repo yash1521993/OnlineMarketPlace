@@ -34,6 +34,7 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 	@Override
 	public void addItems(Session session){
 		try{
+			System.out.print("+++++++++++Add items here+++++++++++\n");
 			Scanner scanner = new Scanner(System.in);
 
 			System.out.print("Enter Item Id: ");
