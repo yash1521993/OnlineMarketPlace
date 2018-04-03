@@ -35,7 +35,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	}
 	
 	
-	
+	//this method register a user
 	public String registerCustomer() throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.registerCustomer();
@@ -50,6 +50,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	
 	}
 
+	//overridden method to validate customer login
 	@Override
 	public boolean validateCustomerLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
@@ -57,13 +58,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	
 	}
 
-	/*//OnlineMarketModel object calls for validateLogin function which has business logic
-	public Session validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
-		OnlineMarketModel modelObj= new OnlineMarketModel();
-		return modelObj.validateLogin(inputId,inputPwd,loginType);
-	
-	}*/
-
+	//overridden sync method to browse items
 	@Override
 	public synchronized ArrayList browseItems(Session session){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
@@ -71,6 +66,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		
 	}
 
+	////overridden sync method to purchase items
 	@Override
 	public synchronized String purchaseItems(Session session){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
@@ -78,7 +74,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		
 	}
 
-
+	//overridden sync method to add items
 	@Override
 	public synchronized String addItems(Session session,int itemId,String itemName,String itemPrice, int itemQuant){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
@@ -86,7 +82,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		
 	}
 
-
+	//overridden sync method to create session
 	@Override
 	public Session createSession(String userType) {
 		Session session = new Session(userType);
