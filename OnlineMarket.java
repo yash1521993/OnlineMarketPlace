@@ -5,6 +5,7 @@
 //
 // yashkuru
 
+import java.util.*;
 /**
  *	Below is the interface declaration OnlineMarket which will be implemented
  *	by OnlineMarketController.
@@ -26,7 +27,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 
 	//role based access for customer to browse items
 	@AnnotateInterface("customer")
-	public String browseItems(Session session) throws java.rmi.RemoteException;
+	public ArrayList browseItems(Session session) throws java.rmi.RemoteException;
 
 	////role based access for customer to purchase items
 	@AnnotateInterface("customer")

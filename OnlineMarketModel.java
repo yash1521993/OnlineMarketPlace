@@ -9,6 +9,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
+import java.util.*;
 
 // Ryan: Here you are violating separation of concerns by mixing
 // Model and framework related code. Instead you should keep these
@@ -24,6 +25,9 @@ import java.sql.*;
 public class OnlineMarketModel {
 
 	private Session session;
+	private ArrayList browsedList = new ArrayList();
+	private int rowNum=0;
+	private String browsedItemData;
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
 
@@ -68,7 +72,7 @@ public class OnlineMarketModel {
 
 
 	//browseItems allows a customer to browse over the app
-	public String browseItems(){
+	public ArrayList browseItems(){
 		
 		String browseQuery = "Select * from Items";
 		try{
@@ -76,7 +80,10 @@ public class OnlineMarketModel {
 			//System.out.println("statement"+statement);
 			ResultSet browsedItems=statement.executeQuery();  
 			while(browsedItems.next()){  
-				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));  
+				browsedItemData=browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity");
+				browsedList.add(rowNum,browsedItemData);rowNum++;
+				System.out.println("statement"+browsedList);
+
 			}
 		}
 		catch (SQLException e) {
@@ -85,7 +92,7 @@ public class OnlineMarketModel {
 		
 		System.out.println("======Your can Browse Market App to shop======");
 		//System.out.println("<-Your shopping items list here->");
-		return "<---+++---Your shopping items list here----+++--->";
+		return browsedList;
 	}
 		
 	//customer can purchase browsed apps

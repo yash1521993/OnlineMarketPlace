@@ -5,6 +5,7 @@
 //
 // yashkuru
 
+import java.util.*;
 /*
 *	OnlineMarketCustomer provides customer view
 *	and implements methods from Customer interface
@@ -13,8 +14,9 @@
 public class OnlineMarketCustomer implements MarketCustomerInterface{
 
 	
-		MarketViewController mvc=new MarketViewController();
-		String samp;
+		private MarketViewController mvc=new MarketViewController();
+		private String samp;
+		private ArrayList browseItem;
 		//overriding interface method
 		@Override
 		public void customerInfo(){
@@ -41,8 +43,9 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		@Override
 		public void browseItems(Session session){
 			try{
-				samp=mvc.browseItems(session);
-				System.out.println(samp);
+				browseItem=mvc.browseItems(session);
+				System.out.println("<---+++---Your shopping items list here----+++--->");
+				System.out.println(browseItem);
 			}
 			catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

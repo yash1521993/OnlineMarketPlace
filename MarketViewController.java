@@ -6,7 +6,7 @@
 // yashkuru
 
 import java.rmi.Naming;
-import java.util.Scanner;
+import java.util.*;
 
 /*
 	MarketViewController acts as a client controller and provides communication
@@ -19,7 +19,8 @@ public class MarketViewController{
 	private static OnlineMarket marketApp;
 	private boolean loginStatus;
 	private Session session;
-	private String browseItems,purchaseItems,addItems;
+	private ArrayList browseItems;
+	private String purchaseItems,addItems;
 
 	//validateUserLogin method calls interface which further 
 	//communicates with Server side controller and model
@@ -66,7 +67,7 @@ public class MarketViewController{
 
 
 	//browseItems method which calls browseItems from interface
-	public String browseItems(Session session){
+	public ArrayList browseItems(Session session){
 		
 		try{
 				browseItems= marketApp.browseItems(session);

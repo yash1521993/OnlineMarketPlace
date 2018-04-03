@@ -8,7 +8,7 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-
+import java.util.*;
 //import proxy 
 import java.lang.reflect.Proxy;
 
@@ -65,7 +65,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	}*/
 
 	@Override
-	public synchronized String browseItems(Session session){
+	public synchronized ArrayList browseItems(Session session){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.browseItems();
 		
