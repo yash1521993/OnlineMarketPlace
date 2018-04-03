@@ -79,7 +79,7 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			//retrieves all the items from db
-			statement = connectSql.connectMySql().prepareStatement("Select * from Items");
+			statement = remoteConn.prepareStatement("Select * from Items");
 			//browsedItems stores the above executed query result
 			ResultSet browsedItems=statement.executeQuery(); 
 			//add each column data to browsed List
@@ -105,7 +105,7 @@ public class OnlineMarketModel {
 		try{
 			System.out.println("======Accessed Customer Purchase Method======");
 			//
-			Statement st = connectSql.connectMySql().createStatement();
+			Statement st = remoteConn.createStatement();
 			
 			ResultSet selectedItem=st.executeQuery("Select * from Items where ItemId="+itemId);
 			while(selectedItem.next()){  
@@ -141,14 +141,8 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 
-			/*Statement st = connectSql.connectMySql().createStatement();
-			ResultSet browsedItems=st.executeQuery("Select * from Items");
-			System.out.println("^^^^add");
-			while(browsedItems.next()){  
-				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
-			}*/
 			//insert admin input items into dataase
-			PreparedStatement insertItem = connectSql.connectMySql().prepareStatement("Insert into Items values(?,?,?,?)");
+			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into Items values(?,?,?,?)");
 			insertItem.setInt(1,itemId);
 			insertItem.setString(2,itemName);
 			insertItem.setString(3,itemPrice);
