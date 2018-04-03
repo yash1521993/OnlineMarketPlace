@@ -71,7 +71,12 @@ public class OnlineMarketModel {
 	public String browseItems(){
 		
 		String browseQuery = "Select * from Items";
-		PreparedStatement statement = connectSql.connectMySql().prepareStatement(browseQuery);
+		try{
+			PreparedStatement statement = connectSql.connectMySql().prepareStatement(browseQuery);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 		System.out.println(statement);
 		System.out.println("======Your can Browse Market App to shop======");
 		//System.out.println("<-Your shopping items list here->");
