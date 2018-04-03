@@ -44,28 +44,31 @@ public class MarketDispatcher {
 			//creating invoker or broker object
 			CommonInvoker invoker = new CommonInvoker();
 			//read user input 
-			Scanner scanner = new Scanner(System.in);
 			System.out.println("Hi Admin! You have the following commands to perform");
-			System.out.println("---Enter 'Browse' ignoring quotes to shop");
-			System.out.println("---Enter 'Add' ignoring quotes to buy items");
-			System.out.println("---Other commands coming soon.....----");
-			String adminInput = scanner.nextLine();
-			//command invocation based on user input
-			if(adminInput.equalsIgnoreCase("add")){
-				invoker.tasksListAdmin(addItems);
-			}
-			else if(adminInput.equalsIgnoreCase("browse")){
-				invoker.tasksListAdmin(browseItems);
-			}
-			else{
-				System.out.println("Invalid command input");
-			}
+			while(true){
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("---Enter 'Browse' ignoring quotes to shop");
+				System.out.println("---Enter 'Add' ignoring quotes to buy items");
+				System.out.println("---Other commands coming soon.....----");
+				System.out.println(">>To exit these commands, press ctrl+c<<");
+				String adminInput = scanner.nextLine();
+				//command invocation based on user input
+				if(adminInput.equalsIgnoreCase("add")){
+					invoker.tasksListAdmin(addItems);
+				}
+				else if(adminInput.equalsIgnoreCase("browse")){
+					invoker.tasksListAdmin(browseItems);
+				}
+				else{
+					System.out.println("Invalid command input");
+				}
+
 			/*else{
 				invoker.tasksList(browseItems);
 			}*/
 			//execute the admin tasks
-			invoker.executeAdminTasks();
-
+				invoker.executeAdminTasks();
+			}
 	    }
 	    else{
 			//abstract factory invocation
@@ -79,24 +82,28 @@ public class MarketDispatcher {
 			PurchaseMarketItems buyItems = new PurchaseMarketItems(marketCustomer,session);
 			//creating invoker or broker object
 			CommonInvoker invoker = new CommonInvoker();
-			//read user input 
-			Scanner scanner = new Scanner(System.in);
 			System.out.println("Hi Customer! You have the following commands to perform");
-			System.out.println("---Enter 'Browse' ignoring quotes to shop");
-			System.out.println("---Enter 'Purchase' ignoring quotes to buy items");
-			String custInput = scanner.nextLine();
-			//command invocation based on user input
-			if(custInput.equalsIgnoreCase("purchase")){
-				invoker.tasksList(buyItems);
+			//read user input 
+			while(true){
+				Scanner scanner = new Scanner(System.in);
+				
+				System.out.println("---Enter 'Browse' ignoring quotes to shop");
+				System.out.println("---Enter 'Purchase' ignoring quotes to buy items");
+				System.out.println(">>To exit these commands, press ctrl+c<<");
+				String custInput = scanner.nextLine();
+				//command invocation based on user input
+				if(custInput.equalsIgnoreCase("purchase")){
+					invoker.tasksList(buyItems);
+				}
+				else if(custInput.equalsIgnoreCase("browse")){
+					invoker.tasksList(browseItems);
+				}
+				else{
+					System.out.println("Invalid command input");
+				}
+				//execute the customer tasks
+				invoker.executeCustomerTasks();
 			}
-			else if(custInput.equalsIgnoreCase("browse")){
-				invoker.tasksList(browseItems);
-			}
-			else{
-				System.out.println("Invalid command input");
-			}
-			//execute the customer tasks
-			invoker.executeCustomerTasks();
 	    }
 
 	}
