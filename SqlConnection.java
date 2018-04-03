@@ -35,7 +35,7 @@ public class SqlConnection {
                 System.out.println("Connecting to Market App Database........");
             } 
             catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
+                System.out.println("Online Market App SQL Exception: " +e.getMessage());
             }
         }
         return conn;
@@ -50,7 +50,7 @@ public class SqlConnection {
                 conn = null;
             } 
             catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println("Online Market App SQL Exception: " +e.getMessage());
             }
         }
     }
