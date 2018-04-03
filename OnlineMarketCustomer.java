@@ -35,7 +35,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 				//read input item name and quantity
 				
 				System.out.print("Enter Item Id of the above Items you wish: ");
-				String itemId = scanner.nextInt();
+				int itemId = scanner.nextInt();
 
 				System.out.print("Enter Item Quantity to be purchased: ");
 				int itemQuantity = scanner.nextInt();

@@ -99,7 +99,7 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			Statement st = connectSql.connectMySql().createStatement();
-			System.out.println(itemName);
+			System.out.println(itemId);
 			ResultSet browsedItems=st.executeQuery("Select * from Items where ItemName="+itemId);
 			while(browsedItems.next()){  
 				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
