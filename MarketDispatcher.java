@@ -39,19 +39,23 @@ public class MarketDispatcher {
 			
 			//invoking customer tasks
 			AddMarketItems addItems = new AddMarketItems(marketAdmin,session);
-			//PurchaseMarketItems buyItems = new PurchaseMarketItems(marketCustomer,session);
+			BrowseAdminMarketItems browseItems = new BrowseAdminMarketItems(marketAdmin,session);
 
 			//creating invoker or broker object
 			CommonInvoker invoker = new CommonInvoker();
 			//read user input 
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Hi Admin! You have the following commands to perform");
-			System.out.println("---Other commands coming soon.....----");
+			System.out.println("---Enter 'Browse' ignoring quotes to shop");
 			System.out.println("---Enter 'Add' ignoring quotes to buy items");
+			System.out.println("---Other commands coming soon.....----");
 			String adminInput = scanner.nextLine();
 			//command invocation based on user input
 			if(adminInput.equalsIgnoreCase("add")){
 				invoker.tasksListAdmin(addItems);
+			}
+			else if(adminInput.equalsIgnoreCase("browse")){
+				invoker.tasksListAdmin(browseItems);
 			}
 			else{
 				System.out.println("Invalid command input");

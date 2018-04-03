@@ -21,6 +21,7 @@ import java.util.*;
 public class OnlineMarketAdmin implements MarketAdminInterface{
 	private MarketViewController mvc=new MarketViewController();
 	private String samp;
+	private ArrayList browseItem;
 	//overriding
 	@Override
 	public void adminInfo(){
@@ -56,6 +57,24 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 		}
 		catch(Exception e){
 			System.out.println("Online Market App- Add Items Exception: " +e.getMessage());
+			//e.printStackTrace();
+		}
+	}
+
+
+	//member method- browseItems helps a customer to browse items
+	@Override
+	public void browseItems(Session session){
+		try{
+			browseItem=mvc.browseItems(session);
+			System.out.println("<---+++---Your shopping items list here----+++--->");
+			System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+			for(int i = 0; i < browseItem.size(); i++) {
+	            System.out.println(browseItem.get(i));
+	        }
+		}
+		catch(Exception e){
+			System.out.println("Online Market App Exception: " +e.getMessage());
 			//e.printStackTrace();
 		}
 	}

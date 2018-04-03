@@ -26,7 +26,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 	boolean validateCustomerLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
 	//role based access for customer to browse items
-	@AnnotateInterface("customer")
+	//@AnnotateInterface("customer")
 	public ArrayList browseItems(Session session) throws java.rmi.RemoteException;
 
 	////role based access for customer to purchase items
