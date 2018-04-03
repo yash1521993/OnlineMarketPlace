@@ -73,6 +73,7 @@ public class OnlineMarketModel {
 
 
 	//browseItems allows a customer to browse over the app
+	@SuppressWarnings("unchecked")
 	public ArrayList browseItems(){
 		//exception handling block
 		try{

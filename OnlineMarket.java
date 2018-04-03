@@ -27,6 +27,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 
 	//role based access for customer to browse items
 	//@AnnotateInterface("customer")
+	@SuppressWarnings("unchecked")
 	public ArrayList browseItems(Session session) throws java.rmi.RemoteException;
 
 	////role based access for customer to purchase items
