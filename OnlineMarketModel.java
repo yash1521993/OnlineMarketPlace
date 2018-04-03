@@ -74,9 +74,8 @@ public class OnlineMarketModel {
 	//browseItems allows a customer to browse over the app
 	public ArrayList browseItems(){
 		
-		String browseQuery = "Select * from Items";
 		try{
-			PreparedStatement statement = connectSql.connectMySql().prepareStatement(browseQuery);
+			PreparedStatement statement = connectSql.connectMySql().prepareStatement("Select * from Items");
 			//System.out.println("statement"+statement);
 			ResultSet browsedItems=statement.executeQuery();  
 			while(browsedItems.next()){  
@@ -86,7 +85,7 @@ public class OnlineMarketModel {
 			}
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
 		
 		System.out.println("======Your can Browse Market App to shop======");
@@ -103,6 +102,12 @@ public class OnlineMarketModel {
 
 	//admin can add items to the inventory
 	public String addItems(){
+		try{
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception: " +e.getMessage());
+		}
 		System.out.println("======Accessed Admin add method======");
 		return "+++++++++++Add items here+++++++++++\n";		
 	}
