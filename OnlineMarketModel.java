@@ -8,6 +8,7 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.*;
 
 // Ryan: Here you are violating separation of concerns by mixing
 // Model and framework related code. Instead you should keep these
@@ -22,7 +23,10 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class OnlineMarketModel {
 
-	Session session;
+	private Session session;
+	//creating  a new instance for mysql connection
+	private SqlConnection connectSql=new SqlConnection();
+
 	//registering a customer
 	public String registerCustomer() throws RemoteException{
 		//yet to implement
@@ -65,6 +69,10 @@ public class OnlineMarketModel {
 
 	//browseItems allows a customer to browse over the app
 	public String browseItems(){
+		
+		String browseQuery = "Select * from Items";
+		PreparedStatement statement = connectSql.connectMySql().prepareStatement(browseQuery);
+		System.out.println(statement);
 		System.out.println("======Your can Browse Market App to shop======");
 		//System.out.println("<-Your shopping items list here->");
 		return "<---+++---Your shopping items list here----+++--->";
