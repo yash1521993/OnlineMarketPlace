@@ -1,2 +1,2 @@
-javac /home/yashkuru/OOAD/4Assignment/mysql-connector-java-5.1.46.jar *.java
-java -Djava.security.policy=policy OnlineMarketController
+javac -classpath "/home/yashkuru/OOAD/4Assignment/mysql-connector-java-5.1.46.jar" *.java
+java -classpath ".:/home/yashkuru/OOAD/4Assignment/mysql-connector-java-5.1.46.jar" -Djava.security.policy=policy OnlineMarketController
