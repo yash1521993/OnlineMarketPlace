@@ -101,7 +101,7 @@ public class OnlineMarketModel {
 	}
 
 	//admin can add items to the inventory
-	public String addItems(){
+	public String addItems(int itemId,String itemName,String itemPrice, int itemQuantity){
 		try{
 
 			/*Statement st = connectSql.connectMySql().createStatement();
@@ -110,21 +110,14 @@ public class OnlineMarketModel {
 			while(browsedItems.next()){  
 				System.out.println(browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity"));
 			}*/
-			Scanner scanner = new Scanner(System.in);
 
-			System.out.print("Enter Item Id: ");
-			String itemId = scanner.nextLine();
+			PreparedStatement insertItem = connectSql.connectMySql().prepareStatement("Insert into Items values(?,?,?,?)");
+			insertItem.setInt(1,itemId);
+			insertItem.setString(2,itemName);
+			insertItem.setString(3,itemPrice);
+			insertItem.setInt(4,itemQuantity);
 
-			System.out.print("Enter Item Name: ");
-			String itemName = scanner.nextLine();
-
-			System.out.print("Enter Item Price: ");
-			String itemPrice = scanner.nextLine();
-
-			System.out.print("Enter Item Quantity: ");
-			String itemQuantity = scanner.nextLine();
-
-			
+			insertItem.executeUpdate();
 
 		}
 		catch (SQLException e) {
