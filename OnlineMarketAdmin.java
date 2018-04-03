@@ -6,7 +6,7 @@
 // yashkuru
 
 import java.rmi.Naming;
-
+import java.util.*;
 // Ryan: Here you are violating separation of concerns by mixing
 // Model and framework related code. Instead you should keep these
 // isolated by maintaining high cohesion.  
@@ -34,8 +34,21 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 	@Override
 	public void addItems(Session session){
 		try{
-			//System.out.println("add items fn");
-			samp=mvc.addItems(session);
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.print("Enter Item Id: ");
+			int itemId = scanner.nextInt();
+
+			System.out.print("Enter Item Name: ");
+			String itemName = scanner.next();
+
+			System.out.print("Enter Item Price: ");
+			String itemPrice = scanner.next();
+
+			System.out.print("Enter Item Quantity: ");
+			int itemQuantity = scanner.nextInt();
+
+			samp=mvc.addItems(session,itemId,itemName,itemPrice,itemQuantity);
 			System.out.println(samp);
 		}
 		catch(Exception e){
