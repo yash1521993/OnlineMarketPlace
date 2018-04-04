@@ -30,7 +30,7 @@ public class OnlineMarketModel {
 	private String browsedItemData;
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
-	private remoteConn=connectSql.connectMySql();
+	private Connection remoteConn=connectSql.connectMySql();
 	private PreparedStatement statement;
 
 	//registering a customer
