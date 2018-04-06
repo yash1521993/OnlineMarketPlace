@@ -6,13 +6,14 @@
 // yashkuru
 
 import java.rmi.Naming;
+// Ryan: Do you need everything in this package?
 import java.util.*;
 // Ryan: Here you are violating separation of concerns by mixing
 // Model and framework related code. Instead you should keep these
 // isolated by maintaining high cohesion.  
 
 
-//Fixed: I have seperated the RMI part by adding it to another source file
+//Fixed: I have separated the RMI part by adding it to another source file
 //this file contains the view
 
 /*

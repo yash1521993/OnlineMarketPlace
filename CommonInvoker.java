@@ -14,7 +14,7 @@ import java.util.List;
 public class CommonInvoker{
 
 	/*
-		Customer realted invoker module
+		Customer related invoker module
 	*/
 
 	//taskList stores customer commands in a queue
@@ -34,7 +34,7 @@ public class CommonInvoker{
 	}
 
 	/*
-		Admin realted invoker module
+		Admin related invoker module
 	*/
 
 	//taskListAdmin stores admin commands in a queue

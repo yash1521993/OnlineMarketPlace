@@ -16,7 +16,7 @@ public class PurchaseMarketItems implements CustomerCmdInterface{
 
 	// FIXED: Made the variable private
 	private Session session;
-	//constructor intializing customer command and session object to purchase items
+	//constructor initializing customer command and session object to purchase items
 	public PurchaseMarketItems(MarketCustomerInterface custCommand,Session session){
       this.custCommand = custCommand;
       this.session=session;

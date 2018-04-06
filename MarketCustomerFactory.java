@@ -6,7 +6,7 @@
 // yashkuru
 
 /*
-	MarketCustomerFactory creates customer factiries extending 
+	MarketCustomerFactory creates customer factories extending 
 	MarketAbstractFactory class
 */
 public class MarketCustomerFactory extends MarketAbstractFactory {

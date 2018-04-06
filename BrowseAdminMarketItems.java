@@ -14,7 +14,7 @@ public class BrowseAdminMarketItems implements AdminCmdInterface{
 	private MarketAdminInterface custCommand;
 	private Session session;
 
-	//constructor initalizing customer commands and session
+	//constructor initializing customer commands and session
 	public BrowseAdminMarketItems(MarketAdminInterface custCommand, Session session){
       this.custCommand = custCommand;
       this.session=session;
