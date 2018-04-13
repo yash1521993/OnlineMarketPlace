@@ -7,7 +7,10 @@
 
 import java.rmi.Naming;
 // Ryan: Do you need everything in this package?
-import java.util.*;
+
+// FIXED: imported only required package
+import java.util.ArrayList;
+import java.util.Scanner;
 // Ryan: Here you are violating separation of concerns by mixing
 // Model and framework related code. Instead you should keep these
 // isolated by maintaining high cohesion.  

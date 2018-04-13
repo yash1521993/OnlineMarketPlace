@@ -9,7 +9,9 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 // Ryan: Do you need everything in this package?
-import java.util.*;
+
+// FIXED: imported only required package
+import java.util.ArrayList;
 //import proxy 
 import java.lang.reflect.Proxy;
 

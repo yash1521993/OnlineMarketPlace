@@ -7,7 +7,9 @@
 
 import java.rmi.Naming;
 // Ryan: Do you need everything in this package?
-import java.util.*;
+
+// FIXED: imported only required package
+import java.util.ArrayList;
 
 /*
 	MarketViewController acts as a client controller and provides communication

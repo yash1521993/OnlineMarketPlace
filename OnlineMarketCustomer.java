@@ -6,7 +6,10 @@
 // yashkuru
 
 // Ryan: Do you need everything in this package?
-import java.util.*;
+
+// FIXED: imported only required package
+import java.util.ArrayList;
+import java.util.Scanner;
 /*
 *	OnlineMarketCustomer provides customer view
 *	and implements methods from Customer interface

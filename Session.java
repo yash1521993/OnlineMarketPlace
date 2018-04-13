@@ -6,7 +6,9 @@
 // yashkuru
 
 // Ryan: Do you need everything in this package?
-import java.io.*;
+
+// FIXED: imported only required package
+import java.io.Serializable;
 /*
 	Session class creates a new session for each user
 */

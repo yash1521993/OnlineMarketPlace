@@ -8,7 +8,6 @@
 //importing required packages to perform database operations
 import java.sql.SQLException;
 import java.sql.DriverManager;
-import java.util.Properties;
 import java.sql.Connection;
 
 /*
