@@ -26,7 +26,7 @@ public class MarketDispatcher {
 		custCreator = MarketFactoryCreator.getLoginType("CustFact");
 	}
 
-	//disptach renders a view based on received request
+	//dispatch renders a view based on received request
 	public void dispatch(String request, Session session) {
 
 		// Admin or Customer View

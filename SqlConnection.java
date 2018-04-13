@@ -31,7 +31,7 @@ public class SqlConnection {
             try {
             	//lookup for sql driver
                 Class.forName(DB_DRIVER);
-                //connect to url using id and passwrod
+                //connect to url using id and password
                 conn = DriverManager.getConnection(CONN_STRING, CONN_ID, CONN_PWD);
                 System.out.println("Connecting to Market App Database........");
             }

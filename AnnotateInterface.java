@@ -18,6 +18,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AnnotateInterface {
-	//value method stores the annotaion value
+	//value method stores the annotation value
 	String value();
 }
