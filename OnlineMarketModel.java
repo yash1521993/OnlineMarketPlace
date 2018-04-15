@@ -40,6 +40,7 @@ public class OnlineMarketModel {
 	private Connection remoteConn=connectSql.connectMySql();
 	private PreparedStatement prepStat;
 	private Statement statement;
+
 	//registering a customer
 	public String registerCustomer() throws RemoteException{
 		//yet to implement
@@ -54,14 +55,42 @@ public class OnlineMarketModel {
 		//admin validation
 		//works for id: admin and password: test
 		if(loginType.equalsIgnoreCase("Admin")){
-			if(inputId.equals("admin") && inputPwd.equals("test")){
+			try{
+				prepStat=connectSql.connectMySql().prepareStatement("Select * from tbl_admin where username=? and password=?");
+
+				prepStat.setString(1,inputId);
+				prepStat.setString(2,inputPwd);
+				ResultSet rs=prepStat.executeQuery();
+				if(rs.next()){
+					System.out.println("Success");
+					loginCheck=true;
+				}
+				else{
+					System.out.println("Denied");
+					loginCheck=false;
+				}
+			}
+			catch (SQLException e) {
+				System.out.println("Online Market App Exception: " +e.getMessage());
+			}
+			/*statement = remoteConn.createStatement();
+			//
+			ResultSet selectedItem=statement.executeQuery("Select * from tbl_admin where username="+inputId+"and password="+inputPwd);
+			while(selectedItem.next()){  
+				System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("first_name")+" "+selectedItem.getString("last_name")+" "+selectedItem.getInt("username"));
+				currentStock=selectedItem.getInt("IQuantity");
+				itemName=selectedItem.getString("ItemName");
+			}*/
+
+			/*if(inputId.equals("admin") && inputPwd.equals("test")){
 				System.out.println("Success");
 				loginCheck=true;
 			}
 			else{
 				System.out.println("Denied");
 				loginCheck=false;
-			}
+			}*/
+
 		}
 		
 		//customer validation
@@ -112,9 +141,9 @@ public class OnlineMarketModel {
 		try{
 			System.out.println("======Accessed Customer Purchase Method======");
 			//setup to execture a sql statement
-			st = remoteConn.createStatement();
+			statement = remoteConn.createStatement();
 			//retrieves all items with given itemId
-			ResultSet selectedItem=st.executeQuery("Select * from Items where ItemId="+itemId);
+			ResultSet selectedItem=statement.executeQuery("Select * from Items where ItemId="+itemId);
 			while(selectedItem.next()){  
 				//System.out.println("itemId");
 				System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
