@@ -43,7 +43,22 @@ public class OnlineMarketModel {
 
 	//registering a customer
 	public String registerCustomer() throws RemoteException{
-		//yet to implement
+		try{
+
+			//insert customer registration details into dataase
+			prepStat = remoteConn.prepareStatement("Insert into tbl_customer values(?,?,?,?)");
+			//set positional params
+			prepStat.setString(1,firstName);
+			prepStat.setString(2,lastName);
+			prepStat.setString(3,userName);
+			prepStat.setString(4,password);
+			//executes the insert statement with above params
+			prepStat.executeUpdate();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception: " +e.getMessage());
+		}
 		System.out.println("Registration page. Register here");
 		return "Registered";
 	}
