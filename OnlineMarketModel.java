@@ -108,12 +108,12 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			//retrieves all the items from db
-			prepStat = remoteConn.prepareStatement("Select * from Items");
+			prepStat = remoteConn.prepareStatement("Select * from tbl_items");
 			//browsedItems stores the above executed query result
 			ResultSet browsedItems=prepStat.executeQuery(); 
 			//add each column data to browsed List
 			while(browsedItems.next()){  
-				browsedItemData=browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity");
+				browsedItemData=browsedItems.getInt(1)+" "+browsedItems.getString("item_type")+" "+browsedItems.getString("description")+" "+browsedItems.getInt("price")+" "+browsedItems.getInt("quantity");
 				browsedList.add(rowNum,browsedItemData);rowNum++;
 				//System.out.println("statement"+browsedList);
 			}
@@ -136,16 +136,16 @@ public class OnlineMarketModel {
 			//setup to execture a sql statement
 			statement = remoteConn.createStatement();
 			//retrieves all items with given itemId
-			ResultSet selectedItem=statement.executeQuery("Select * from Items where ItemId="+itemId);
+			ResultSet selectedItem=statement.executeQuery("Select * from tbl_items where item_id="+itemId);
 			while(selectedItem.next()){  
 				//System.out.println("itemId");
-				System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
-				currentStock=selectedItem.getInt("IQuantity");
-				itemName=selectedItem.getString("ItemName");
+				//System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
+				currentStock=selectedItem.getInt("quantity");
+				itemName=selectedItem.getString("description");
 			}
 			//condition check for item out of stock
 			if(itemQuantity<=currentStock){
-				prepStat=connectSql.connectMySql().prepareStatement("Update Items set IQuantity=? where ItemId=?");
+				prepStat=connectSql.connectMySql().prepareStatement("Update tbl_items set quantity=? where item_id=?");
 				//System.out.println("asgdgsdgadgasd"+(currentStock-itemQuantity));
 				prepStat.setInt(1,currentStock-itemQuantity);
 				prepStat.setInt(2,itemId);
@@ -172,7 +172,7 @@ public class OnlineMarketModel {
 		try{
 
 			//insert admin input items into dataase
-			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into Items values(?,?,?,?)");
+			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into tbl_items values(?,?,?,?)");
 			//set positional params
 			insertItem.setInt(1,itemId);
 			insertItem.setString(2,itemName);
