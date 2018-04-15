@@ -62,47 +62,40 @@ public class OnlineMarketModel {
 				prepStat.setString(2,inputPwd);
 				ResultSet rs=prepStat.executeQuery();
 				if(rs.next()){
-					System.out.println("Success");
+					System.out.println("Admin Login Success");
 					loginCheck=true;
 				}
 				else{
-					System.out.println("Denied");
+					System.out.println("Admin Login Denied");
 					loginCheck=false;
 				}
 			}
 			catch (SQLException e) {
 				System.out.println("Online Market App Exception: " +e.getMessage());
 			}
-			/*statement = remoteConn.createStatement();
-			//
-			ResultSet selectedItem=statement.executeQuery("Select * from tbl_admin where username="+inputId+"and password="+inputPwd);
-			while(selectedItem.next()){  
-				System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("first_name")+" "+selectedItem.getString("last_name")+" "+selectedItem.getInt("username"));
-				currentStock=selectedItem.getInt("IQuantity");
-				itemName=selectedItem.getString("ItemName");
-			}*/
-
-			/*if(inputId.equals("admin") && inputPwd.equals("test")){
-				System.out.println("Success");
-				loginCheck=true;
-			}
-			else{
-				System.out.println("Denied");
-				loginCheck=false;
-			}*/
 
 		}
 		
 		//customer validation
 		//works for id: customer and password: test
 		if(loginType.equalsIgnoreCase("Customer")){
-			if(inputId.equals("customer") && inputPwd.equals("test")){
-				System.out.println("Success");
-				loginCheck=true;
+			try{
+				prepStat=connectSql.connectMySql().prepareStatement("Select * from tbl_customer where username=? and password=?");
+
+				prepStat.setString(1,inputId);
+				prepStat.setString(2,inputPwd);
+				ResultSet rs=prepStat.executeQuery();
+				if(rs.next()){
+					System.out.println("Customer Login Success");
+					loginCheck=true;
+				}
+				else{
+					System.out.println("Customer Login Denied");
+					loginCheck=false;
+				}
 			}
-			else{
-				System.out.println("Denied");
-				loginCheck=false;
+			catch (SQLException e) {
+				System.out.println("Online Market App Exception: " +e.getMessage());
 			}
 		}
 		return loginCheck;
