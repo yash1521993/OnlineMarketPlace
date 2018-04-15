@@ -15,7 +15,6 @@ import java.util.Scanner;
 // Model and framework related code. Instead you should keep these
 // isolated by maintaining high cohesion.  
 
-
 //Fixed: I have separated the RMI part by adding it to another source file
 //this file contains the view
 

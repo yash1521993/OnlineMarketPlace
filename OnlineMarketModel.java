@@ -38,8 +38,8 @@ public class OnlineMarketModel {
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
 	private Connection remoteConn=connectSql.connectMySql();
-	private PreparedStatement statement;
-
+	private PreparedStatement prepStat;
+	private Statement statement;
 	//registering a customer
 	public String registerCustomer() throws RemoteException{
 		//yet to implement
@@ -86,9 +86,9 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			//retrieves all the items from db
-			statement = remoteConn.prepareStatement("Select * from Items");
+			prepStat = remoteConn.prepareStatement("Select * from Items");
 			//browsedItems stores the above executed query result
-			ResultSet browsedItems=statement.executeQuery(); 
+			ResultSet browsedItems=prepStat.executeQuery(); 
 			//add each column data to browsed List
 			while(browsedItems.next()){  
 				browsedItemData=browsedItems.getInt(1)+" "+browsedItems.getString("ItemName")+" "+browsedItems.getString("ItemPrice")+" "+browsedItems.getInt("IQuantity");
@@ -112,7 +112,7 @@ public class OnlineMarketModel {
 		try{
 			System.out.println("======Accessed Customer Purchase Method======");
 			//setup to execture a sql statement
-			Statement st = remoteConn.createStatement();
+			st = remoteConn.createStatement();
 			//retrieves all items with given itemId
 			ResultSet selectedItem=st.executeQuery("Select * from Items where ItemId="+itemId);
 			while(selectedItem.next()){  
@@ -123,12 +123,12 @@ public class OnlineMarketModel {
 			}
 			//condition check for item out of stock
 			if(itemQuantity<=currentStock){
-				statement=connectSql.connectMySql().prepareStatement("Update Items set IQuantity=? where ItemId=?");
+				prepStat=connectSql.connectMySql().prepareStatement("Update Items set IQuantity=? where ItemId=?");
 				//System.out.println("asgdgsdgadgasd"+(currentStock-itemQuantity));
-				statement.setInt(1,currentStock-itemQuantity);
-				statement.setInt(2,itemId);
+				prepStat.setInt(1,currentStock-itemQuantity);
+				prepStat.setInt(2,itemId);
 				
-				statement.executeUpdate();
+				prepStat.executeUpdate();
 				
 			}
 			else{
