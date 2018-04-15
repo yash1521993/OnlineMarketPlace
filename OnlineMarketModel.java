@@ -42,7 +42,7 @@ public class OnlineMarketModel {
 	private Statement statement;
 
 	//registering a customer
-	public String registerCustomer() throws RemoteException{
+	public String registerCustomer(String firstName, String lastName, String userName, String password) throws RemoteException{
 		try{
 
 			//insert customer registration details into dataase
@@ -57,7 +57,7 @@ public class OnlineMarketModel {
 
 		}
 		catch (SQLException e) {
-			System.out.println("Online Market App Exception: " +e.getMessage());
+			System.out.println("Online Market App Exception-Registration: " +e.getMessage());
 		}
 		System.out.println("Registration page. Register here");
 		return "Registered";
