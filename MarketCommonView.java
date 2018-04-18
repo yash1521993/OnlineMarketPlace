@@ -40,7 +40,7 @@ public class MarketCommonView{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter First Name:");
 		String firstName = scanner.nextLine();
-
+		return firstName;
 	}
 
 	//captures user's last name details
@@ -48,7 +48,7 @@ public class MarketCommonView{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Last Name:");
 		String lastName = scanner.nextLine();
-
+		return lastName;
 	}
 
 	//captures user type who's trying to access market app
