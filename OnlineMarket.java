@@ -18,7 +18,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 	//this method returns an Id for each customer
 	int regId() throws java.rmi.RemoteException;
 	//this method registers a new customer
-	String registerCustomer(String firstName, String lastName, String userName, String password) throws java.rmi.RemoteException;
+	String registerCustomer(String regType,String firstName,String lastName,String userName,String password) throws java.rmi.RemoteException;
 	
 	//this method verifies for a valid admin based on role
 	//@AnnotateInterface("admin")
