@@ -68,8 +68,7 @@ public class MarketViewController{
 				System.out.println(">>>>>Input should be only from either of the above roles<<<<<<");
 		}
 		catch(Exception e){
-				System.out.println("Online Market App Exception: " +e.getMessage());
-				//e.printStackTrace();
+			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
 		return loginStatus;
 			
@@ -81,8 +80,7 @@ public class MarketViewController{
 			session= marketApp.createSession(userType);
 		}	
 		catch(Exception e){
-				System.out.println("Online Market App- Session Exception: " +e.getMessage());
-				//e.printStackTrace();
+			System.out.println("Online Market App- Session Exception: " +e.getMessage());
 		}
 		return session;
 	}
@@ -120,7 +118,6 @@ public class MarketViewController{
 		}
 		catch(Exception e){
 			System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
-			//e.printStackTrace();
 		}
 		return addItems;
 	}
