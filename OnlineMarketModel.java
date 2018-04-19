@@ -42,6 +42,7 @@ public class OnlineMarketModel {
 	private Statement statement;
 	private ResultSet rsltSet;
 	private int custId=0;
+	public static String userId="";
 	//registering a customer
 	public String registerCustomer(String firstName,String lastName, String userName, String password) throws RemoteException{
 		//customer insertion
@@ -83,12 +84,13 @@ public class OnlineMarketModel {
 		//works for id: admin and password: test
 		if(loginType.equalsIgnoreCase("Admin")){
 			try{
-				prepStat=connectSql.connectMySql().prepareStatement("Select * from tbl_admin where username=? and password=?");
+				prepStat=remoteConn.prepareStatement("Select * from tbl_admin where username=? and password=?");
 
 				prepStat.setString(1,inputId);
 				prepStat.setString(2,inputPwd);
 				ResultSet rs=prepStat.executeQuery();
 				if(rs.next()){
+					
 					System.out.println("Admin Login Success");
 					loginCheck=true;
 				}
@@ -107,12 +109,13 @@ public class OnlineMarketModel {
 		//works for id: customer and password: test
 		if(loginType.equalsIgnoreCase("Customer")){
 			try{
-				prepStat=connectSql.connectMySql().prepareStatement("Select * from tbl_customers where username=? and password=?");
+				prepStat=remoteConn.prepareStatement("Select * from tbl_customers where username=? and password=?");
 
 				prepStat.setString(1,inputId);
 				prepStat.setString(2,inputPwd);
 				ResultSet rs=prepStat.executeQuery();
 				if(rs.next()){
+					userId=inputId;
 					System.out.println("Customer Login Success");
 					loginCheck=true;
 				}
@@ -155,7 +158,7 @@ public class OnlineMarketModel {
 		
 	//customer can purchase browsed apps
 	public String purchaseItems(int itemId, int itemQuantity){
-		int currentStock=0;
+		int currentStock=0,retrievedCId=0;
 		String itemName="";
 		//exception handling block
 		try{
@@ -172,13 +175,29 @@ public class OnlineMarketModel {
 			}
 			//condition check for item out of stock
 			if(itemQuantity<=currentStock){
-				prepStat=connectSql.connectMySql().prepareStatement("Update tbl_items set quantity=? where item_id=?");
+				prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
 				//System.out.println("asgdgsdgadgasd"+(currentStock-itemQuantity));
 				prepStat.setInt(1,currentStock-itemQuantity);
 				prepStat.setInt(2,itemId);
-				
 				prepStat.executeUpdate();
 				
+				//select cart_id from tbl_cart join tbl_itemcart on tbl_cart.cart_id=tbl_itemcart.cart_id 
+				prepStat=remoteConn.prepareStatement("select cart_id from tbl_cart join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where username=?");
+				prepStat.setString(1,userId);
+				ResultSet rsltSet1=prepStat.executeQuery();
+
+				System.out.println("level1"+userId);
+				while(rsltSet1.next()){
+					//System.out.println("level1nnn");
+					retrievedCId=rsltSet1.getInt(1);
+					//System.out.println("retrievedCId"+retrievedCId);
+				}
+				//System.out.println("level2");
+				prepStat=remoteConn.prepareStatement("Insert into tbl_itemcart values(?,?)");
+				prepStat.setInt(1,retrievedCId);
+				prepStat.setInt(2,itemId);
+
+				prepStat.executeUpdate();				
 			}
 			else{
 				return "----Requested quantity is more than current stock----";
