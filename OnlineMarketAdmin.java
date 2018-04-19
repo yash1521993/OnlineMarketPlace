@@ -34,6 +34,41 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 		System.out.println("------------------------------------");
 		System.out.println("You can now Browse, Add, Delete, Update");
 	}
+
+	//method addUsers helps admin to add a new Customers/Admin
+	@Override
+	public void addUsers(Session session){
+		try{
+			//scanner class allows the admin to enter his/her input
+			Scanner scanner = new Scanner(System.in);
+
+			System.out.print("+++++++++++Add Customer/Admin here+++++++++++\n");
+
+			System.out.println("Enter 'Admin' to add a new admin to database");
+			System.out.println("Enter 'Customer' to add a new admin to database");
+			System.out.println("--------------Enter one from above------------------");
+			String accType = scanner.nextLine();
+			
+			System.out.println("Enter First Name:");
+			String firstName = scanner.nextLine();
+
+			System.out.println("Enter Last Name:");
+			String lastName = scanner.nextLine();
+
+			System.out.println("Enter UserId:");
+			String inputLoginId = scanner.nextLine();
+
+			System.out.println("Enter Password:");
+			String inputLoginPwd = scanner.nextLine();
+
+			//pass these input fields to client controller
+			samp=mvc.addUsers(session,accType,firstName,lastName,inputLoginId,inputLoginPwd);
+			System.out.println(samp);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App- Add Users Exception: " +e.getMessage());
+		}
+	}
 	
 	//member method- addItems helps a admin to add items to market app
 	@Override
@@ -63,7 +98,6 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 		}
 		catch(Exception e){
 			System.out.println("Online Market App- Add Items Exception: " +e.getMessage());
-			//e.printStackTrace();
 		}
 	}
 
