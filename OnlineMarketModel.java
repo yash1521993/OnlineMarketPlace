@@ -42,31 +42,13 @@ public class OnlineMarketModel {
 	private Statement statement;
 
 	//registering a customer
-	public String registerCustomer(String regType,String firstName,String lastName, String userName, String password) throws RemoteException{
-		//admin insertion
-		if(regType.equalsIgnoreCase("Admin")){
-			try{
-				//insert customer registration details into dataase
-				prepStat = remoteConn.prepareStatement("Insert into tbl_admin values(?,?,?,?)");
-				//set positional params
-				prepStat.setString(1,firstName);
-				prepStat.setString(2,lastName);
-				prepStat.setString(3,userName);
-				prepStat.setString(4,password);
-				//executes the insert statement with above params
-				prepStat.executeUpdate();
-
-			}
-			catch (SQLException e) {
-				System.out.println("Online Market App Exception-Registration: " +e.getMessage());
-			}
-		}
-
+	public String registerCustomer(String firstName,String lastName, String userName, String password) throws RemoteException{
+		
 		//customer insertion
 		if(regType.equalsIgnoreCase("Customer")){
 			try{
 				//insert customer registration details into dataase
-				prepStat = remoteConn.prepareStatement("Insert into tbl_customer values(?,?,?,?)");
+				prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)");
 				//set positional params
 				prepStat.setString(1,firstName);
 				prepStat.setString(2,lastName);
@@ -74,6 +56,7 @@ public class OnlineMarketModel {
 				prepStat.setString(4,password);
 				//executes the insert statement with above params
 				prepStat.executeUpdate();
+				return "Registered";
 
 			}
 			catch (SQLException e) {
@@ -82,7 +65,7 @@ public class OnlineMarketModel {
 		}
 
 		//System.out.println("Registration page. Register here");
-		return "Registered";
+		return "user name already exists";
 	}
 	
 	//this method checks for a valid customer or user
@@ -117,7 +100,7 @@ public class OnlineMarketModel {
 		//works for id: customer and password: test
 		if(loginType.equalsIgnoreCase("Customer")){
 			try{
-				prepStat=connectSql.connectMySql().prepareStatement("Select * from tbl_customer where username=? and password=?");
+				prepStat=connectSql.connectMySql().prepareStatement("Select * from tbl_customers where username=? and password=?");
 
 				prepStat.setString(1,inputId);
 				prepStat.setString(2,inputPwd);
