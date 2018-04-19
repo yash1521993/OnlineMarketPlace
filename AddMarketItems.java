@@ -22,7 +22,7 @@ public class AddMarketItems implements AdminCmdInterface{
       this.session=session;
 	}
 	
-	//calling browseItems() method
+	//calling addItems() method
 	@Override
 	public void adminTasks(){
 		custCommand.addItems(session);

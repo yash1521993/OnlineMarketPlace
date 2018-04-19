@@ -117,7 +117,7 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 	        System.out.println("<------------------------------------------------>");
 		}
 		catch(Exception e){
-			System.out.println("Online Market App Exception: " +e.getMessage());
+			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
 		}
 	}
 
