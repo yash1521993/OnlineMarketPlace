@@ -34,7 +34,7 @@ public class OnlineMarketModel {
 	private Session session;
 	private ArrayList browsedList = new ArrayList();
 	private int rowNum=0;
-	private String browsedItemData,retrievedId;
+	private String browsedItemData,retrievedId,registerStatus="";
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
 	private Connection remoteConn=connectSql.connectMySql();
@@ -43,21 +43,27 @@ public class OnlineMarketModel {
 	private ResultSet rsltSet;
 	private int custId=0;
 	public static String userId="";
-	-
+	
 	//registering a customer
 	public String registerCustomer(String firstName,String lastName, String userName, String password) throws RemoteException{
 		//customer insertion
 		try{
 			//checks if a customer already exists with same user name
-			//prepStat=remoteConn.prepareStatement("Select * from tbl_customers where username=?");
-			rsltSet=statement.executeQuery("Select * from tbl_customers where username="+userName);
+			prepStat=remoteConn.prepareStatement("Select * from tbl_customers where username=?");
+			prepStat.setString(1,userName);
+			rsltSet=prepStat.executeQuery();
 			while(rsltSet.next()){  
+				//System.out.println("while");
 				retrievedId=rsltSet.getString("username");
 			}
+			//returns reg failed msg if username already exists
 			if(retrievedId.equalsIgnoreCase(userName)){
-				return "New Customer Registration failed-User name already exists";
+				//System.out.println("ifffffff");
+				registerStatus= "New Customer Registration failed-User name already exists";
 			}
+			//if no match then insert a record to customers table and a cart table
 			else{
+				System.out.println("elseeeeee");
 				//insert customer registration details into dataase
 				prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 				//set positional params
@@ -71,14 +77,13 @@ public class OnlineMarketModel {
 				rsltSet=prepStat.getGeneratedKeys();
 				if(rsltSet.next()){
 					custId=rsltSet.getInt(1);
-					//System.out.println("Online>>>>"+custId);
 				}
 
 				//creates cart for each newly registered customer
 				prepStat=remoteConn.prepareStatement("Insert into tbl_cart(customer_id) values(?)");
 				prepStat.setInt(1,custId);
 				prepStat.executeUpdate();
-				return " Registered successfully";
+				registerStatus="You are now successfully Registered";
 			}
 			
 			
@@ -86,6 +91,7 @@ public class OnlineMarketModel {
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception-Registration: " +e.getMessage());
 		}
+		return registerStatus;
 	}
 	
 	//this method checks for a valid customer or user
