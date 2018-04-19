@@ -40,32 +40,38 @@ public class OnlineMarketModel {
 	private Connection remoteConn=connectSql.connectMySql();
 	private PreparedStatement prepStat;
 	private Statement statement;
-
+	private ResultSet rsltSet;
+	private int custId=0;
 	//registering a customer
 	public String registerCustomer(String firstName,String lastName, String userName, String password) throws RemoteException{
-		
 		//customer insertion
-		//if(regType.equalsIgnoreCase("Customer")){
-			try{
-				//insert customer registration details into dataase
-				prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)");
-				//set positional params
-				prepStat.setString(1,firstName);
-				prepStat.setString(2,lastName);
-				prepStat.setString(3,userName);
-				prepStat.setString(4,password);
-				//executes the insert statement with above params
-				prepStat.executeUpdate();
-				return "Registered";
+		try{
+			//insert customer registration details into dataase
+			prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			//set positional params
+			prepStat.setString(1,firstName);
+			prepStat.setString(2,lastName);
+			prepStat.setString(3,userName);
+			prepStat.setString(4,password);
+			//executes the insert statement with above params
+			prepStat.executeUpdate();
 
+			rsltSet=prepStat.getGeneratedKeys();
+			if(rsltSet.next()){
+				custId=rsltSet.getInt(1);
+				System.out.println("Online>>>>"+custId);
 			}
-			catch (SQLException e) {
-				System.out.println("Online Market App Exception-Registration: " +e.getMessage());
-			}
-		//}
 
-		//System.out.println("Registration page. Register here");
-		return "user name already exists";
+			prepStat=remoteConn.prepareStatement("Insert into tbl_cart(customer_id) values(?)");
+			prepStat.setInt(1,custId);
+			prepStat.executeUpdate();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception-Registration: " +e.getMessage());
+		}
+		return " Registered successfully";
+		//return "New Customer Registration failed";
 	}
 	
 	//this method checks for a valid customer or user
