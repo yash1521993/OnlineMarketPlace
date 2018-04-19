@@ -17,7 +17,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 	//interface should extend from Remote super class
 	//this method returns an Id for each customer
 	int regId() throws java.rmi.RemoteException;
-	
+
 	//this method registers a new customer
 	String registerCustomer(String firstName,String lastName,String userName,String password) throws java.rmi.RemoteException;
 	
@@ -40,7 +40,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 
 	//role based access for admin to add items
 	@AnnotateInterface("admin")
-	public String addItems(Session session,int itemId,String itemName,String itemPrice, int itemQuantity) throws java.rmi.RemoteException;
+	public String addItems(Session session,int itemId,String itemName,String itemDesc,String itemPrice, int itemQuantity) throws java.rmi.RemoteException;
 	
 	//createSession() creates and returns a session based on userType
 	public Session createSession(String userType) throws java.rmi.RemoteException;

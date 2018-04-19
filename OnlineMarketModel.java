@@ -59,7 +59,7 @@ public class OnlineMarketModel {
 			rsltSet=prepStat.getGeneratedKeys();
 			if(rsltSet.next()){
 				custId=rsltSet.getInt(1);
-				System.out.println("Online>>>>"+custId);
+				//System.out.println("Online>>>>"+custId);
 			}
 
 			//creates cart for each newly registered customer
@@ -194,17 +194,18 @@ public class OnlineMarketModel {
 	}
 
 	//admin can add items to the inventory
-	public String addItems(int itemId,String itemName,String itemPrice, int itemQuantity){
+	public String addItems(int itemId,String itemName,String itemDesc,String itemPrice, int itemQuantity){
 		//exception handling block
 		try{
 
 			//insert admin input items into dataase
-			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into tbl_items values(?,?,?,?)");
+			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into tbl_items values(?,?,?,?,?)");
 			//set positional params
 			insertItem.setInt(1,itemId);
 			insertItem.setString(2,itemName);
-			insertItem.setString(3,itemPrice);
-			insertItem.setInt(4,itemQuantity);
+			insertItem.setString(3,itemDesc);
+			insertItem.setString(5,itemPrice);
+			insertItem.setInt(5,itemQuantity);
 			//executes the insert statement with above params
 			insertItem.executeUpdate();
 

@@ -49,13 +49,16 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 			System.out.print("Enter Item Name: ");
 			String itemName = scanner.next();
 
+			System.out.print("Enter Item Description: ");
+			String itemDesc = scanner.next();
+
 			System.out.print("Enter Item Price: ");
 			String itemPrice = scanner.next();
 
 			System.out.print("Enter Item Quantity: ");
 			int itemQuantity = scanner.nextInt();
 			//pass these input items to client controller
-			samp=mvc.addItems(session,itemId,itemName,itemPrice,itemQuantity);
+			samp=mvc.addItems(session,itemId,itemName,itemDesc,itemPrice,itemQuantity);
 			System.out.println(samp);
 		}
 		catch(Exception e){
@@ -73,14 +76,13 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 			browseItem=mvc.browseItems(session);
 			//displaying items from database
 			System.out.println("<---+++---Your shopping items list here----+++--->");
-			System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+			System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemDesc"+"  "+"ItemPrice"+"  "+"ItemQuantity");
 			for(int i = 0; i < browseItem.size(); i++) {
 	            System.out.println(browseItem.get(i));
 	        }
 		}
 		catch(Exception e){
 			System.out.println("Online Market App Exception: " +e.getMessage());
-			//e.printStackTrace();
 		}
 	}
 
