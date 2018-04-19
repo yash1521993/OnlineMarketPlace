@@ -46,11 +46,11 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 			System.out.print("Enter Item Id: ");
 			int itemId = scanner.nextInt();
 
-			System.out.print("Enter Item Name: ");
+			System.out.print("Enter Item Name without space: ");
 			String itemName = scanner.next();
 
-			System.out.print("Enter Item Description: ");
-			String itemDesc = scanner.next();
+			System.out.print("Enter Item Type without space: ");
+			String itemType = scanner.next();
 
 			System.out.print("Enter Item Price: ");
 			String itemPrice = scanner.next();

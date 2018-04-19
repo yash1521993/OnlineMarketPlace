@@ -112,11 +112,11 @@ public class MarketViewController{
 	}
 
 	//purchaseItems method which calls purchaseItems from interface
-	public String addItems(Session session,int itemId,String itemName,String itemDesc,String itemPrice, int itemQuant){
+	public String addItems(Session session,int itemId,String itemName,String itemType,String itemPrice, int itemQuant){
 		
 		try{
 			//send user input to store them to database
-			addItems= marketApp.addItems(session,itemId,itemName,itemDesc,itemPrice,itemQuant);
+			addItems= marketApp.addItems(session,itemId,itemName,itemType,itemPrice,itemQuant);
 		}
 		catch(Exception e){
 			System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());

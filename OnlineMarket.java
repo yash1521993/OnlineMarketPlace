@@ -40,7 +40,7 @@ public interface OnlineMarket extends java.rmi.Remote {
 
 	//role based access for admin to add items
 	@AnnotateInterface("admin")
-	public String addItems(Session session,int itemId,String itemName,String itemDesc,String itemPrice, int itemQuantity) throws java.rmi.RemoteException;
+	public String addItems(Session session,int itemId,String itemName,String itemType,String itemPrice, int itemQuantity) throws java.rmi.RemoteException;
 	
 	//createSession() creates and returns a session based on userType
 	public Session createSession(String userType) throws java.rmi.RemoteException;

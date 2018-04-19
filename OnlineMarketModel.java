@@ -194,7 +194,7 @@ public class OnlineMarketModel {
 	}
 
 	//admin can add items to the inventory
-	public String addItems(int itemId,String itemName,String itemDesc,String itemPrice, int itemQuantity){
+	public String addItems(int itemId,String itemName,String itemType,String itemPrice, int itemQuantity){
 		//exception handling block
 		try{
 
@@ -203,8 +203,8 @@ public class OnlineMarketModel {
 			//set positional params
 			insertItem.setInt(1,itemId);
 			insertItem.setString(2,itemName);
-			insertItem.setString(3,itemDesc);
-			insertItem.setString(5,itemPrice);
+			insertItem.setString(3,itemType);
+			insertItem.setString(4,itemPrice);
 			insertItem.setInt(5,itemQuantity);
 			//executes the insert statement with above params
 			insertItem.executeUpdate();
