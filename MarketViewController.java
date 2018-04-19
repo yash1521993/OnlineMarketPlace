@@ -23,7 +23,7 @@ public class MarketViewController{
 	private boolean loginStatus;
 	private Session session;
 	private ArrayList browseItems;
-	private String purchaseItems,addItems,userDetails;
+	private String purchaseItems,addItems,userDetails,addUsers;
 	private MarketCommonView marketView=new MarketCommonView();
 	static String firstName,lastName,loginId,password;
 
@@ -120,6 +120,20 @@ public class MarketViewController{
 			System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
 		}
 		return addItems;
+	}
+
+
+	//addUsers method which calls addUsers from interface
+	public String addUsers(Session session,String accType,String firstName,String lastName,String inputLoginId,String inputLoginPwd){
+		
+		try{
+			//send user input to store them to database
+			addUsers= marketApp.addUsers(session,accType,firstName,lastName,inputLoginId,inputLoginPwd);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App- Add Users Exception: " +e.getMessage());
+		}
+		return addUsers;
 	}
 
 
