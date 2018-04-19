@@ -34,7 +34,7 @@ public class OnlineMarketModel {
 	private Session session;
 	private ArrayList browsedList = new ArrayList();
 	private int rowNum=0;
-	private String browsedItemData,retrievedId,registerStatus="";
+	private String browsedItemData="",retrievedId="",retrievedUId="",registerStatus="",creationStatus="";
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
 	private Connection remoteConn=connectSql.connectMySql();
@@ -105,12 +105,12 @@ public class OnlineMarketModel {
 				rsltSet=prepStat.executeQuery();
 				while(rsltSet.next()){  
 					//System.out.println("while");
-					retrievedId=rsltSet.getString("username");
+					retrievedUId=rsltSet.getString("username");
 				}
 
 				//returns reg failed msg if username already exists
-				if(retrievedId.equalsIgnoreCase(userName)){
-					registerStatus= "New Customer Creation failed-User name already exists";
+				if(retrievedUId.equalsIgnoreCase(userName)){
+					creationStatus= "New Customer Creation failed-User name already exists";
 				}
 
 				//if no match then insert a record to customers table and a cart table
@@ -136,32 +136,37 @@ public class OnlineMarketModel {
 					prepStat=remoteConn.prepareStatement("Insert into tbl_cart(customer_id) values(?)");
 					prepStat.setInt(1,custId);
 					prepStat.executeUpdate();
-					registerStatus="You have now successfully created a Customer account";
+					creationStatus="You have now successfully created a Customer account";
 				}
 			}	//end try
 			catch (SQLException e) {
 				System.out.println("Online Market App Exception-Registration: " +e.getMessage());
 			}
+			
 		}//end parent customer-if
 
 
-		if(regType.equalsIgnoreCase("Admin")){
+		else if(regType.equalsIgnoreCase("Admin")){
+			//System.out.println("admin");
 			try{
 				//checks if a customer already exists with same user name
-				prepStat=remoteConn.prepareStatement("Select * from tbl_admin where username=?");
+				prepStat=remoteConn.prepareStatement("Select username from tbl_admin where username=?");
 				prepStat.setString(1,userName);
+				//System.out.println("admin while"+userName+"riddd:"+retrievedUId);
 				rsltSet=prepStat.executeQuery();
 				while(rsltSet.next()){  
-					retrievedId=rsltSet.getString("username");
+					retrievedUId=rsltSet.getString("username");
 				}
 
 				//returns reg failed msg if username already exists
-				if(retrievedId.equalsIgnoreCase(userName)){
-					registerStatus= "New Admin Creation failed-User name already exists";
+				if(retrievedUId.equalsIgnoreCase(userName)){
+					//System.out.println("admin if");
+					creationStatus= "New Admin Creation failed-User name already exists";
 				}
 
 				//if no match then insert a record to customers table and a cart table
 				else{
+					//System.out.println("admin else");
 					//insert customer registration details into dataase
 					prepStat = remoteConn.prepareStatement("Insert into tbl_admin(first_name,last_name,username,password) values(?,?,?,?)");
 					//set positional params
@@ -173,15 +178,19 @@ public class OnlineMarketModel {
 					//executes the insert statement with above params
 					prepStat.executeUpdate();
 
-					registerStatus="You have now successfully created a Admin account";
+					creationStatus="You have now successfully created a Admin account";
 				}
 			}	//end try
 			catch (SQLException e) {
 				System.out.println("Online Market App Exception-Registration: " +e.getMessage());
 			}
-		}//end parent admin-if
-
-		return registerStatus;
+			
+		}//end parent admin- else if
+		else{
+			creationStatus="Invalid account type input";
+		}
+		return creationStatus;
+		
 	}
 	
 	//this method checks for a valid customer or user

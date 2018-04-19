@@ -22,7 +22,7 @@ import java.lang.reflect.Proxy;
 *
 */
 public class OnlineMarketController extends UnicastRemoteObject implements OnlineMarket{
-	private String name;
+	private String name,addUsers;
 	private int regId = 0;
 
 	//constructor for controller
@@ -83,8 +83,14 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	//overridden sync method to add users
 	@Override
 	public synchronized String addUsers(Session session,String accType,String firstName,String lastName,String inputLoginId,String inputLoginPwd){
-		OnlineMarketModel modelObj= new OnlineMarketModel();
-		return modelObj.addUsers(accType,firstName,lastName,inputLoginId,inputLoginPwd);
+		try {
+			OnlineMarketModel modelObj= new OnlineMarketModel();
+			addUsers=modelObj.addUsers(accType,firstName,lastName,inputLoginId,inputLoginPwd);
+		}
+		catch (Exception e){
+			System.out.println("Online Market Server Exception: " + e.getMessage());
+		}
+		return addUsers;
 	}
 
 	//overridden sync method to create session
@@ -119,7 +125,6 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		} 
 		catch (Exception e){
 			System.out.println("Online Market Server Exception: " + e.getMessage());
-			e.printStackTrace();
 		}
 	}
 
