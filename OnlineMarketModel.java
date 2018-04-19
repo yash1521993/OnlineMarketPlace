@@ -45,7 +45,7 @@ public class OnlineMarketModel {
 	public String registerCustomer(String firstName,String lastName, String userName, String password) throws RemoteException{
 		
 		//customer insertion
-		if(regType.equalsIgnoreCase("Customer")){
+		//if(regType.equalsIgnoreCase("Customer")){
 			try{
 				//insert customer registration details into dataase
 				prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)");
@@ -62,7 +62,7 @@ public class OnlineMarketModel {
 			catch (SQLException e) {
 				System.out.println("Online Market App Exception-Registration: " +e.getMessage());
 			}
-		}
+		//}
 
 		//System.out.println("Registration page. Register here");
 		return "user name already exists";

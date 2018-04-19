@@ -38,9 +38,9 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	}
 	
 	//this method register a user
-	public String registerCustomer(String regType,String firstName, String lastName, String userName, String password) throws RemoteException{
+	public String registerCustomer(String firstName, String lastName, String userName, String password) throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
-		return modelObj.registerCustomer(regType,firstName,lastName,userName,password);
+		return modelObj.registerCustomer(firstName,lastName,userName,password);
 	}
 	
 	/*//this method register a user
