@@ -42,13 +42,6 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.registerCustomer(firstName,lastName,userName,password);
 	}
-	
-	/*//this method register a user
-	public String registerCustomer(String firstName, String lastName, String userName, String password) throws RemoteException{
-		OnlineMarketModel modelObj= new OnlineMarketModel();
-		return modelObj.registerCustomer();
-	}*/
-	
 
 	//OnlineMarketModel object calls for validateLogin function which has business logic
 	@Override
@@ -109,8 +102,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 			OnlineMarket createProxy = (OnlineMarket)Proxy.newProxyInstance(OnlineMarket.class.getClassLoader(),
 	                new Class<?>[] {OnlineMarket.class}, new AuthenticateUserInvocationHandler(new OnlineMarketController(name)));
 
-			// Create a new instance of a Online market server.
-			//OnlineMarketController marketCntrlr = new OnlineMarketController(name);
+			// Create a new instance of a Online market server
 			System.out.println("Reaching server:" + name);
 			
 			// rebind binds the server and RMI Service

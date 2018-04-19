@@ -55,13 +55,14 @@ public class OnlineMarketModel {
 			prepStat.setString(4,password);
 			//executes the insert statement with above params
 			prepStat.executeUpdate();
-
+			//retrieves last inserted customer id
 			rsltSet=prepStat.getGeneratedKeys();
 			if(rsltSet.next()){
 				custId=rsltSet.getInt(1);
 				System.out.println("Online>>>>"+custId);
 			}
 
+			//creates cart for each newly registered customer
 			prepStat=remoteConn.prepareStatement("Insert into tbl_cart(customer_id) values(?)");
 			prepStat.setInt(1,custId);
 			prepStat.executeUpdate();

@@ -18,7 +18,7 @@ public class MarketCommonView{
 		Scanner scanner = new Scanner(System.in);
 		String userAction = "";
 		System.out.println("~~~~~~~~~~~~~Login/Registration~~~~~~~~~~~~~~~");
-		System.out.println("Enter 'Login' without quotes for Login");
+		System.out.println("Enter 'Login' without quotes for Customer/Admin Login");
 		System.out.println("Enter 'Register' without quotes for registration a new Customer account");
 		System.out.println("--------------Enter one from above------------------");
 		userAction = scanner.nextLine();

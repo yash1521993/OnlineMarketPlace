@@ -27,12 +27,15 @@ public class MarketViewController{
 	private MarketCommonView marketView=new MarketCommonView();
 	static String firstName,lastName,loginId,password;
 
+	//captures user entered info
 	public void getRegInfo(){
-		System.out.println("----- New Customer Registration ----");
+		System.out.println("----->> New Customer Registration <<----");
 		firstName=marketView.getFirstName();
 		lastName=marketView.getLastName();
 		loginId=marketView.getInputLoginId();
 		password=marketView.getInputLoginPwd();
+
+		//exception handling block
 		try{
 			userDetails=marketApp.registerCustomer(firstName,lastName,loginId,password);
 			System.out.println("----- User"+userDetails+" ----");
@@ -68,7 +71,6 @@ public class MarketViewController{
 				System.out.println("Online Market App Exception: " +e.getMessage());
 				//e.printStackTrace();
 		}
-		
 		return loginStatus;
 			
 	}
@@ -89,27 +91,23 @@ public class MarketViewController{
 	//browseItems method which calls browseItems from interface
 	public ArrayList browseItems(Session session){
 		try{
-				browseItems= marketApp.browseItems(session);
-			}
-			catch(Exception e){
-				System.out.println("Online Market App-Browse Items Exception: " +e.getMessage());
-				//e.printStackTrace();
-			}
-
+			browseItems= marketApp.browseItems(session);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Browse Items Exception: " +e.getMessage());
+		}
 		return browseItems;
 	}
 
 	//purchaseItems method which calls purchaseItems from interface
 	public String purchaseItems(Session session,int itemId,int itemQuant){
 		try{
-				//send user input item id and quantity to query database
-				purchaseItems= marketApp.purchaseItems(session,itemId,itemQuant);
-			}
-			catch(Exception e){
-				System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
-				//e.printStackTrace();
-			}
-
+			//send user input item id and quantity to query database
+			purchaseItems= marketApp.purchaseItems(session,itemId,itemQuant);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
+		}
 		return purchaseItems;
 	}
 
@@ -117,61 +115,60 @@ public class MarketViewController{
 	public String addItems(Session session,int itemId,String itemName,String itemPrice, int itemQuant){
 		
 		try{
-				//send user input to store them to database
-				addItems= marketApp.addItems(session,itemId,itemName,itemPrice,itemQuant);
-			}
-			catch(Exception e){
-				System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
-				//e.printStackTrace();
-			}
-
+			//send user input to store them to database
+			addItems= marketApp.addItems(session,itemId,itemName,itemPrice,itemQuant);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
+			//e.printStackTrace();
+		}
 		return addItems;
 	}
 
 
 	//main method
 	public static void main(String args[]){
-			// creates a security manager for RMI
-			System.setSecurityManager(new SecurityManager( ));
-			//variable declaration
-			int regId;
-			MarketViewController viewController = new MarketViewController();
-			String register,userAct = "";
+		// creates a security manager for RMI
+		System.setSecurityManager(new SecurityManager( ));
+		//variable declaration
+		int regId;
+		MarketViewController viewController = new MarketViewController();
+		String register,userAct = "";
+		
+		//try and catch block for exception handling
+		try{
+			MarketFrontController frontController = new MarketFrontController();
+			// Locate Online Market Server
+			String name = "//10.234.136.55:5432/OnlineMarketServer";
+			marketApp = (OnlineMarket) Naming.lookup(name);
 			
-			//try and catch block for exception handling
-			try{
-				MarketFrontController frontController = new MarketFrontController();
-				// Locate Online Market Server
-				String name = "//10.234.136.55:5432/OnlineMarketServer";
-				marketApp = (OnlineMarket) Naming.lookup(name);
-				
-				//calling interface implemented methods
-				regId = marketApp.regId();
-				
-				//register=marketApp.registerCustomer(regType,firstName,lastName,loginId,password);
-				System.out.println("Registration ID: " + regId);
-				
-				//System.out.println("Registration Status: "+register);
-				//market common view instance
-				MarketCommonView marketView=new MarketCommonView();
-				//loop for continuous input i.e., either login or register
-				while(true){
-					userAct = marketView.userAction();	
-					if(userAct.equalsIgnoreCase("register")){
-						viewController.getRegInfo();
-					}
-
-					if(userAct.equalsIgnoreCase("login")){
-						//System.out.println("Hi this is login");
-						frontController.dispatchRequest(marketView.getLoginType());					
-					}
+			//calling interface implemented methods
+			regId = marketApp.regId();
+			
+			//register=marketApp.registerCustomer(regType,firstName,lastName,loginId,password);
+			System.out.println("Registration ID: " + regId);
+			
+			//System.out.println("Registration Status: "+register);
+			//market common view instance
+			MarketCommonView marketView=new MarketCommonView();
+			//loop for continuous input i.e., either login or register
+			while(true){
+				userAct = marketView.userAction();
+				//registers or login a customer/admin based on user input	
+				if(userAct.equalsIgnoreCase("register")){
+					viewController.getRegInfo();
 				}
 
-			} 
-			catch(Exception e){
-				System.out.println("Online Market App Exception: " +e.getMessage());
+				if(userAct.equalsIgnoreCase("login")){
+					//System.out.println("Hi this is login");
+					frontController.dispatchRequest(marketView.getLoginType());					
+				}
 			}
-			
-			System.exit(0);
+		} 
+		catch(Exception e){
+			System.out.println("Online Market App Exception: " +e.getMessage());
+		}
+		
+		System.exit(0);
 	}
 }
