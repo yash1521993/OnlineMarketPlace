@@ -25,18 +25,17 @@ public class MarketViewController{
 	private ArrayList browseItems;
 	private String purchaseItems,addItems,userDetails;
 	private MarketCommonView marketView=new MarketCommonView();
-	static String regType,firstName,lastName,loginId,password;
+	static String firstName,lastName,loginId,password;
 
 	public void getRegInfo(){
-		//marketView.getRegType();
-		//regType=marketView.getRegType();
+		System.out.println("----- New Customer Registration ----");
 		firstName=marketView.getFirstName();
 		lastName=marketView.getLastName();
 		loginId=marketView.getInputLoginId();
 		password=marketView.getInputLoginPwd();
 		try{
-			userDetails=marketApp.registerCustomer("Customer",firstName,lastName,loginId,password);
-			System.out.println("-----user"+userDetails);
+			userDetails=marketApp.registerCustomer(firstName,lastName,loginId,password);
+			System.out.println("----- User"+userDetails+" ----");
 		}
 		catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());
