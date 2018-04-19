@@ -175,27 +175,26 @@ public class OnlineMarketModel {
 			}
 			//condition check for item out of stock
 			if(itemQuantity<=currentStock){
+				//updates items table quantity
 				prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
 				//System.out.println("asgdgsdgadgasd"+(currentStock-itemQuantity));
 				prepStat.setInt(1,currentStock-itemQuantity);
 				prepStat.setInt(2,itemId);
 				prepStat.executeUpdate();
 				
-				//select cart_id from tbl_cart join tbl_itemcart on tbl_cart.cart_id=tbl_itemcart.cart_id 
+				//retrieves cart_id of the logged in customer
 				prepStat=remoteConn.prepareStatement("select cart_id from tbl_cart join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where username=?");
 				prepStat.setString(1,userId);
 				ResultSet rsltSet1=prepStat.executeQuery();
-
-				System.out.println("level1"+userId);
 				while(rsltSet1.next()){
-					//System.out.println("level1nnn");
 					retrievedCId=rsltSet1.getInt(1);
-					//System.out.println("retrievedCId"+retrievedCId);
 				}
-				//System.out.println("level2");
-				prepStat=remoteConn.prepareStatement("Insert into tbl_itemcart values(?,?)");
+
+				//updates cart table with the customer purchased item id
+				prepStat=remoteConn.prepareStatement("Insert into tbl_itemcart values(?,?,?)");
 				prepStat.setInt(1,retrievedCId);
 				prepStat.setInt(2,itemId);
+				prepStat.setInt(3,itemQuantity);
 
 				prepStat.executeUpdate();				
 			}
