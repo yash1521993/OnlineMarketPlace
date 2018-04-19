@@ -38,7 +38,7 @@ public class MarketViewController{
 		//exception handling block
 		try{
 			userDetails=marketApp.registerCustomer(firstName,lastName,loginId,password);
-			System.out.println("----- User"+userDetails+" ----");
+			System.out.println("----- "+userDetails+" ----");
 		}
 		catch(Exception e){
 				System.out.println("Online Market App Exception: " +e.getMessage());

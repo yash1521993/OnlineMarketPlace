@@ -67,7 +67,7 @@ public class MarketCommonView{
 	//capturing user id
 	public String getInputLoginId(){
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter Login ID:");
+		System.out.println("Enter UserId:");
 		String inputLoginId = scanner.nextLine();
 		return inputLoginId;
 	}
