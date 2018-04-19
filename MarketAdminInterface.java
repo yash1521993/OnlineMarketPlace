@@ -13,4 +13,5 @@ public interface MarketAdminInterface{
 	public void adminInfo();
 	public void addItems(Session session);
 	public void browseItems(Session session);
+	public void addUsers(Session session);
 }
