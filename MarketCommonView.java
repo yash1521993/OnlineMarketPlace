@@ -16,22 +16,24 @@ public class MarketCommonView{
 	//allows login or registration
 	public String userAction(){
 		Scanner scanner = new Scanner(System.in);
+		String userAction = "";
 		System.out.println("~~~~~~~~~~~~~Login/Registration~~~~~~~~~~~~~~~");
 		System.out.println("Enter 'Login' without quotes for Login");
 		System.out.println("Enter 'Register' without quotes for registration a new account");
 		System.out.println("--------------Enter one from above------------------");
-		String userAction = scanner.nextLine();
+		userAction = scanner.nextLine();
 		return userAction;
 	}
 
 	//captures user type who's trying to register with market app
 	public String getRegType(){
 		Scanner scanner = new Scanner(System.in);
+		String regType = "";
 		System.out.println("~~~~~~~~~~~~~Registration~~~~~~~~~~~~~~~");
 		System.out.println("Enter 'Admin' without quotes for Admin registration");
 		System.out.println("Enter 'Customer' without quotes for Customer registration");
 		System.out.println("--------------Enter one from above------------------");
-		String regType = scanner.nextLine();
+		regType = scanner.nextLine();
 		return regType;
 	}
 
