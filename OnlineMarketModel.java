@@ -140,13 +140,13 @@ public class OnlineMarketModel {
 			ResultSet browsedItems=prepStat.executeQuery(); 
 			//add each column data to browsed List
 			while(browsedItems.next()){  
-				browsedItemData=browsedItems.getInt(1)+" "+browsedItems.getString("item_type")+" "+browsedItems.getString("description")+" "+browsedItems.getInt("price")+" "+browsedItems.getInt("quantity");
+				browsedItemData=browsedItems.getInt(1)+"-----"+browsedItems.getString("item_name")+"-----"+browsedItems.getString("item_type")+"-----"+browsedItems.getString("price")+"-----"+browsedItems.getInt("quantity");
 				browsedList.add(rowNum,browsedItemData);rowNum++;
 				//System.out.println("statement"+browsedList);
 			}
 		}
 		catch (SQLException e) {
-			System.out.println("Online Market App Exception: " +e.getMessage());
+			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
 		}
 		
 		System.out.println("======Your can Browse Market App to shop======");
@@ -168,7 +168,7 @@ public class OnlineMarketModel {
 				//System.out.println("itemId");
 				//System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
 				currentStock=selectedItem.getInt("quantity");
-				itemName=selectedItem.getString("description");
+				itemName=selectedItem.getString("item_name");
 			}
 			//condition check for item out of stock
 			if(itemQuantity<=currentStock){
