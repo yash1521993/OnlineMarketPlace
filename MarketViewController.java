@@ -23,7 +23,7 @@ public class MarketViewController{
 	private boolean loginStatus;
 	private Session session;
 	private ArrayList browseItems,viewCart;
-	private String purchaseItems,addItems,userDetails,addUsers,addItemsToCart;
+	private String purchaseItems,addItems,userDetails,addUsers,addItemsToCart,updateItems;
 	private MarketCommonView marketView=new MarketCommonView();
 	static String firstName,lastName,loginId,password;
 
@@ -159,6 +159,18 @@ public class MarketViewController{
 		return addUsers;
 	}
 
+	//updateItems method which calls updateItems from interface
+	public String updateItems(Session session,int itemId,String itemAttribute){
+		
+		try{
+			//send user input to store them to database
+			updateItems= marketApp.updateItems(session,itemId,itemAttribute);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Update Items Exception: " +e.getMessage());
+		}
+		return updateItems;
+	}
 
 	//main method
 	public static void main(String args[]){

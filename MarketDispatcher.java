@@ -39,6 +39,7 @@ public class MarketDispatcher {
 			
 			//invoking customer tasks
 			AddMarketItems addItems = new AddMarketItems(marketAdmin,session);
+			UpdateMarketItems updateItems = new UpdateMarketItems(marketAdmin,session);
 			BrowseAdminMarketItems browseItems = new BrowseAdminMarketItems(marketAdmin,session);
 			AddUsers addUsers = new AddUsers(marketAdmin,session);
 
@@ -49,8 +50,9 @@ public class MarketDispatcher {
 			//while loop to provide continuous user input
 			while(true){
 				Scanner scanner = new Scanner(System.in);
-				System.out.println("---Enter 'Browse' ignoring quotes to shop");
-				System.out.println("---Enter 'AddI' ignoring quotes to buy items");
+				System.out.println("---Enter 'Browse' ignoring quotes to browse items");
+				System.out.println("---Enter 'AddI' ignoring quotes to add items");
+				System.out.println("---Enter 'Update' ignoring quotes to update items");
 				System.out.println("---Enter 'AddU' ignoring quotes to add Customer/Admin");
 				System.out.println(">>To exit these commands, press ctrl+c<<");
 				String adminInput = scanner.nextLine();
@@ -64,12 +66,15 @@ public class MarketDispatcher {
 				else if(adminInput.equalsIgnoreCase("browse")){
 					invoker.tasksListAdmin(browseItems);
 				}
+				else if(adminInput.equalsIgnoreCase("update")){
+					invoker.tasksListAdmin(updateItems);
+				}
 				else{
 					System.out.println("Invalid command input");
 				}
 
 			//execute the admin tasks
-				invoker.executeAdminTasks();
+			invoker.executeAdminTasks();
 			}
 	    }
 	    else{

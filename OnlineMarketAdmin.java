@@ -101,6 +101,30 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 		}
 	}
 
+	//member method- updateItems helps a admin to update items attributes
+	@Override
+	public void updateItems(Session session){
+		try{
+			System.out.print("++++------++++Update items here++++------++++\n");
+			//scanner class allows the admin to enter his/her input
+			Scanner scanner = new Scanner(System.in);
+			//read input item id, name, price and quantity
+			System.out.print("Enter Item Id to update: ");
+			int itemId = scanner.nextInt();
+
+			System.out.print("----Enter Item attribute() to be updated----");
+			System.out.print("Any of the attributes either: price or quantity or desc::: ");
+			String itemAttribute = scanner.next();
+
+			//pass these input items to client controller
+			samp=mvc.updateItems(session,itemId,itemAttribute);
+			System.out.println(samp);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App- Add Items Exception: " +e.getMessage());
+		}
+	}
+
 
 	//member method- browseItems helps a customer to browse items
 	@Override
