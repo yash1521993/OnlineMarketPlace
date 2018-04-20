@@ -43,7 +43,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 			System.out.print("Enter Item Quantity to be purchased: ");
 			int itemQuantity = scanner.nextInt();
 
-			samp=mvc.purchaseItems(session,itemId,itemQuantity);
+			samp=mvc.addItemsToCart(session,itemId,itemQuantity);
 			//System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
 			System.out.println(samp);
 		}
@@ -102,11 +102,17 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		try{
 			cartItem=mvc.viewCart(session);
 			//displaying items from cart db
-			System.out.println("<---+++---Your Cart items list here----+++--->");
-			System.out.println("CartId"+"	"+"ItemId"+"	"+"ItemQuantity");
-			for(int i = 0; i < cartItem.size(); i++) {
-	            System.out.println(cartItem.get(i));
-	        }
+			if(cartItem.isEmpty()){
+				System.out.println("<---+++---Your Cart is Empty----+++--->");
+			}
+			else{
+				System.out.println("<---+++---Your Cart items list here----+++--->");
+				System.out.println("CartId"+"	"+"ItemId"+"	"+"ItemQuantity");
+				for(int i = 0; i < cartItem.size(); i++) {
+		            System.out.println(cartItem.get(i));
+		        }
+			}
+			
 		}
 		catch(Exception e){
 			System.out.println("Online Market App Exception - View Cart: " +e.getMessage());
