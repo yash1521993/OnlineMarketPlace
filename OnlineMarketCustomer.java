@@ -32,7 +32,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 	@Override
 	public void addItemsToCart(Session session){
 		try{
-			System.out.print("+++++++++++Purchase items here+++++++++++\n");
+			System.out.print("+++++++++++Add items to cart here+++++++++++\n");
 			//scanner class allows the admin to enter his/her input
 			Scanner scanner = new Scanner(System.in);
 			//read input item name and quantity
@@ -57,18 +57,15 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 	@Override
 	public void purchaseItems(Session session){
 		try{
-			System.out.print("+++++++++++Purchase items here+++++++++++\n");
+			System.out.print("+++++++++++Check out items here+++++++++++\n");
 			//scanner class allows the admin to enter his/her input
 			Scanner scanner = new Scanner(System.in);
 			//read input item name and quantity
 			
-			System.out.print("Enter Item Id of the above Items you wish: ");
+			System.out.print("Enter Item Id to check out: ");
 			int itemId = scanner.nextInt();
 
-			System.out.print("Enter Item Quantity to be purchased: ");
-			int itemQuantity = scanner.nextInt();
-
-			samp=mvc.purchaseItems(session,itemId,itemQuantity);
+			samp=mvc.purchaseItems(session,itemId);
 			//System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
 			System.out.println(samp);
 		}
@@ -92,7 +89,6 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		}
 		catch(Exception e){
 			System.out.println("Online Market App Exception: " +e.getMessage());
-			//e.printStackTrace();
 		}
 	}
 
@@ -105,6 +101,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 			if(cartItem.isEmpty()){
 				System.out.println("<---+++---Your Cart is Empty----+++--->");
 			}
+			//if cart is not null, display items
 			else{
 				System.out.println("<---+++---Your Cart items list here----+++--->");
 				System.out.println("CartId"+"	"+"ItemId"+"	"+"ItemQuantity");
@@ -112,7 +109,6 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		            System.out.println(cartItem.get(i));
 		        }
 			}
-			
 		}
 		catch(Exception e){
 			System.out.println("Online Market App Exception - View Cart: " +e.getMessage());
