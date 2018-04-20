@@ -42,6 +42,8 @@ public class MarketDispatcher {
 			UpdateMarketItems updateItems = new UpdateMarketItems(marketAdmin,session);
 			BrowseAdminMarketItems browseItems = new BrowseAdminMarketItems(marketAdmin,session);
 			AddUsers addUsers = new AddUsers(marketAdmin,session);
+			RemoveMarketItems removeItem = new RemoveMarketItems(marketAdmin,session);
+			DeleteCustomer removeCustomer = new DeleteCustomer(marketAdmin,session);
 
 			//creating invoker or broker object
 			CommonInvoker invoker = new CommonInvoker();

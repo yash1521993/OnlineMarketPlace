@@ -108,13 +108,12 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 			System.out.print("++++------++++Update items here++++------++++\n");
 			//scanner class allows the admin to enter his/her input
 			Scanner scanner = new Scanner(System.in);
-			//read input item id, name, price and quantity
+			//read input item id, (name, price or quantity)-whichever field is to be updated
 			System.out.print("Enter Item Id to update: ");
 			int itemId = scanner.nextInt();
 
 			System.out.println("----Enter Item attribute to be updated----");
 			System.out.println("Any of the attributes either: price or quantity or desc::");
-			System.out.println("Note:desc should be one-word");
 			String itemAttribute = scanner.next();
 
 			System.out.print("Enter Item attribute Value: ");
@@ -146,6 +145,47 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 		}
 		catch(Exception e){
 			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
+		}
+	}
+
+
+	//member method- removeItem helps a admin to remove items from db
+	@Override
+	public void removeItem(Session session){
+		try{
+			System.out.print("*--------------Remove Items here--------------*\n");
+			//scanner class allows the admin to enter his/her input
+			Scanner scanner = new Scanner(System.in);
+			//read input item id
+			System.out.print("Enter Item Id to delete the item: ");
+			int itemId = scanner.nextInt();
+
+			//pass these input items to client controller
+			samp=mvc.removeItem(session,itemId);
+			System.out.println(samp);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App- Remove Items Exception: " +e.getMessage());
+		}
+	}
+
+	//member method- removeCustomer helps a admin to remove customers from db
+	@Override
+	public void removeCustomer(Session session){
+		try{
+			System.out.print("*--------------Remove Customers here--------------*\n");
+			//scanner class allows the admin to enter his/her input
+			Scanner scanner = new Scanner(System.in);
+			//read input item id
+			System.out.print("Enter Customer UserId to delete the customer: ");
+			int customerId = scanner.nextInt();
+
+			//pass these input items to client controller
+			samp=mvc.removeCustomer(session,customerId);
+			System.out.println(samp);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App- Remove Customer Exception: " +e.getMessage());
 		}
 	}
 
