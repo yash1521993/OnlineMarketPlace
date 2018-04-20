@@ -273,6 +273,59 @@ public class OnlineMarketModel {
 		return browsedList;
 	}
 		
+	//customer can add items to cart browsed apps
+	public String addItemsToCart(int itemId, int itemQuantity){
+		int currentStock=0,retrievedCId=0;
+		String itemName="";
+		//exception handling block
+		try{
+			System.out.println("======Accessed Customer Purchase Method======");
+			//setup to execture a sql statement
+			statement = remoteConn.createStatement();
+			//retrieves all items with given itemId
+			ResultSet selectedItem=statement.executeQuery("Select * from tbl_items where item_id="+itemId);
+			while(selectedItem.next()){  
+				//System.out.println("itemId");
+				//System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
+				currentStock=selectedItem.getInt("quantity");
+				itemName=selectedItem.getString("item_name");
+			}
+			//condition check for item out of stock
+			if(itemQuantity<=currentStock){
+				//updates items table quantity
+				prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
+				//System.out.println("asgdgsdgadgasd"+(currentStock-itemQuantity));
+				prepStat.setInt(1,currentStock-itemQuantity);
+				prepStat.setInt(2,itemId);
+				prepStat.executeUpdate();
+				
+				//retrieves cart_id of the logged in customer
+				prepStat=remoteConn.prepareStatement("select cart_id from tbl_cart join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where username=?");
+				prepStat.setString(1,userId);
+				ResultSet rsltSet1=prepStat.executeQuery();
+				while(rsltSet1.next()){
+					retrievedCId=rsltSet1.getInt(1);
+				}
+
+				//updates cart table with the customer purchased item id
+				prepStat=remoteConn.prepareStatement("Insert into tbl_itemcart values(?,?,?)");
+				prepStat.setInt(1,retrievedCId);
+				prepStat.setInt(2,itemId);
+				prepStat.setInt(3,itemQuantity);
+
+				prepStat.executeUpdate();				
+			}
+			else{
+				return "----Requested quantity is more than current stock----";
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception: " +e.getMessage());
+		}
+		
+		return "Your item "+itemName+" has been purchased successfully";
+	}
+
 	//customer can purchase browsed apps
 	public String purchaseItems(int itemId, int itemQuantity){
 		int currentStock=0,retrievedCId=0;
@@ -323,8 +376,6 @@ public class OnlineMarketModel {
 			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
 		
-		/*return "Purchase your browsed items here. Below is your wish list\n"+
-				"--------------------Empty list--------------------------";*/
 		return "Your item "+itemName+" has been purchased successfully";
 	}
 

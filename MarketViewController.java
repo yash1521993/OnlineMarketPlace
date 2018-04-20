@@ -23,7 +23,7 @@ public class MarketViewController{
 	private boolean loginStatus;
 	private Session session;
 	private ArrayList browseItems;
-	private String purchaseItems,addItems,userDetails,addUsers;
+	private String purchaseItems,addItems,userDetails,addUsers,addItemsToCart;
 	private MarketCommonView marketView=new MarketCommonView();
 	static String firstName,lastName,loginId,password;
 
@@ -95,6 +95,18 @@ public class MarketViewController{
 			System.out.println("Online Market App-Browse Items Exception: " +e.getMessage());
 		}
 		return browseItems;
+	}
+
+	//addItemsToCart method which calls addItemsToCart from interface
+	public String addItemsToCart(Session session,int itemId,int itemQuant){
+		try{
+			//send user input item id and quantity to query database
+			addItemsToCart= marketApp.addItemsToCart(session,itemId,itemQuant);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Purchase Items Exception: " +e.getMessage());
+		}
+		return addItemsToCart;
 	}
 
 	//purchaseItems method which calls purchaseItems from interface
