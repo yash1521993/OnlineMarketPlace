@@ -98,7 +98,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	@Override
 	public synchronized String updateItems(Session session,int itemId,String itemAttribute,String attributeValue){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
-		return modelObj.updateItems(itemId,itemName,itemAttribute,attributeValue);
+		return modelObj.updateItems(itemId,itemAttribute,attributeValue);
 	}
 
 	//overridden sync method to add users

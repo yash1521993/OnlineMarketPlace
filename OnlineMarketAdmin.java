@@ -112,8 +112,9 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 			System.out.print("Enter Item Id to update: ");
 			int itemId = scanner.nextInt();
 
-			System.out.print("----Enter Item attribute() to be updated----");
-			System.out.print("Any of the attributes either: price or quantity or desc::: ");
+			System.out.println("----Enter Item attribute to be updated----");
+			System.out.println("Any of the attributes either: price or quantity or desc::");
+			System.out.println("Note:desc should be one-word");
 			String itemAttribute = scanner.next();
 
 			System.out.print("Enter Item attribute Value: ");
