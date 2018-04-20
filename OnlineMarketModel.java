@@ -35,7 +35,7 @@ public class OnlineMarketModel {
 	private ArrayList browsedList = new ArrayList();
 	private ArrayList cartItemsData = new ArrayList();
 	private int rowNum=0;
-	private String browsedItemData="",cartData="",retrievedId="",retrievedUId="",registerStatus="",creationStatus="";
+	private String browsedItemData="",cartData="",retrievedId="",retrievedUId="",registerStatus="",creationStatus="",updateStatus="";
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
 	private Connection remoteConn=connectSql.connectMySql();
@@ -349,7 +349,7 @@ public class OnlineMarketModel {
 
 	//customer can purchase browsed apps
 	public String purchaseItems(){
-		int currentStock=0,retrievedCId=0,itemId=0,cartId=0,itemQuantity=0;
+		int currentStock=0,itemId=0,cartId=0,itemQuantity=0;
 		String itemName="";
 		//exception handling block
 		try{
@@ -363,7 +363,7 @@ public class OnlineMarketModel {
 			rsltSet=prepStat.executeQuery(); 
 			//ResultSet selectedItem=statement.executeQuery("Select * from tbl_itemcart where item_id="+itemId);
 			while(rsltSet.next()){  
-				//System.out.println("itemId");
+				//System.out.println("while1");
 				//System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
 				currentStock=rsltSet.getInt("quantity");
 				itemId=rsltSet.getInt("item_id");
@@ -373,11 +373,14 @@ public class OnlineMarketModel {
 			//retrieve items original stock
 			rsltSet1 = statement.executeQuery("Select quantity from tbl_items where item_id="+itemId);
 			while(rsltSet1.next()){
+				//System.out.println("while2");
 				itemQuantity=rsltSet1.getInt("quantity");
 			}
 
+			System.out.println("values"+currentStock+"---"+itemQuantity);
 			//condition check for item out of stock
-			if(itemQuantity<=currentStock){
+			if(itemQuantity>=currentStock){
+				//System.out.println("ifff");
 				//updates items table quantity
 				prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
 				
@@ -385,14 +388,7 @@ public class OnlineMarketModel {
 				prepStat.setInt(2,itemId);
 				prepStat.executeUpdate();
 				
-				/*//retrieves cart_id of the logged in customer
-				prepStat=remoteConn.prepareStatement("select cart_id from tbl_cart join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where username=?");
-				prepStat.setString(1,userId);
-				ResultSet rsltSet1=prepStat.executeQuery();
-				while(rsltSet1.next()){
-					retrievedCId=rsltSet1.getInt(1);
-				}*/
-
+			
 				//clears cart of respective customer
 				prepStat=remoteConn.prepareStatement("Delete from tbl_itemcart where cart_id="+cartId);
 
@@ -430,5 +426,59 @@ public class OnlineMarketModel {
 		}
 		System.out.println("======Accessed Admin add method======");
 		return "+++++++++++Above item has been added to database+++++++++++\n";		
+	}
+
+	//admin can update items in the inventory
+	public String updateItems(int itemId,String itemAttribute){
+		String itemType="";
+		int itemPrice=0,itemQuantity=0;
+		//exception handling block
+		try{
+			//retrieve admin input item id if exists
+			statement = remoteConn.createStatement();
+			rsltSet = statement.executeQuery("Select * from tbl_items where item_id="+itemId);
+
+			while(rsltSet.next()){
+				//System.out.println("while2");
+				itemQuantity=rsltSet.getInt("quantity");
+				itemPrice=rsltSet.getInt("price");
+				itemType=rsltSet.getString("item_type");
+			}
+			if(itemPrice!=0){
+				if(itemAttribute.equalsIgnoreCase("price")){
+					
+					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
+				}
+				else if(itemAttribute.equalsIgnoreCase("quantity")){
+					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
+				}
+				else if(itemAttribute.equalsIgnoreCase("desc")){
+					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
+				}
+				else{
+					updateStatus="Update failed. Invalid Item Attibute";
+				}
+				
+			}
+			else{
+				updateStatus="Update failed. Invalid item Id";
+			}
+			//insert admin input items into dataase
+			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into tbl_items values(?,?,?,?,?)");
+			//set positional params
+			insertItem.setInt(1,itemId);
+			insertItem.setString(2,itemName);
+			insertItem.setString(3,itemType);
+			insertItem.setString(4,itemPrice);
+			insertItem.setInt(5,itemQuantity);
+			//executes the insert statement with above params
+			insertItem.executeUpdate();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception: " +e.getMessage());
+		}
+		System.out.println("======Accessed Admin Update method======");
+		return updateStatus;		
 	}
 }
