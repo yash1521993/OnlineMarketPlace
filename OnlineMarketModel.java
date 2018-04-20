@@ -488,4 +488,25 @@ public class OnlineMarketModel {
 		System.out.println("======Accessed Admin Update method======");
 		return updateStatus;		
 	}
+
+
+	//removeItem helps admin to remove a item from db
+	public String removeItem(Session session,int itemId){
+		try{
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Remove Items Exception: " +e.getMessage());
+		}
+	}
+
+	//removeCustomer helps admin to remove a customer from db
+	public String removeCustomer(Session session,int customerId){
+		try{
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Remove Customer Exception: " +e.getMessage());
+		}
+	}
 }

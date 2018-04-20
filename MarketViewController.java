@@ -23,7 +23,7 @@ public class MarketViewController{
 	private boolean loginStatus;
 	private Session session;
 	private ArrayList browseItems,viewCart;
-	private String purchaseItems,addItems,userDetails,addUsers,addItemsToCart,updateItems;
+	private String purchaseItems,addItems,userDetails,addUsers,addItemsToCart,updateItems,removeItem,removeCustomer;
 	private MarketCommonView marketView=new MarketCommonView();
 	static String firstName,lastName,loginId,password;
 
@@ -170,6 +170,33 @@ public class MarketViewController{
 			System.out.println("Online Market App-Update Items Exception: " +e.getMessage());
 		}
 		return updateItems;
+	}
+
+	//removeItem method which calls removeItem from interface
+	public String removeItem(Session session,int itemId){
+		
+		try{
+			//send user input to store them to database
+			removeItem= marketApp.removeItem(session,itemId);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Remove Items Exception: " +e.getMessage());
+		}
+		return removeItem;
+	}
+
+
+	//removeCustomer method which calls removeCustomer from interface
+	public String removeCustomer(Session session,int customerId){
+		
+		try{
+			//send user input to store them to database
+			removeCustomer= marketApp.removeCustomer(session,customerId);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Remove Customer Exception: " +e.getMessage());
+		}
+		return removeCustomer;
 	}
 
 	//main method

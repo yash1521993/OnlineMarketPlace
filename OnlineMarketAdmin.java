@@ -176,7 +176,7 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 			System.out.print("*--------------Remove Customers here--------------*\n");
 			//scanner class allows the admin to enter his/her input
 			Scanner scanner = new Scanner(System.in);
-			//read input item id
+			//read input customer id
 			System.out.print("Enter Customer UserId to delete the customer: ");
 			int customerId = scanner.nextInt();
 
