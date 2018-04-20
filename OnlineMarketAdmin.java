@@ -116,8 +116,11 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 			System.out.print("Any of the attributes either: price or quantity or desc::: ");
 			String itemAttribute = scanner.next();
 
+			System.out.print("Enter Item attribute Value: ");
+			String attributeValue = scanner.next();
+
 			//pass these input items to client controller
-			samp=mvc.updateItems(session,itemId,itemAttribute);
+			samp=mvc.updateItems(session,itemId,itemAttribute,attributeValue);
 			System.out.println(samp);
 		}
 		catch(Exception e){

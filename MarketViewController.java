@@ -160,11 +160,11 @@ public class MarketViewController{
 	}
 
 	//updateItems method which calls updateItems from interface
-	public String updateItems(Session session,int itemId,String itemAttribute){
+	public String updateItems(Session session,int itemId,String itemAttribute,String attributeValue){
 		
 		try{
 			//send user input to store them to database
-			updateItems= marketApp.updateItems(session,itemId,itemAttribute);
+			updateItems= marketApp.updateItems(session,itemId,itemAttribute,attributeValue);
 		}
 		catch(Exception e){
 			System.out.println("Online Market App-Update Items Exception: " +e.getMessage());

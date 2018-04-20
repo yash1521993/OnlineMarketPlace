@@ -429,7 +429,7 @@ public class OnlineMarketModel {
 	}
 
 	//admin can update items in the inventory
-	public String updateItems(int itemId,String itemAttribute){
+	public String updateItems(int itemId,String itemAttribute,String attributeValue){
 		String itemType="";
 		int itemPrice=0,itemQuantity=0;
 		//exception handling block
