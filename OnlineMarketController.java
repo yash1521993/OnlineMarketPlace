@@ -108,6 +108,13 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 		return modelObj.removeItem(itemId);
 	}
 
+	//overridden sync method to view customers
+	@Override
+	public synchronized ArrayList viewCustomers(Session session){
+		OnlineMarketModel modelObj= new OnlineMarketModel();
+		return modelObj.viewCustomers();
+	}
+
 	//overridden sync method to remove customers
 	@Override
 	public synchronized String removeCustomer(Session session,int customerId){

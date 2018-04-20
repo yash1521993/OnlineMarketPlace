@@ -34,9 +34,11 @@ public class OnlineMarketModel {
 	private Session session;
 	private ArrayList browsedList = new ArrayList();
 	private ArrayList cartItemsData = new ArrayList();
+	private ArrayList customerDataList = new ArrayList();
+	
 	private int rowNum=0;
 	private String browsedItemData="",cartData="",retrievedId="",retrievedUId="",removeCustStatus="";
-	private String registerStatus="",creationStatus="",updateStatus="",removeItemStatus="";
+	private String registerStatus="",creationStatus="",updateStatus="",removeItemStatus="",customerData="";
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
 	private Connection remoteConn=connectSql.connectMySql();
@@ -271,8 +273,7 @@ public class OnlineMarketModel {
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
 		}
-		
-		
+
 		return browsedList;
 	}
 
@@ -285,7 +286,7 @@ public class OnlineMarketModel {
 			//retrieves all the items from db
 			prepStat = remoteConn.prepareStatement("Select * from tbl_itemcart join tbl_cart on tbl_cart.cart_id=tbl_itemcart.cart_id join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where tbl_customers.username=?");
 			prepStat.setString(1,userId);
-			//browsedItems stores the above executed query result
+			//cartItems stores the above executed query result
 			ResultSet cartItems=prepStat.executeQuery(); 
 			//add each column data to browsed List
 			while(cartItems.next()){  
@@ -296,8 +297,7 @@ public class OnlineMarketModel {
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
 		}
-		
-		
+
 		return cartItemsData;
 	}
 		
@@ -492,7 +492,7 @@ public class OnlineMarketModel {
 
 
 	//removeItem helps admin to remove a item from db
-	public String removeItem(Session session,int itemId){
+	public String removeItem(int itemId){
 		int retItemId=0;
 		try{
 			//retrieve admin input item id if exists
@@ -519,14 +519,39 @@ public class OnlineMarketModel {
 		return removeItemStatus;
 	}
 
-	//removeCustomer helps admin to remove a customer from db
-	public String removeCustomer(Session session,int customerId){
+	//view customers allows a admin to browse over the app
+	@SuppressWarnings("unchecked")
+	public ArrayList viewCustomers(){
+		System.out.println("======Accessed view all customers method======");
+		//exception handling block
 		try{
+			//retrieves all the customers from db
+			prepStat = remoteConn.prepareStatement("Select customer_id,username from tbl_customers");
+
+			//browsedItems stores the above executed query result
+			ResultSet customerList=prepStat.executeQuery(); 
+			//add each column data to browsed List
+			while(customerList.next()){  
+				customerData=customerList.getInt(1)+"---------"+customerList.getString(2);
+				customerDataList.add(rowNum,customerData);rowNum++;
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
+		}
+		
+		return customerDataList;
+	}
+
+	//removeCustomer helps admin to remove a customer from db
+	public String removeCustomer(int customerId){
+		/*try{
+
 			removeCustStatus="";
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Remove Customer Exception: " +e.getMessage());
-		}
-		return removeCustStatus
+		}*/
+		return removeCustStatus;
 	}
 }

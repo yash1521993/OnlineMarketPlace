@@ -44,6 +44,7 @@ public class MarketDispatcher {
 			AddUsers addUsers = new AddUsers(marketAdmin,session);
 			RemoveMarketItems removeItem = new RemoveMarketItems(marketAdmin,session);
 			DeleteCustomer removeCustomer = new DeleteCustomer(marketAdmin,session);
+			ViewCustomers viewCustomers = new ViewCustomers(marketAdmin,session);
 
 			//creating invoker or broker object
 			CommonInvoker invoker = new CommonInvoker();
@@ -58,6 +59,7 @@ public class MarketDispatcher {
 				System.out.println("---Enter 'update' ignoring quotes to update items");
 				System.out.println("---Enter 'removeC' ignoring quotes to delete Customer");
 				System.out.println("---Enter 'removeI' ignoring quotes to delete Item");
+				System.out.println("---Enter 'view' ignoring quotes to view all Customers");
 				System.out.println(">>>...To exit these commands, press ctrl+c...<<<");
 				String adminInput = scanner.nextLine();
 				//command invocation based on user input
@@ -78,6 +80,9 @@ public class MarketDispatcher {
 				}
 				else if(adminInput.equalsIgnoreCase("removeC")){
 					invoker.tasksListAdmin(removeCustomer);
+				}
+				else if(adminInput.equalsIgnoreCase("view")){
+					invoker.tasksListAdmin(viewCustomers);
 				}
 				else{
 					System.out.println("Invalid command input");

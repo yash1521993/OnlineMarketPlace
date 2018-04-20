@@ -22,10 +22,10 @@ public class MarketViewController{
 	private static OnlineMarket marketApp;
 	private boolean loginStatus;
 	private Session session;
-	private ArrayList browseItems,viewCart;
+	private ArrayList browseItems,viewCart,viewCustomers;
 	private String purchaseItems,addItems,userDetails,addUsers,addItemsToCart,updateItems,removeItem,removeCustomer;
 	private MarketCommonView marketView=new MarketCommonView();
-	static String firstName,lastName,loginId,password;
+	private static String firstName,lastName,loginId,password;
 
 	//captures user entered info
 	public void getRegInfo(){
@@ -118,6 +118,17 @@ public class MarketViewController{
 			System.out.println("Online Market App-Browse Items Exception: " +e.getMessage());
 		}
 		return viewCart;
+	}
+
+	//viewCustomers method which calls viewCustomers from interface
+	public ArrayList viewCustomers(Session session){
+		try{
+			viewCustomers= marketApp.viewCustomers(session);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Browse Customer Exception: " +e.getMessage());
+		}
+		return viewCustomers;
 	}
 
 	//purchaseItems method which calls purchaseItems from interface

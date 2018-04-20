@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class OnlineMarketAdmin implements MarketAdminInterface{
 	private MarketViewController mvc=new MarketViewController();
 	private String samp;
-	private ArrayList browseItem;
+	private ArrayList browseItem,viewCustomers;
 	//overriding
 	@Override
 	public void adminInfo(){
@@ -183,6 +183,27 @@ public class OnlineMarketAdmin implements MarketAdminInterface{
 			//pass these input items to client controller
 			samp=mvc.removeCustomer(session,customerId);
 			System.out.println(samp);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App- Remove Customer Exception: " +e.getMessage());
+		}
+	}
+
+	//member method- viewCustomers helps a admin to view all customers from db
+	@Override
+	public void viewCustomers(Session session){
+		try{
+			System.out.print("*----*****-------List of Customers-------*****----*\n");
+			
+			//pass these input items to client controller
+			viewCustomers=mvc.viewCustomers(session);
+
+			System.out.println("CustomerId"+"  "+"UserName");
+			for(int i = 0; i < viewCustomers.size(); i++) {
+	            System.out.println(viewCustomers.get(i)+"\t"+"\t");
+	        }
+	        System.out.println("<------------------------------------------------>");
+			//System.out.println(viewCustomers);
 		}
 		catch(Exception e){
 			System.out.println("Online Market App- Remove Customer Exception: " +e.getMessage());

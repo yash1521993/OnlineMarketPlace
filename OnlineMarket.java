@@ -39,6 +39,11 @@ public interface OnlineMarket extends java.rmi.Remote {
 	@SuppressWarnings("unchecked")
 	public ArrayList viewCart(Session session) throws java.rmi.RemoteException;
 
+	//role based access for admin to browse customers
+	@AnnotateInterface("admin")
+	@SuppressWarnings("unchecked")
+	public ArrayList viewCustomers(Session session) throws java.rmi.RemoteException;
+
 	//role based access for customer to purchase items
 	@AnnotateInterface("customer")
 	public String addItemsToCart(Session session,int itemId,int itemQuantity) throws java.rmi.RemoteException;
