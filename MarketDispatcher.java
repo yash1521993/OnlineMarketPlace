@@ -81,7 +81,8 @@ public class MarketDispatcher {
 			
 			//invoking customer tasks
 			BrowseMarketItems browseItems = new BrowseMarketItems(marketCustomer,session);
-			AddItemsToCart buyItems = new AddItemsToCart(marketCustomer,session);
+			AddItemsToCart addItemsToCart = new AddItemsToCart(marketCustomer,session);
+			ViewCart viewCart = new ViewCart(marketCustomer,session);
 			PurchaseMarketItems buyItems = new PurchaseMarketItems(marketCustomer,session);
 			//creating invoker or broker object
 			CommonInvoker invoker = new CommonInvoker();
@@ -93,6 +94,7 @@ public class MarketDispatcher {
 				
 				System.out.println("---Enter 'Browse' ignoring quotes to shop");
 				System.out.println("---Enter 'Add' ignoring quotes to add items to the cart");
+				System.out.println("---Enter 'View' ignoring quotes to view items in cart");
 				System.out.println("---Enter 'Purchase' ignoring quotes to checkout items from the cart");
 				System.out.println(">>To exit these commands, press ctrl+c<<");
 				String custInput = scanner.nextLine();
@@ -102,6 +104,9 @@ public class MarketDispatcher {
 				}
 				else if(custInput.equalsIgnoreCase("add")){
 					invoker.tasksList(addItemsToCart);
+				}
+				else if(custInput.equalsIgnoreCase("view")){
+					invoker.tasksList(viewCart);
 				}
 				else if(custInput.equalsIgnoreCase("browse")){
 					invoker.tasksList(browseItems);

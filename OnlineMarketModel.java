@@ -32,9 +32,9 @@ import java.util.ArrayList;
 public class OnlineMarketModel {
 	
 	private Session session;
-	private ArrayList browsedList = new ArrayList();
+	private ArrayList browsedList,cartItems = new ArrayList();
 	private int rowNum=0;
-	private String browsedItemData="",retrievedId="",retrievedUId="",registerStatus="",creationStatus="";
+	private String browsedItemData="",cartData="",retrievedId="",retrievedUId="",registerStatus="",creationStatus="";
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
 	private Connection remoteConn=connectSql.connectMySql();
@@ -272,6 +272,30 @@ public class OnlineMarketModel {
 		System.out.println("======Your can Browse Market App to shop======");
 		return browsedList;
 	}
+
+	//view cart allows a customer to browse over the app
+	@SuppressWarnings("unchecked")
+	public ArrayList viewCart(){
+		//exception handling block
+		try{
+			//retrieves all the items from db
+			prepStat = remoteConn.prepareStatement("Select * from tbl_itemcart");
+			//browsedItems stores the above executed query result
+			ResultSet cartItems=prepStat.executeQuery(); 
+			//add each column data to browsed List
+			while(cartItems.next()){  
+				cartData=cartItems.getInt(1)+"-----"+cartItems.getInt(2)+"-----"+cartItems.getInt(3);
+				cartItems.add(rowNum,cartData);rowNum++;
+				//System.out.println("statement"+browsedList);
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
+		}
+		
+		System.out.println("======Your can Browse Market App to shop======");
+		return cartItems;
+	}
 		
 	//customer can add items to cart browsed apps
 	public String addItemsToCart(int itemId, int itemQuantity){
@@ -279,7 +303,7 @@ public class OnlineMarketModel {
 		String itemName="";
 		//exception handling block
 		try{
-			System.out.println("======Accessed Customer Purchase Method======");
+			System.out.println("======Accessed Customer Add Items to Cart Method======");
 			//setup to execture a sql statement
 			statement = remoteConn.createStatement();
 			//retrieves all items with given itemId
@@ -292,12 +316,6 @@ public class OnlineMarketModel {
 			}
 			//condition check for item out of stock
 			if(itemQuantity<=currentStock){
-				//updates items table quantity
-				prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
-				//System.out.println("asgdgsdgadgasd"+(currentStock-itemQuantity));
-				prepStat.setInt(1,currentStock-itemQuantity);
-				prepStat.setInt(2,itemId);
-				prepStat.executeUpdate();
 				
 				//retrieves cart_id of the logged in customer
 				prepStat=remoteConn.prepareStatement("select cart_id from tbl_cart join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where username=?");
@@ -323,7 +341,7 @@ public class OnlineMarketModel {
 			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
 		
-		return "Your item "+itemName+" has been purchased successfully";
+		return "Your item "+itemName+" has been added to cart successfully";
 	}
 
 	//customer can purchase browsed apps
@@ -333,10 +351,12 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			System.out.println("======Accessed Customer Purchase Method======");
+			
+
 			//setup to execture a sql statement
 			statement = remoteConn.createStatement();
 			//retrieves all items with given itemId
-			ResultSet selectedItem=statement.executeQuery("Select * from tbl_items where item_id="+itemId);
+			ResultSet selectedItem=statement.executeQuery("Select * from tbl_itemcart where item_id="+itemId);
 			while(selectedItem.next()){  
 				//System.out.println("itemId");
 				//System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));

@@ -58,18 +58,15 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 	public void purchaseItems(Session session){
 		try{
 			System.out.print("+++++++++++Purchase items here+++++++++++\n");
-			//scanner class allows the admin to enter his/her input
-			Scanner scanner = new Scanner(System.in);
-			//read input item name and quantity
-			
-			System.out.print("Enter Item Id of the above Items you wish: ");
-			int itemId = scanner.nextInt();
-
-			System.out.print("Enter Item Quantity to be purchased: ");
-			int itemQuantity = scanner.nextInt();
 
 			samp=mvc.purchaseItems(session,itemId,itemQuantity);
-			//System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+			
+			System.out.println("<---+++---Your Cart items list here----+++--->");
+			System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+			for(int i = 0; i < browseItem.size(); i++) {
+	            System.out.println(browseItem.get(i));
+	        }
+
 			System.out.println(samp);
 		}
 		catch(Exception e){
@@ -93,6 +90,23 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		catch(Exception e){
 			System.out.println("Online Market App Exception: " +e.getMessage());
 			//e.printStackTrace();
+		}
+	}
+
+	//member method- viewCart helps a customer to view cart items
+	@Override
+	public void viewCart(Session session){
+		try{
+			cartItem=mvc.viewCart(session);
+			//displaying items from database
+			System.out.println("<---+++---Your Cart items list here----+++--->");
+			System.out.println("CartId"+"	"+"ItemId"+"	"+"ItemQuantity");
+			for(int i = 0; i < cartItem.size(); i++) {
+	            System.out.println(cartItem.get(i));
+	        }
+		}
+		catch(Exception e){
+			System.out.println("Online Market App Exception - View Cart: " +e.getMessage());
 		}
 	}
 }

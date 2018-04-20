@@ -109,6 +109,17 @@ public class MarketViewController{
 		return addItemsToCart;
 	}
 
+	//viewCart method which calls viewCart from interface
+	public ArrayList viewCart(Session session){
+		try{
+			viewCart= marketApp.viewCart(session);
+		}
+		catch(Exception e){
+			System.out.println("Online Market App-Browse Items Exception: " +e.getMessage());
+		}
+		return viewCart;
+	}
+
 	//purchaseItems method which calls purchaseItems from interface
 	public String purchaseItems(Session session,int itemId,int itemQuant){
 		try{

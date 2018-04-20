@@ -16,4 +16,5 @@ public interface MarketCustomerInterface{
 	public void addItemsToCart(Session session);
 	public void purchaseItems(Session session);
 	public void browseItems(Session session);
+	public void viewCart(Session session);
 }
