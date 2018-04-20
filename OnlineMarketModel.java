@@ -35,7 +35,8 @@ public class OnlineMarketModel {
 	private ArrayList browsedList = new ArrayList();
 	private ArrayList cartItemsData = new ArrayList();
 	private int rowNum=0;
-	private String browsedItemData="",cartData="",retrievedId="",retrievedUId="",registerStatus="",creationStatus="",updateStatus="";
+	private String browsedItemData="",cartData="",retrievedId="",retrievedUId="",removeCustStatus="";
+	private String registerStatus="",creationStatus="",updateStatus="",removeItemStatus="";
 	//creating  a new instance for mysql connection
 	private SqlConnection connectSql=new SqlConnection();
 	private Connection remoteConn=connectSql.connectMySql();
@@ -492,21 +493,40 @@ public class OnlineMarketModel {
 
 	//removeItem helps admin to remove a item from db
 	public String removeItem(Session session,int itemId){
+		int retItemId=0;
 		try{
+			//retrieve admin input item id if exists
+			statement = remoteConn.createStatement();
+			rsltSet = statement.executeQuery("Select * from tbl_items where item_id="+itemId);
 
+			while(rsltSet.next()){
+				retItemId=rsltSet.getInt("item_id");
+			}
+			//remove item entry from tbl_items if exists
+			if(retItemId!=0){
+				prepStat=remoteConn.prepareStatement("Delete from tbl_items where item_id="+itemId);
+				prepStat.executeUpdate();	
+				removeItemStatus="Success-->Deleted requested Item.";
+			}
+			//if item id doesn't match from db
+			else{
+				removeItemStatus="Delete failed. Invalid item Id";
+			}
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Remove Items Exception: " +e.getMessage());
 		}
+		return removeItemStatus;
 	}
 
 	//removeCustomer helps admin to remove a customer from db
 	public String removeCustomer(Session session,int customerId){
 		try{
-
+			removeCustStatus="";
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Remove Customer Exception: " +e.getMessage());
 		}
+		return removeCustStatus
 	}
 }
