@@ -60,36 +60,37 @@ public class OnlineMarketModel {
 				//System.out.println("while");
 				retrievedId=rsltSet.getString("username");
 			}
-
-			//returns reg failed msg if username already exists
-			if(retrievedId.equalsIgnoreCase(userName)){
-				registerStatus= "New Customer Registration failed-User name already exists";
-			}
-
-			//if no match then insert a record to customers table and a cart table
-			else{
-				//insert customer registration details into dataase
-				prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-				//set positional params
-				prepStat.setString(1,firstName);
-				prepStat.setString(2,lastName);
-				prepStat.setString(3,userName);
-				prepStat.setString(4,password);
-
-				//executes the insert statement with above params
-				prepStat.executeUpdate();
-
-				//retrieves last inserted customer id
-				rsltSet=prepStat.getGeneratedKeys();
-				if(rsltSet.next()){
-					custId=rsltSet.getInt(1);
+			synchronized(this){
+				//returns reg failed msg if username already exists
+				if(retrievedId.equalsIgnoreCase(userName)){
+					registerStatus= "New Customer Registration failed-User name already exists";
 				}
 
-				//creates cart for each newly registered customer
-				prepStat=remoteConn.prepareStatement("Insert into tbl_cart(customer_id) values(?)");
-				prepStat.setInt(1,custId);
-				prepStat.executeUpdate();
-				registerStatus="You are now successfully Registered";
+				//if no match then insert a record to customers table and a cart table
+				else{
+					//insert customer registration details into dataase
+					prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+					//set positional params
+					prepStat.setString(1,firstName);
+					prepStat.setString(2,lastName);
+					prepStat.setString(3,userName);
+					prepStat.setString(4,password);
+
+					//executes the insert statement with above params
+					prepStat.executeUpdate();
+
+					//retrieves last inserted customer id
+					rsltSet=prepStat.getGeneratedKeys();
+					if(rsltSet.next()){
+						custId=rsltSet.getInt(1);
+					}
+
+					//creates cart for each newly registered customer
+					prepStat=remoteConn.prepareStatement("Insert into tbl_cart(customer_id) values(?)");
+					prepStat.setInt(1,custId);
+					prepStat.executeUpdate();
+					registerStatus="You are now successfully Registered";
+				}
 			}
 		}
 		catch (SQLException e) {
@@ -335,7 +336,8 @@ public class OnlineMarketModel {
 				prepStat.setInt(2,itemId);
 				prepStat.setInt(3,itemQuantity);
 
-				prepStat.executeUpdate();				
+				prepStat.executeUpdate();
+				return "Your item "+itemName+" has been added to cart successfully"	;			
 			}
 			else{
 				return "----Requested quantity is more than current stock----";
@@ -345,13 +347,16 @@ public class OnlineMarketModel {
 			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
 		
-		return "Your item "+itemName+" has been added to cart successfully";
+		return "Your item "+itemName+" not found in item list";
 	}
 
 	//customer can purchase browsed apps
 	public String purchaseItems(){
 		int currentStock=0,itemId=0,cartId=0,itemQuantity=0;
-		String itemName="";
+		ArrayList<Integer> itemList = new ArrayList<Integer>();
+		ArrayList<Integer> cartStock = new ArrayList<Integer>();
+		int i =0;
+		String returnStatement = "";
 		//exception handling block
 		try{
 			System.out.println("======Accessed Customer Check Out Method======");
@@ -366,44 +371,51 @@ public class OnlineMarketModel {
 			while(rsltSet.next()){  
 				//System.out.println("while1");
 				//System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
-				currentStock=rsltSet.getInt("quantity");
-				itemId=rsltSet.getInt("item_id");
+				cartStock.add(i,rsltSet.getInt("quantity"));
+				itemList.add(i,rsltSet.getInt("item_id"));
 				cartId=rsltSet.getInt("cart_id");
+				i++;
 			}
+			System.out.println(cartStock);
+			System.out.println(itemList);
+			for(i = 0; i< cartStock.size();i++){
+					//retrieve items original stock
+					rsltSet1 = statement.executeQuery("Select quantity from tbl_items where item_id="+itemList.get(i));
+					while(rsltSet1.next()){
+						//System.out.println("while2");
+						itemQuantity=rsltSet1.getInt("quantity");
+					}
 
-			//retrieve items original stock
-			rsltSet1 = statement.executeQuery("Select quantity from tbl_items where item_id="+itemId);
-			while(rsltSet1.next()){
-				//System.out.println("while2");
-				itemQuantity=rsltSet1.getInt("quantity");
+					System.out.println("values"+cartStock.get(i)+"---"+itemQuantity);
+					//condition check for item out of stock
+					if(itemQuantity >= cartStock.get(i)){
+						//System.out.println("ifff");
+						//updates items table quantity
+						prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
+						
+						prepStat.setInt(1,itemQuantity-cartStock.get(i));
+						prepStat.setInt(2,itemList.get(i));
+						prepStat.executeUpdate();
+						returnStatement = returnStatement+" "+itemList.get(i)+ "<<<<<Purchase Successful >>>>\n";
+								
+					}
+					else{
+						System.out.println(itemQuantity);
+						System.out.println(cartStock.get(i));
+						System.out.println(itemQuantity >= cartStock.get(i));
+						 returnStatement = returnStatement+" "+ itemList.get(i)+ "<<<<< Out Of Stock >>>>\n";
+					}
 			}
-
-			System.out.println("values"+currentStock+"---"+itemQuantity);
-			//condition check for item out of stock
-			if(itemQuantity>=currentStock){
-				//System.out.println("ifff");
-				//updates items table quantity
-				prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
-				
-				prepStat.setInt(1,currentStock-itemQuantity);
-				prepStat.setInt(2,itemId);
-				prepStat.executeUpdate();
-				
-			
-				//clears cart of respective customer
-				prepStat=remoteConn.prepareStatement("Delete from tbl_itemcart where cart_id="+cartId);
-
-				prepStat.executeUpdate();				
-			}
-			else{
-				return "----Requested item can't be checked out----";
-			}
+			//clears cart of respective customer
+			prepStat=remoteConn.prepareStatement("Delete from tbl_itemcart where cart_id="+cartId);
+			prepStat.executeUpdate();
+			return 	returnStatement;
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception-Checkout: " +e.getMessage());
 		}
 		
-		return "Your item "+itemName+" has been purchased successfully";
+		return "Error in check out";
 	}
 
 	//admin can add items to the inventory
@@ -445,41 +457,43 @@ public class OnlineMarketModel {
 				itemPrice=rsltSet.getInt("price");
 				itemType=rsltSet.getString("item_type");
 			}
-			//if there is matched item Id then update user entered attribute
-			if(itemPrice!=0){
-				//update item price
-				if(itemAttribute.equalsIgnoreCase("price")){
-					prepStat=remoteConn.prepareStatement("Update tbl_items set price=? where item_id=?");
-					prepStat.setString(1,attributeValue);
-					prepStat.setInt(2,itemId);
-					prepStat.executeUpdate();
-					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
+			synchronized(this){
+				//if there is matched item Id then update user entered attribute
+				if(itemPrice!=0){
+					//update item price
+					if(itemAttribute.equalsIgnoreCase("price")){
+						prepStat=remoteConn.prepareStatement("Update tbl_items set price=? where item_id=?");
+						prepStat.setString(1,attributeValue);
+						prepStat.setInt(2,itemId);
+						prepStat.executeUpdate();
+						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
+					}
+					//update item quantity
+					else if(itemAttribute.equalsIgnoreCase("quantity")){
+						prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
+						prepStat.setInt(1,Integer.parseInt(attributeValue));
+						prepStat.setInt(2,itemId);
+						prepStat.executeUpdate();
+						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
+					}
+					//update item description or type
+					else if(itemAttribute.equalsIgnoreCase("desc")){
+						prepStat=remoteConn.prepareStatement("Update tbl_items set item_type=? where item_id=?");
+						prepStat.setString(1,attributeValue);
+						prepStat.setInt(2,itemId);
+						prepStat.executeUpdate();
+						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
+					}
+					//nothing matches
+					else{
+						updateStatus="Update failed. Invalid Item Attibute";
+					}
+					
 				}
-				//update item quantity
-				else if(itemAttribute.equalsIgnoreCase("quantity")){
-					prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
-					prepStat.setInt(1,Integer.parseInt(attributeValue));
-					prepStat.setInt(2,itemId);
-					prepStat.executeUpdate();
-					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
-				}
-				//update item description or type
-				else if(itemAttribute.equalsIgnoreCase("desc")){
-					prepStat=remoteConn.prepareStatement("Update tbl_items set item_type=? where item_id=?");
-					prepStat.setString(1,attributeValue);
-					prepStat.setInt(2,itemId);
-					prepStat.executeUpdate();
-					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
-				}
-				//nothing matches
+				//if item id doesn't match from db
 				else{
-					updateStatus="Update failed. Invalid Item Attibute";
+					updateStatus="Update failed. Invalid item Id";
 				}
-				
-			}
-			//if item id doesn't match from db
-			else{
-				updateStatus="Update failed. Invalid item Id";
 			}
 
 		}
@@ -503,14 +517,16 @@ public class OnlineMarketModel {
 				retItemId=rsltSet.getInt("item_id");
 			}
 			//remove item entry from tbl_items if exists
-			if(retItemId!=0){
-				prepStat=remoteConn.prepareStatement("Delete from tbl_items where item_id="+itemId);
-				prepStat.executeUpdate();	
-				removeItemStatus="Success-->Deleted requested Item.";
-			}
-			//if item id doesn't match from db
-			else{
-				removeItemStatus="Delete failed. Invalid item Id";
+			synchronized(this){
+				if(retItemId!=0){
+					prepStat=remoteConn.prepareStatement("Delete from tbl_items where item_id="+itemId);
+					prepStat.executeUpdate();	
+					removeItemStatus="Success-->Deleted requested Item.";
+				}
+				//if item id doesn't match from db
+				else{
+					removeItemStatus="Delete failed. Invalid item Id";
+				}
 			}
 		}
 		catch (SQLException e) {
@@ -555,14 +571,16 @@ public class OnlineMarketModel {
 				retCustomerId=rsltSet.getInt("customer_id");
 			}
 			//remove customer entry from tbl_customers, if exists
-			if(retCustomerId!=0){
-				prepStat=remoteConn.prepareStatement("Delete from tbl_customers where customer_id="+customerId);
-				prepStat.executeUpdate();	
-				removeCustStatus="Success-->Deleted requested customer entry.";
-			}
-			//if customer id doesn't match from db, return this error msg
-			else{
-				removeCustStatus="Delete failed. Invalid Customer Id";
+			synchronized(this){
+				if(retCustomerId!=0){
+					prepStat=remoteConn.prepareStatement("Delete from tbl_customers where customer_id="+customerId);
+					prepStat.executeUpdate();	
+					removeCustStatus="Success-->Deleted requested customer entry.";
+				}
+				//if customer id doesn't match from db, return this error msg
+				else{
+					removeCustStatus="Delete failed. Invalid Customer Id";
+				}
 			}
 		}
 		catch (SQLException e) {
