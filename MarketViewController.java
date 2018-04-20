@@ -22,7 +22,7 @@ public class MarketViewController{
 	private static OnlineMarket marketApp;
 	private boolean loginStatus;
 	private Session session;
-	private ArrayList browseItems;
+	private ArrayList browseItems,viewCart;
 	private String purchaseItems,addItems,userDetails,addUsers,addItemsToCart;
 	private MarketCommonView marketView=new MarketCommonView();
 	static String firstName,lastName,loginId,password;

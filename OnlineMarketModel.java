@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class OnlineMarketModel {
 	
 	private Session session;
-	private ArrayList browsedList,cartItems = new ArrayList();
+	private ArrayList browsedList,cartItemsData = new ArrayList();
 	private int rowNum=0;
 	private String browsedItemData="",cartData="",retrievedId="",retrievedUId="",registerStatus="",creationStatus="";
 	//creating  a new instance for mysql connection
@@ -285,7 +285,7 @@ public class OnlineMarketModel {
 			//add each column data to browsed List
 			while(cartItems.next()){  
 				cartData=cartItems.getInt(1)+"-----"+cartItems.getInt(2)+"-----"+cartItems.getInt(3);
-				cartItems.add(rowNum,cartData);rowNum++;
+				cartItemsData.add(rowNum,cartData);rowNum++;
 				//System.out.println("statement"+browsedList);
 			}
 		}
@@ -294,7 +294,7 @@ public class OnlineMarketModel {
 		}
 		
 		System.out.println("======Your can Browse Market App to shop======");
-		return cartItems;
+		return cartItemsData;
 	}
 		
 	//customer can add items to cart browsed apps
