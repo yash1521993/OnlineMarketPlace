@@ -444,39 +444,46 @@ public class OnlineMarketModel {
 				itemPrice=rsltSet.getInt("price");
 				itemType=rsltSet.getString("item_type");
 			}
+			//if there is matched item Id then update user entered attribute
 			if(itemPrice!=0){
+				//update item price
 				if(itemAttribute.equalsIgnoreCase("price")){
-					
+					prepStat=remoteConn.prepareStatement("Update tbl_items set price=? where item_id=?");
+					prepStat.setInt(1,attributeValue);
+					prepStat.setInt(2,itemId);
+					prepStat.executeUpdate();
 					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 				}
+				//update item quantity
 				else if(itemAttribute.equalsIgnoreCase("quantity")){
+					prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
+					prepStat.setInt(1,attributeValue);
+					prepStat.setInt(2,itemId);
+					prepStat.executeUpdate();
 					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 				}
+				//update item description or type
 				else if(itemAttribute.equalsIgnoreCase("desc")){
+					prepStat=remoteConn.prepareStatement("Update tbl_items set item_type=? where item_id=?");
+					prepStat.setInt(1,attributeValue);
+					prepStat.setInt(2,itemId);
+					prepStat.executeUpdate();
 					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 				}
+				//nothing matches
 				else{
 					updateStatus="Update failed. Invalid Item Attibute";
 				}
 				
 			}
+			//if item id doesn't match from db
 			else{
 				updateStatus="Update failed. Invalid item Id";
 			}
-			//insert admin input items into dataase
-			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into tbl_items values(?,?,?,?,?)");
-			//set positional params
-			insertItem.setInt(1,itemId);
-			insertItem.setString(2,itemName);
-			insertItem.setString(3,itemType);
-			insertItem.setString(4,itemPrice);
-			insertItem.setInt(5,itemQuantity);
-			//executes the insert statement with above params
-			insertItem.executeUpdate();
 
 		}
 		catch (SQLException e) {
-			System.out.println("Online Market App Exception: " +e.getMessage());
+			System.out.println("Online Market App - Update Items Exception: " +e.getMessage());
 		}
 		System.out.println("======Accessed Admin Update method======");
 		return updateStatus;		
