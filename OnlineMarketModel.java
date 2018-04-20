@@ -545,13 +545,29 @@ public class OnlineMarketModel {
 
 	//removeCustomer helps admin to remove a customer from db
 	public String removeCustomer(int customerId){
-		/*try{
+		int retCustomerId=0;
+		try{
+			//retrieve admin input customer id if exists
+			statement = remoteConn.createStatement();
+			rsltSet = statement.executeQuery("Select * from tbl_customers where customer_id="+customerId);
 
-			removeCustStatus="";
+			while(rsltSet.next()){
+				retCustomerId=rsltSet.getInt("customer_id");
+			}
+			//remove customer entry from tbl_customers, if exists
+			if(retCustomerId!=0){
+				prepStat=remoteConn.prepareStatement("Delete from tbl_customers where customer_id="+customerId);
+				prepStat.executeUpdate();	
+				removeCustStatus="Success-->Deleted requested customer entry.";
+			}
+			//if customer id doesn't match from db, return this error msg
+			else{
+				removeCustStatus="Delete failed. Invalid Customer Id";
+			}
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Remove Customer Exception: " +e.getMessage());
-		}*/
+		}
 		return removeCustStatus;
 	}
 }
