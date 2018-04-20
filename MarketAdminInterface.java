@@ -12,6 +12,7 @@ public interface MarketAdminInterface{
 	//partially implemented admin related methods
 	public void adminInfo();
 	public void addItems(Session session);
+	public void updateItems(Session session);
 	public void browseItems(Session session);
 	public void addUsers(Session session);
 }
