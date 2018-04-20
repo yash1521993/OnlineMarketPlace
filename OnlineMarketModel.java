@@ -279,14 +279,14 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			//retrieves all the items from db
-			prepStat = remoteConn.prepareStatement("Select * from tbl_itemcart");
+			prepStat = remoteConn.prepareStatement("Select * from tbl_itemcart join tbl_cart on tbl_cart.cart_id=tbl_itemcart.cart_id join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where tbl_customers.username=?");
+			prepStat.setString(1,userId);
 			//browsedItems stores the above executed query result
 			ResultSet cartItems=prepStat.executeQuery(); 
 			//add each column data to browsed List
 			while(cartItems.next()){  
 				cartData=cartItems.getInt(1)+"-----"+cartItems.getInt(2)+"-----"+cartItems.getInt(3);
 				cartItemsData.add(rowNum,cartData);rowNum++;
-				//System.out.println("statement"+browsedList);
 			}
 		}
 		catch (SQLException e) {
