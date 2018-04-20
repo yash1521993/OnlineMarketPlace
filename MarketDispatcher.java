@@ -50,11 +50,13 @@ public class MarketDispatcher {
 			//while loop to provide continuous user input
 			while(true){
 				Scanner scanner = new Scanner(System.in);
-				System.out.println("---Enter 'Browse' ignoring quotes to browse items");
-				System.out.println("---Enter 'AddI' ignoring quotes to add items");
-				System.out.println("---Enter 'Update' ignoring quotes to update items");
-				System.out.println("---Enter 'AddU' ignoring quotes to add Customer/Admin");
-				System.out.println(">>To exit these commands, press ctrl+c<<");
+				System.out.println("---Enter 'browse' ignoring quotes to browse items");
+				System.out.println("---Enter 'addI' ignoring quotes to add items");
+				System.out.println("---Enter 'addU' ignoring quotes to add Customer/Admin");
+				System.out.println("---Enter 'update' ignoring quotes to update items");
+				System.out.println("---Enter 'removeC' ignoring quotes to delete Customer");
+				System.out.println("---Enter 'removeI' ignoring quotes to delete Item");
+				System.out.println(">>>...To exit these commands, press ctrl+c...<<<");
 				String adminInput = scanner.nextLine();
 				//command invocation based on user input
 				if(adminInput.equalsIgnoreCase("addi")){
@@ -68,6 +70,12 @@ public class MarketDispatcher {
 				}
 				else if(adminInput.equalsIgnoreCase("update")){
 					invoker.tasksListAdmin(updateItems);
+				}
+				else if(adminInput.equalsIgnoreCase("removeI")){
+					invoker.tasksListAdmin(removeItem);
+				}
+				else if(adminInput.equalsIgnoreCase("removeC")){
+					invoker.tasksListAdmin(removeCustomer);
 				}
 				else{
 					System.out.println("Invalid command input");
