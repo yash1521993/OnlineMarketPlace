@@ -449,7 +449,7 @@ public class OnlineMarketModel {
 				//update item price
 				if(itemAttribute.equalsIgnoreCase("price")){
 					prepStat=remoteConn.prepareStatement("Update tbl_items set price=? where item_id=?");
-					prepStat.setInt(1,attributeValue);
+					prepStat.setString(1,attributeValue);
 					prepStat.setInt(2,itemId);
 					prepStat.executeUpdate();
 					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
@@ -457,7 +457,7 @@ public class OnlineMarketModel {
 				//update item quantity
 				else if(itemAttribute.equalsIgnoreCase("quantity")){
 					prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
-					prepStat.setInt(1,attributeValue);
+					prepStat.setInt(1,Integer.parseInt(attributeValue));
 					prepStat.setInt(2,itemId);
 					prepStat.executeUpdate();
 					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
@@ -465,7 +465,7 @@ public class OnlineMarketModel {
 				//update item description or type
 				else if(itemAttribute.equalsIgnoreCase("desc")){
 					prepStat=remoteConn.prepareStatement("Update tbl_items set item_type=? where item_id=?");
-					prepStat.setInt(1,attributeValue);
+					prepStat.setString(1,attributeValue);
 					prepStat.setInt(2,itemId);
 					prepStat.executeUpdate();
 					updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
