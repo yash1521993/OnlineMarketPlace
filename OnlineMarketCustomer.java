@@ -59,13 +59,8 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		try{
 			System.out.print("+++++++++++Check out items here+++++++++++\n");
 			//scanner class allows the admin to enter his/her input
-			Scanner scanner = new Scanner(System.in);
-			//read input item name and quantity
-			
-			System.out.print("Enter Item Id to check out: ");
-			int itemId = scanner.nextInt();
 
-			samp=mvc.purchaseItems(session,itemId);
+			samp=mvc.purchaseItems(session);
 			//System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
 			System.out.println(samp);
 		}
@@ -78,14 +73,16 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 	//member method- browseItems helps a customer to browse items
 	@Override
 	public void browseItems(Session session){
+		
 		try{
 			browseItem=mvc.browseItems(session);
 			//displaying items from database
 			System.out.println("<---+++---Your shopping items list here----+++--->");
-			System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+			System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemType"+"  "+"ItemPrice"+"  "+"ItemQuantity");
 			for(int i = 0; i < browseItem.size(); i++) {
-	            System.out.println(browseItem.get(i));
+	            System.out.println(browseItem.get(i)+"\t"+"\t");
 	        }
+	        System.out.println("<------------------------------------------------>");
 		}
 		catch(Exception e){
 			System.out.println("Online Market App Exception: " +e.getMessage());
