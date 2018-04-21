@@ -157,7 +157,6 @@ public class OnlineMarketModel {
 				//checks if a customer already exists with same user name
 				prepStat=remoteConn.prepareStatement("Select username from tbl_admin where username=?");
 				prepStat.setString(1,userName);
-				//System.out.println("admin while"+userName+"riddd:"+retrievedUId);
 				rsltSet=prepStat.executeQuery();
 				while(rsltSet.next()){  
 					retrievedUId=rsltSet.getString("username");
@@ -171,7 +170,6 @@ public class OnlineMarketModel {
 
 				//if no match then insert a record to customers table and a cart table
 				else{
-					//System.out.println("admin else");
 					//insert customer registration details into dataase
 					prepStat = remoteConn.prepareStatement("Insert into tbl_admin(first_name,last_name,username,password) values(?,?,?,?)");
 					//set positional params
@@ -314,8 +312,6 @@ public class OnlineMarketModel {
 			//retrieves all items with given itemId
 			ResultSet selectedItem=statement.executeQuery("Select * from tbl_items where item_id="+itemId);
 			while(selectedItem.next()){  
-				//System.out.println("itemId");
-				//System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
 				currentStock=selectedItem.getInt("quantity");
 				itemName=selectedItem.getString("item_name");
 			}
@@ -367,7 +363,6 @@ public class OnlineMarketModel {
 			prepStat = remoteConn.prepareStatement("Select * from tbl_itemcart join tbl_cart on tbl_cart.cart_id=tbl_itemcart.cart_id join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where tbl_customers.username=?");
 			prepStat.setString(1,userId);
 			rsltSet=prepStat.executeQuery(); 
-			//ResultSet selectedItem=statement.executeQuery("Select * from tbl_itemcart where item_id="+itemId);
 			while(rsltSet.next()){  
 				cartStock.add(i,rsltSet.getInt("quantity"));
 				itemList.add(i,rsltSet.getInt("item_id"));
@@ -380,11 +375,10 @@ public class OnlineMarketModel {
 					//retrieve items original stock
 					rsltSet1 = statement.executeQuery("Select quantity from tbl_items where item_id="+itemList.get(i));
 					while(rsltSet1.next()){
-						//System.out.println("while2");
 						itemQuantity=rsltSet1.getInt("quantity");
 					}
 
-					System.out.println("values"+cartStock.get(i)+"---"+itemQuantity);
+					//System.out.println("values"+cartStock.get(i)+"---"+itemQuantity);
 					//condition check for item out of stock
 					if(itemQuantity >= cartStock.get(i)){
 						//System.out.println("ifff");
@@ -394,13 +388,13 @@ public class OnlineMarketModel {
 						prepStat.setInt(1,itemQuantity-cartStock.get(i));
 						prepStat.setInt(2,itemList.get(i));
 						prepStat.executeUpdate();
-						returnStatement = returnStatement+" "+itemList.get(i)+ "<<<<<Purchase Successful >>>>\n";
+						returnStatement = returnStatement+" <<<<< "+itemList.get(i)+ " Purchase Successful >>>>\n";
 								
 					}
 					else{
-						System.out.println(itemQuantity);
+						/*System.out.println(itemQuantity);
 						System.out.println(cartStock.get(i));
-						System.out.println(itemQuantity >= cartStock.get(i));
+						System.out.println(itemQuantity >= cartStock.get(i));*/
 						 returnStatement = returnStatement+" "+ itemList.get(i)+ "<<<<< Out Of Stock >>>>\n";
 					}
 			}
