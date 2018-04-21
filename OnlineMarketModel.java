@@ -369,15 +369,13 @@ public class OnlineMarketModel {
 			rsltSet=prepStat.executeQuery(); 
 			//ResultSet selectedItem=statement.executeQuery("Select * from tbl_itemcart where item_id="+itemId);
 			while(rsltSet.next()){  
-				//System.out.println("while1");
-				//System.out.println(selectedItem.getInt(1)+" "+selectedItem.getString("ItemName")+" "+selectedItem.getString("ItemPrice")+" "+selectedItem.getInt("IQuantity"));
 				cartStock.add(i,rsltSet.getInt("quantity"));
 				itemList.add(i,rsltSet.getInt("item_id"));
 				cartId=rsltSet.getInt("cart_id");
 				i++;
 			}
-			System.out.println(cartStock);
-			System.out.println(itemList);
+			
+			//loop through all the cart items
 			for(i = 0; i< cartStock.size();i++){
 					//retrieve items original stock
 					rsltSet1 = statement.executeQuery("Select quantity from tbl_items where item_id="+itemList.get(i));

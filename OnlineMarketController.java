@@ -96,14 +96,14 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 
 	//overridden sync method to add items
 	@Override
-	public synchronized String updateItems(Session session,int itemId,String itemAttribute,String attributeValue){
+	public String updateItems(Session session,int itemId,String itemAttribute,String attributeValue){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.updateItems(itemId,itemAttribute,attributeValue);
 	}
 
 	//overridden sync method to remove items
 	@Override
-	public synchronized String removeItem(Session session,int itemId){
+	public String removeItem(Session session,int itemId){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.removeItem(itemId);
 	}
@@ -117,7 +117,7 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 
 	//overridden sync method to remove customers
 	@Override
-	public synchronized String removeCustomer(Session session,int customerId){
+	public String removeCustomer(Session session,int customerId){
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.removeCustomer(customerId);
 	}
