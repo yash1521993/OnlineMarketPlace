@@ -227,10 +227,10 @@ public class MarketViewController{
 			marketApp = (OnlineMarket) Naming.lookup(name);
 			
 			//calling interface implemented methods
-			regId = marketApp.regId();
+			//regId = marketApp.regId();
 			
 			//register=marketApp.registerCustomer(regType,firstName,lastName,loginId,password);
-			System.out.println("Registration ID: " + regId);
+			//System.out.println("Registration ID: " + regId);
 			
 			//System.out.println("Registration Status: "+register);
 			//market common view instance

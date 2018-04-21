@@ -23,18 +23,11 @@ import java.lang.reflect.Proxy;
 */
 public class OnlineMarketController extends UnicastRemoteObject implements OnlineMarket{
 	private String name,addUsers;
-	private int regId = 0;
 
 	//constructor for controller
 	public OnlineMarketController(String name) throws RemoteException {
 		super(); 
 		this.name = name;
-	}
-
-	//this method returns a registration id for a customer
-	public synchronized int regId() throws RemoteException {
-		regId++; 
-		return regId;
 	}
 	
 	//this method register a user

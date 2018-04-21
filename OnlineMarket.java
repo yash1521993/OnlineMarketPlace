@@ -13,11 +13,10 @@ import java.util.ArrayList;
  *	Below is the interface declaration OnlineMarket which will be implemented
  *	by OnlineMarketController.
  */
-public interface OnlineMarket extends java.rmi.Remote {
-	//interface should extend from Remote super class
-	//this method returns an Id for each customer
-	int regId() throws java.rmi.RemoteException;
 
+//interface should extend from Remote super class
+public interface OnlineMarket extends java.rmi.Remote {
+	
 	//this method registers a new customer
 	String registerCustomer(String firstName,String lastName,String userName,String password) throws java.rmi.RemoteException;
 	
