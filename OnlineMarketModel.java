@@ -5,9 +5,7 @@
 //
 // yashkuru
 
-import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 // Ryan: Do you need everything in these packages?
 
 // FIXED: imported only required package
@@ -31,7 +29,6 @@ import java.util.ArrayList;
  */
 public class OnlineMarketModel {
 	
-	private Session session;
 	private ArrayList browsedList = new ArrayList();
 	private ArrayList cartItemsData = new ArrayList();
 	private ArrayList customerDataList = new ArrayList();
@@ -47,7 +44,8 @@ public class OnlineMarketModel {
 	private ResultSet rsltSet,rsltSet1;
 	private int custId=0;
 	public static String userId="";
-	
+	private DbAccess dbAccess=new DbAccess();
+
 	//registering a customer
 	public String registerCustomer(String firstName,String lastName, String userName, String password) throws RemoteException{
 		//customer insertion
@@ -199,16 +197,12 @@ public class OnlineMarketModel {
 	//this method checks for a valid customer or user
 	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		
+		
 		boolean loginCheck=false;
 		//admin validation
-		//works for id: admin and password: test
 		if(loginType.equalsIgnoreCase("Admin")){
 			try{
-				prepStat=remoteConn.prepareStatement("Select * from tbl_admin where username=? and password=?");
-
-				prepStat.setString(1,inputId);
-				prepStat.setString(2,inputPwd);
-				ResultSet rs=prepStat.executeQuery();
+				ResultSet rs= dbAccess.validateLogin(inputId,inputPwd,loginType);
 				if(rs.next()){
 					
 					System.out.println("Admin Login Success");
@@ -226,14 +220,9 @@ public class OnlineMarketModel {
 		}
 		
 		//customer validation
-		//works for id: customer and password: test
 		if(loginType.equalsIgnoreCase("Customer")){
 			try{
-				prepStat=remoteConn.prepareStatement("Select * from tbl_customers where username=? and password=?");
-
-				prepStat.setString(1,inputId);
-				prepStat.setString(2,inputPwd);
-				ResultSet rs=prepStat.executeQuery();
+				ResultSet rs= dbAccess.validateLogin(inputId,inputPwd,loginType);
 				if(rs.next()){
 					userId=inputId;
 					System.out.println("Customer Login Success");
