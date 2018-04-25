@@ -57,5 +57,26 @@ public class DbAccess{
 		return rsltSet;
 	}
 
+	
+	//browseItems allows a customer to browse over the app
+	@SuppressWarnings("unchecked")
+	public ResultSet browseItems(){
+		System.out.println("======Your can Browse Market App to shop======");
+		//exception handling block
+		try{
+			//retrieves all the items from db
+			prepStat = remoteConn.prepareStatement("Select * from tbl_items");
+			//browsedItems stores the above executed query result
+			ResultSet browsedItems=prepStat.executeQuery(); 
+			
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
+		}
+
+		return browsedItems;
+	}
+
+
 
 }

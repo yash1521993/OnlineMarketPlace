@@ -197,7 +197,6 @@ public class OnlineMarketModel {
 	//this method checks for a valid customer or user
 	public boolean validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		
-		
 		boolean loginCheck=false;
 		//admin validation
 		if(loginType.equalsIgnoreCase("Admin")){
@@ -247,15 +246,11 @@ public class OnlineMarketModel {
 		System.out.println("======Your can Browse Market App to shop======");
 		//exception handling block
 		try{
-			//retrieves all the items from db
-			prepStat = remoteConn.prepareStatement("Select * from tbl_items");
-			//browsedItems stores the above executed query result
-			ResultSet browsedItems=prepStat.executeQuery(); 
+			browsedItems=dbAccess.browseItems();
 			//add each column data to browsed List
 			while(browsedItems.next()){  
 				browsedItemData=browsedItems.getInt(1)+"-----"+browsedItems.getString("item_name")+"-----"+browsedItems.getString("item_type")+"-----"+browsedItems.getString("price")+"-----"+browsedItems.getInt("quantity");
 				browsedList.add(rowNum,browsedItemData);rowNum++;
-				//System.out.println("statement"+browsedList);
 			}
 		}
 		catch (SQLException e) {
