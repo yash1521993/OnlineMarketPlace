@@ -533,8 +533,7 @@ public class OnlineMarketModel {
 		int retCustomerId=0;
 		try{
 			//retrieve admin input customer id if exists
-			statement = remoteConn.createStatement();
-			rsltSet = statement.executeQuery("Select * from tbl_customers where customer_id="+customerId);
+			rsltSet	=dbAccess.getCustomer(customerId);
 
 			while(rsltSet.next()){
 				retCustomerId=rsltSet.getInt("customer_id");
@@ -542,8 +541,7 @@ public class OnlineMarketModel {
 			//remove customer entry from tbl_customers, if exists
 			synchronized(this){
 				if(retCustomerId!=0){
-					prepStat=remoteConn.prepareStatement("Delete from tbl_customers where customer_id="+customerId);
-					prepStat.executeUpdate();	
+					dbAccess.deleteCustomer(retCustomerId);
 					removeCustStatus="Success-->Deleted requested customer entry.";
 				}
 				//if customer id doesn't match from db, return this error msg

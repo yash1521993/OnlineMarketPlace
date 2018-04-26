@@ -67,7 +67,6 @@ public class DbAccess{
 
 	
 	//browseItems allows a customer to browse over the app
-	@SuppressWarnings("unchecked")
 	public ResultSet browseItems(){
 		
 		System.out.println("======Your can Browse Market App to shop======");
@@ -106,7 +105,6 @@ public class DbAccess{
 	}
 
 	//view customers allows a admin to browse over the app
-	
 	public ResultSet viewCustomers(){
 
 		//exception handling block
@@ -122,6 +120,34 @@ public class DbAccess{
 		}
 		
 		return customerList;
+	}
+
+	//getCustomer method retrieves a unique customer from database
+	public ResultSet getCustomer(int customerId){
+		int retCustomerId=0;
+		try{
+			//retrieve admin input customer id if exists
+			statement = remoteConn.createStatement();
+			rsltSet = statement.executeQuery("Select * from tbl_customers where customer_id="+customerId);
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Get Customer Exception: " +e.getMessage());
+		}
+		return rsltSet;
+	}
+
+	public void deleteCustomer(int customerId){
+		
+		try{
+			prepStat=remoteConn.prepareStatement("Delete from tbl_customers where customer_id="+customerId);
+			prepStat.executeUpdate();	
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Remove Customer Exception: " +e.getMessage());
+		}
+		
 	}
 
 }
