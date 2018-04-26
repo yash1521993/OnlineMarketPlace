@@ -483,7 +483,7 @@ public class OnlineMarketModel {
 		int retItemId=0;
 		try{
 			//retrieve admin input item id if exists
-			rsltSet=dbAccess.getItem();
+			rsltSet=dbAccess.getItem(itemId);
 			while(rsltSet.next()){
 				retItemId=rsltSet.getInt("item_id");
 			}
