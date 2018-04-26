@@ -483,17 +483,14 @@ public class OnlineMarketModel {
 		int retItemId=0;
 		try{
 			//retrieve admin input item id if exists
-			statement = remoteConn.createStatement();
-			rsltSet = statement.executeQuery("Select * from tbl_items where item_id="+itemId);
-
+			rsltSet=dbAccess.getItem();
 			while(rsltSet.next()){
 				retItemId=rsltSet.getInt("item_id");
 			}
 			//remove item entry from tbl_items if exists
 			synchronized(this){
 				if(retItemId!=0){
-					prepStat=remoteConn.prepareStatement("Delete from tbl_items where item_id="+itemId);
-					prepStat.executeUpdate();	
+					dbAccess.removeItem(retItemId);
 					removeItemStatus="Success-->Deleted requested Item.";
 				}
 				//if item id doesn't match from db

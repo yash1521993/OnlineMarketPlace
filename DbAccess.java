@@ -150,4 +150,31 @@ public class DbAccess{
 		
 	}
 
+	public ResultSet getItem(int itemId){
+		int retCustomerId=0;
+		try{
+			//retrieve admin input item id if exists
+			statement = remoteConn.createStatement();
+			rsltSet = statement.executeQuery("Select * from tbl_items where item_id="+itemId);
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Get Item Exception: " +e.getMessage());
+		}
+		return rsltSet;
+	}
+
+	public void removeItem(int itemId){
+		
+		try{
+			prepStat=remoteConn.prepareStatement("Delete from tbl_items where item_id="+itemId);
+			prepStat.executeUpdate();	
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Remove Item Exception: " +e.getMessage());
+		}
+		
+	}
+
 }
