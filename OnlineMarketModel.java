@@ -41,7 +41,8 @@ public class OnlineMarketModel {
 	private Connection remoteConn=connectSql.connectMySql();
 	private PreparedStatement prepStat;
 	private Statement statement;
-	private ResultSet rsltSet,rsltSet1;
+	private ResultSet cartItems,browsedItems,rsltSet,rsltSet1;
+
 	private int custId=0;
 	public static String userId="";
 	private DbAccess dbAccess=new DbAccess();
