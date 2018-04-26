@@ -124,7 +124,7 @@ public class DbAccess{
 
 	//getCustomer method retrieves a unique customer from database
 	public ResultSet getCustomer(int customerId){
-		int retCustomerId=0;
+		
 		try{
 			//retrieve admin input customer id if exists
 			statement = remoteConn.createStatement();
@@ -151,7 +151,7 @@ public class DbAccess{
 	}
 
 	public ResultSet getItem(int itemId){
-		int retCustomerId=0;
+		
 		try{
 			//retrieve admin input item id if exists
 			statement = remoteConn.createStatement();
@@ -175,6 +175,42 @@ public class DbAccess{
 			System.out.println("Online Market App - Remove Item Exception: " +e.getMessage());
 		}
 		
+	}
+
+	public void updateItemPrice(int itemId,String attributeValue){
+		try{
+			prepStat=remoteConn.prepareStatement("Update tbl_items set price=? where item_id=?");
+			prepStat.setString(1,attributeValue);
+			prepStat.setInt(2,itemId);
+			prepStat.executeUpdate();
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Update Item Exception: " +e.getMessage());
+		}
+	}
+
+	public void updateItemQuantity(int itemId,String attributeValue){
+		try{
+			prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
+			prepStat.setInt(1,Integer.parseInt(attributeValue));
+			prepStat.setInt(2,itemId);
+			prepStat.executeUpdate();
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Update Item Exception: " +e.getMessage());
+		}
+	}
+
+	public void updateItemDesc(int itemId,String attributeValue){
+		try{
+			prepStat=remoteConn.prepareStatement("Update tbl_items set item_type=? where item_id=?");
+			prepStat.setString(1,attributeValue);
+			prepStat.setInt(2,itemId);
+			prepStat.executeUpdate();
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Update Item Exception: " +e.getMessage());
+		}
 	}
 
 }

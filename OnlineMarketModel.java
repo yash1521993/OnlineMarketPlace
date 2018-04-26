@@ -421,8 +421,7 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			//retrieve admin input item id if exists
-			statement = remoteConn.createStatement();
-			rsltSet = statement.executeQuery("Select * from tbl_items where item_id="+itemId);
+			rsltSet=dbAccess.getItem(itemId);
 
 			while(rsltSet.next()){
 				//System.out.println("while2");
@@ -435,26 +434,17 @@ public class OnlineMarketModel {
 				if(itemPrice!=0){
 					//update item price
 					if(itemAttribute.equalsIgnoreCase("price")){
-						prepStat=remoteConn.prepareStatement("Update tbl_items set price=? where item_id=?");
-						prepStat.setString(1,attributeValue);
-						prepStat.setInt(2,itemId);
-						prepStat.executeUpdate();
+						dbAccess.updateItemPrice(attributeValue,itemId);
 						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 					}
 					//update item quantity
 					else if(itemAttribute.equalsIgnoreCase("quantity")){
-						prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
-						prepStat.setInt(1,Integer.parseInt(attributeValue));
-						prepStat.setInt(2,itemId);
-						prepStat.executeUpdate();
+						dbAccess.updateItemQuantity(attributeValue,itemId);
 						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 					}
 					//update item description or type
 					else if(itemAttribute.equalsIgnoreCase("desc")){
-						prepStat=remoteConn.prepareStatement("Update tbl_items set item_type=? where item_id=?");
-						prepStat.setString(1,attributeValue);
-						prepStat.setInt(2,itemId);
-						prepStat.executeUpdate();
+						dbAccess.updateItemDesc(attributeValue,itemId);
 						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 					}
 					//nothing matches
