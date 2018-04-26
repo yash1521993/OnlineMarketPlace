@@ -41,7 +41,7 @@ public class OnlineMarketModel {
 	private Connection remoteConn=connectSql.connectMySql();
 	private PreparedStatement prepStat;
 	private Statement statement;
-	private ResultSet cartItems,browsedItems,rsltSet,rsltSet1;
+	private ResultSet cartItems,browsedItems,customerList,rsltSet,rsltSet1;
 
 	private int custId=0;
 	public static String userId="";
@@ -514,11 +514,7 @@ public class OnlineMarketModel {
 		System.out.println("======Accessed view all customers method======");
 		//exception handling block
 		try{
-			//retrieves all the customers from db
-			prepStat = remoteConn.prepareStatement("Select customer_id,username from tbl_customers");
-
-			//browsedItems stores the above executed query result
-			ResultSet customerList=prepStat.executeQuery(); 
+			customerList=dbAccess.viewCustomers();
 			//add each column data to browsed List
 			while(customerList.next()){  
 				customerData=customerList.getInt(1)+"---------"+customerList.getString(2);
@@ -526,7 +522,7 @@ public class OnlineMarketModel {
 			}
 		}
 		catch (SQLException e) {
-			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
+			System.out.println("Online Market App Exception- Customer List: " +e.getMessage());
 		}
 		
 		return customerDataList;

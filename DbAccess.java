@@ -28,7 +28,7 @@ public class DbAccess{
 	private ArrayList browsedList = new ArrayList();
 	private ArrayList cartItemsData = new ArrayList();
 	private ArrayList customerDataList = new ArrayList();
-
+	private ResultSet customerList;
 	//this method checks for a valid customer or user
 	public ResultSet validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		
@@ -88,10 +88,7 @@ public class DbAccess{
 
 
 	//view cart allows a customer to browse over the app
-	@SuppressWarnings("unchecked")
 	public ResultSet viewCart(){
-		
-		System.out.println("======Accessed cart view method======");
 		//exception handling block
 		try{
 			//retrieves all the items from db
@@ -106,6 +103,25 @@ public class DbAccess{
 		}
 
 		return cartItems;
+	}
+
+	//view customers allows a admin to browse over the app
+	
+	public ResultSet viewCustomers(){
+
+		//exception handling block
+		try{
+			//retrieves all the customers from db
+			prepStat = remoteConn.prepareStatement("Select customer_id,username from tbl_customers");
+
+			//browsedItems stores the above executed query result
+			customerList=prepStat.executeQuery(); 
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App -Customer List Exception: " +e.getMessage());
+		}
+		
+		return customerList;
 	}
 
 }
