@@ -266,11 +266,7 @@ public class OnlineMarketModel {
 		System.out.println("======Accessed cart view method======");
 		//exception handling block
 		try{
-			//retrieves all the items from db
-			prepStat = remoteConn.prepareStatement("Select * from tbl_itemcart join tbl_cart on tbl_cart.cart_id=tbl_itemcart.cart_id join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where tbl_customers.username=?");
-			prepStat.setString(1,userId);
-			//cartItems stores the above executed query result
-			ResultSet cartItems=prepStat.executeQuery(); 
+			cartItems=dbAccess.viewCart();
 			//add each column data to browsed List
 			while(cartItems.next()){  
 				cartData=cartItems.getInt(1)+"-----"+cartItems.getInt(2)+"-----"+cartItems.getInt(3);
