@@ -10,10 +10,8 @@ import java.rmi.RemoteException;
 
 // FIXED: imported only required package
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.Connection;
+
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 // Ryan: Here you are violating separation of concerns by mixing
@@ -32,18 +30,10 @@ public class OnlineMarketModel {
 	private ArrayList browsedList = new ArrayList();
 	private ArrayList cartItemsData = new ArrayList();
 	private ArrayList customerDataList = new ArrayList();
-	
 	private int rowNum=0;
 	private String browsedItemData="",cartData="",retrievedId="",retrievedUId="",removeCustStatus="";
 	private String registerStatus="",creationStatus="",updateStatus="",removeItemStatus="",customerData="";
-	//creating  a new instance for mysql connection
-	private SqlConnection connectSql=new SqlConnection();
-	private Connection remoteConn=connectSql.connectMySql();
-	private PreparedStatement prepStat;
-	private Statement statement;
 	private ResultSet cartItems,browsedItems,customerList,rsltSet,rsltSet1;
-
-	private int custId=0;
 	public static String userId="";
 	private DbAccess dbAccess=new DbAccess();
 
@@ -90,7 +80,7 @@ public class OnlineMarketModel {
 
 				//returns reg failed msg if username already exists
 				if(retrievedUId.equalsIgnoreCase(userName)){
-					creationStatus= "New Customer Creation failed-User name already exists";
+					creationStatus= "New Customer Creation failed - User name already exists";
 				}
 
 				//if no match then insert a record to customers table and a cart table
@@ -244,7 +234,6 @@ public class OnlineMarketModel {
 			if(itemQuantity<=currentStock){
 				
 				//retrieves cart_id of the logged in customer
-				
 				rsltSet1=dbAccess.getCartId();
 				while(rsltSet1.next()){
 					retrievedCId=rsltSet1.getInt(1);
@@ -298,7 +287,6 @@ public class OnlineMarketModel {
 						//updates items table quantity
 						dbAccess.updateItemQuantity(itemList.get(i),Integer.toString(itemQuantity-cartStock.get(i)));
 						returnStatement = returnStatement+" <<<<< "+itemList.get(i)+ " Purchase Successful >>>>\n";
-								
 					}
 					else{
 						returnStatement = returnStatement+" "+ itemList.get(i)+ "<<<<< Out Of Stock >>>>\n";
@@ -311,7 +299,6 @@ public class OnlineMarketModel {
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception-Checkout: " +e.getMessage());
 		}
-		
 		return "Error in check out";
 	}
 
@@ -452,4 +439,5 @@ public class OnlineMarketModel {
 		}
 		return removeCustStatus;
 	}
+
 }
