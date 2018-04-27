@@ -13,6 +13,9 @@ import java.sql.Statement;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/*
+	DbAccess class acts as a database access layer between model and user view
+*/
 public class DbAccess{
 
 	//creating  a new instance for mysql connection
@@ -29,6 +32,7 @@ public class DbAccess{
 	private ArrayList cartItemsData = new ArrayList();
 	private ArrayList customerDataList = new ArrayList();
 	private ResultSet customerList;
+
 	//this method checks for a valid customer or user
 	public ResultSet validateLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		
@@ -68,7 +72,6 @@ public class DbAccess{
 	
 	//browseItems allows a customer to browse over the app
 	public ResultSet browseItems(){
-		
 		System.out.println("======Your can Browse Market App to shop======");
 		//exception handling block
 		try{
@@ -76,15 +79,12 @@ public class DbAccess{
 			prepStat = remoteConn.prepareStatement("Select * from tbl_items");
 			//browsedItems stores the above executed query result
 			browsedItems=prepStat.executeQuery(); 
-			
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception- Browse Items: " +e.getMessage());
 		}
-
 		return browsedItems;
 	}
-
 
 	//view cart allows a customer to browse over the app
 	public ResultSet viewCart(){
@@ -104,6 +104,7 @@ public class DbAccess{
 		return cartItems;
 	}
 
+	//getCartId returns a cartId
 	public ResultSet getCartId(){
 		//exception handling block
 		try{
@@ -111,7 +112,6 @@ public class DbAccess{
 			prepStat=remoteConn.prepareStatement("select cart_id from tbl_cart join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where username=?");
 			prepStat.setString(1,userId);
 			rsltSet=prepStat.executeQuery();
-			
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App Exception- Get Cart Id: " +e.getMessage());
@@ -122,7 +122,6 @@ public class DbAccess{
 
 	//view customers allows a admin to browse over the app
 	public ResultSet viewCustomers(){
-
 		//exception handling block
 		try{
 			//retrieves all the customers from db
@@ -140,12 +139,11 @@ public class DbAccess{
 
 	//getCustomer method retrieves a unique customer from database
 	public ResultSet getCustomer(int customerId){
-		
+		//exception handling block
 		try{
 			//retrieve admin input customer id if exists
 			statement = remoteConn.createStatement();
 			rsltSet = statement.executeQuery("Select * from tbl_customers where customer_id="+customerId);
-
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Get Customer Exception: " +e.getMessage());
@@ -153,15 +151,14 @@ public class DbAccess{
 		return rsltSet;
 	}
 
-	//getCustomer method retrieves a unique customer from database
+	//getCustomerByUserName method retrieves a unique customer from database
 	public ResultSet getCustomerByUserName(String userName){
-		
+		//exception handling block
 		try{
 			//retrieve admin input username if exists
 			prepStat=remoteConn.prepareStatement("Select * from tbl_customers where username=?");
 			prepStat.setString(1,userName);
 			rsltSet=prepStat.executeQuery();
-
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Get Customer By Username Exception: " +e.getMessage());
@@ -169,8 +166,9 @@ public class DbAccess{
 		return rsltSet;
 	}
 
+	//getAdminByUserName method fetches a user through username
 	public ResultSet getAdminByUserName(String userName){
-		
+		//exception handling block
 		try{
 			//retrieve admin input username if exists
 			prepStat=remoteConn.prepareStatement("Select username from tbl_admin where username=?");
@@ -184,8 +182,9 @@ public class DbAccess{
 		return rsltSet;
 	}
 
+	//insertAdmin method inserts an admin record
 	public void insertAdmin(String firstName,String lastName, String userName, String password){
-		
+		//exception handling block
 		try{
 			prepStat = remoteConn.prepareStatement("Insert into tbl_admin(first_name,last_name,username,password) values(?,?,?,?)");
 			//set positional params
@@ -196,15 +195,15 @@ public class DbAccess{
 
 			//executes the insert statement with above params
 			prepStat.executeUpdate();
-
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Add Admin Exception: " +e.getMessage());
 		}
 	}
 
+	//insertCustomer method inserts a customer to db
 	public void insertCustomer(String firstName,String lastName, String userName, String password){
-		
+		//exception handling block
 		try{
 			prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 			//set positional params
@@ -233,22 +232,22 @@ public class DbAccess{
 		}
 	}
 
-
+	//deleteCustomer method deletes a customer
 	public void deleteCustomer(int customerId){
-		
+		//exception handling block
 		try{
+			//deletes customer
 			prepStat=remoteConn.prepareStatement("Delete from tbl_customers where customer_id="+customerId);
 			prepStat.executeUpdate();	
-
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Remove Customer Exception: " +e.getMessage());
 		}
-		
 	}
 
+	//getItem method retrieves selected item Id
 	public ResultSet getItem(int itemId){
-		
+		//exception handling block
 		try{
 			//retrieve admin input item id if exists
 			statement = remoteConn.createStatement();
@@ -261,8 +260,9 @@ public class DbAccess{
 		return rsltSet;
 	}
 
+	//removeItem method removes items from db
 	public void removeItem(int itemId){
-		
+		//exception handling block
 		try{
 			prepStat=remoteConn.prepareStatement("Delete from tbl_items where item_id="+itemId);
 			prepStat.executeUpdate();	
@@ -274,12 +274,12 @@ public class DbAccess{
 		
 	}
 
+	//removeCartItem method removes cart items
 	public void removeCartItem(int cartId){
-		
+		//exception handling block
 		try{
 			prepStat=remoteConn.prepareStatement("Delete from tbl_itemcart where cart_id="+cartId);
 			prepStat.executeUpdate();	
-
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Remove Cart Item Exception: " +e.getMessage());
@@ -287,7 +287,9 @@ public class DbAccess{
 		
 	}
 
+	//updateItemPrice method updates item price
 	public void updateItemPrice(int itemId,String attributeValue){
+		//exception handling block
 		try{
 			prepStat=remoteConn.prepareStatement("Update tbl_items set price=? where item_id=?");
 			prepStat.setString(1,attributeValue);
@@ -299,7 +301,9 @@ public class DbAccess{
 		}
 	}
 
+	//updateItemQuantity method updates item quantity
 	public void updateItemQuantity(int itemId,String attributeValue){
+		//exception handling block
 		try{
 			prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
 			prepStat.setInt(1,Integer.parseInt(attributeValue));
@@ -311,7 +315,9 @@ public class DbAccess{
 		}
 	}
 
+	//updateItemDesc method updates item description
 	public void updateItemDesc(int itemId,String attributeValue){
+		//exception handling block
 		try{
 			prepStat=remoteConn.prepareStatement("Update tbl_items set item_type=? where item_id=?");
 			prepStat.setString(1,attributeValue);
@@ -342,9 +348,9 @@ public class DbAccess{
 		catch (SQLException e) {
 			System.out.println("Online Market App - Insert Item Exception: " +e.getMessage());
 		}
-		
 	}
 
+	//insertItemsToCart method inserts customers items to cart
 	public void insertItemsToCart(int retrievedCId,int itemId,int itemQuantity){
 		//exception handling block
 		try{
@@ -353,14 +359,12 @@ public class DbAccess{
 			prepStat.setInt(1,retrievedCId);
 			prepStat.setInt(2,itemId);
 			prepStat.setInt(3,itemQuantity);
-
 			prepStat.executeUpdate();
-
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Insert Items to Cart Exception: " +e.getMessage());
 		}
-		
 	}
+
 
 }
