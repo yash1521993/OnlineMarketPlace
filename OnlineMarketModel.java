@@ -54,7 +54,6 @@ public class OnlineMarketModel {
 			//checks if a customer already exists with same user name
 			rsltSet=dbAccess.getCustomerByUserName(userName);
 			while(rsltSet.next()){  
-				//System.out.println("while");
 				retrievedId=rsltSet.getString("username");
 			}
 			synchronized(this){
@@ -86,7 +85,6 @@ public class OnlineMarketModel {
 				//checks if a customer already exists with same user name
 				rsltSet=dbAccess.getCustomerByUserName(userName);
 				while(rsltSet.next()){  
-					//System.out.println("while");
 					retrievedUId=rsltSet.getString("username");
 				}
 
@@ -110,7 +108,7 @@ public class OnlineMarketModel {
 
 
 		else if(regType.equalsIgnoreCase("Admin")){
-			//System.out.println("admin");
+
 			try{
 				//checks if a admin already exists with same user name
 				rsltSet=dbAccess.getAdminByUserName(userName);
@@ -120,7 +118,6 @@ public class OnlineMarketModel {
 
 				//returns reg failed msg if username already exists
 				if(retrievedUId.equalsIgnoreCase(userName)){
-					//System.out.println("admin if");
 					creationStatus= "New Admin Creation failed-User name already exists";
 				}
 
@@ -279,49 +276,32 @@ public class OnlineMarketModel {
 		try{
 			System.out.println("======Accessed Customer Check Out Method======");
 			
-			//retrieves all items with given itemId
-			
+			//retrieves all items from cart
 			rsltSet=dbAccess.viewCart();
 			while(rsltSet.next()){  
-								System.out.println("while");
 				cartStock.add(i,rsltSet.getInt("quantity"));
 				itemList.add(i,rsltSet.getInt("item_id"));
 				cartId=rsltSet.getInt("cart_id");
-				System.out.println("valuesaaaa"+rsltSet.getInt("quantity")+"---"+rsltSet.getInt("item_id")+"c"+rsltSet.getInt("cart_id"));
-				i++;
-				System.out.println("valuesaaaa"+rsltSet.getInt("quantity")+"---"+rsltSet.getInt("item_id")+"c"+rsltSet.getInt("cart_id"));
+				i++;				
 			}
 			
 			//loop through all the cart items
-			for(i = 0; i< cartStock.size();i++){System.out.println("for"+cartStock.size());
+			for(i = 0; i< cartStock.size();i++){
 					//retrieve items original stock
-					/*statement = remoteConn.createStatement();
-					rsltSet1 = statement.executeQuery("Select quantity from tbl_items where item_id="+itemList.get(i));
-								System.out.println("select"+itemList.get(i));*/
 					rsltSet1=dbAccess.getItem(itemList.get(i));
 					while(rsltSet1.next()){
 						itemQuantity=rsltSet1.getInt("quantity");
 					}
 
-					System.out.println("values"+cartStock.get(i)+"---"+itemQuantity);
 					//condition check for item out of stock
 					if(itemQuantity >= cartStock.get(i)){
-						System.out.println("ifff");
 						//updates items table quantity
-						/*prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
-						
-						prepStat.setInt(1,itemQuantity-cartStock.get(i));
-						prepStat.setInt(2,itemList.get(i));
-						prepStat.executeUpdate(itemList.get(i));*/
 						dbAccess.updateItemQuantity(itemList.get(i),Integer.toString(itemQuantity-cartStock.get(i)));
 						returnStatement = returnStatement+" <<<<< "+itemList.get(i)+ " Purchase Successful >>>>\n";
 								
 					}
 					else{
-						/*System.out.println(itemQuantity);
-						System.out.println(cartStock.get(i));
-						System.out.println(itemQuantity >= cartStock.get(i));*/
-						 returnStatement = returnStatement+" "+ itemList.get(i)+ "<<<<< Out Of Stock >>>>\n";
+						returnStatement = returnStatement+" "+ itemList.get(i)+ "<<<<< Out Of Stock >>>>\n";
 					}
 			}
 			//clears cart of respective customer
@@ -355,7 +335,6 @@ public class OnlineMarketModel {
 			rsltSet=dbAccess.getItem(itemId);
 
 			while(rsltSet.next()){
-				//System.out.println("while2");
 				itemQuantity=rsltSet.getInt("quantity");
 				itemPrice=rsltSet.getInt("price");
 				itemType=rsltSet.getString("item_type");
