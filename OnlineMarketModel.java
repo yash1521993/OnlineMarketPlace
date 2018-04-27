@@ -396,19 +396,10 @@ public class OnlineMarketModel {
 		//exception handling block
 		try{
 			//insert admin input items into dataase
-			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into tbl_items values(?,?,?,?,?)");
-			//set positional params
-			insertItem.setInt(1,itemId);
-			insertItem.setString(2,itemName);
-			insertItem.setString(3,itemType);
-			insertItem.setString(4,itemPrice);
-			insertItem.setInt(5,itemQuantity);
-			//executes the insert statement with above params
-			insertItem.executeUpdate();
-
+			dbAccess.insertItems(itemId,itemName,itemType,itemPrice,itemQuantity);
 		}
 		catch (SQLException e) {
-			System.out.println("Online Market App Exception: " +e.getMessage());
+			System.out.println("Online Market App - Add Items Exception: " +e.getMessage());
 		}
 		System.out.println("======Accessed Admin add method======");
 		return "+++++++++++Above item has been added to database+++++++++++\n";		
@@ -434,17 +425,17 @@ public class OnlineMarketModel {
 				if(itemPrice!=0){
 					//update item price
 					if(itemAttribute.equalsIgnoreCase("price")){
-						dbAccess.updateItemPrice(attributeValue,itemId);
+						dbAccess.updateItemPrice(itemId,attributeValue);
 						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 					}
 					//update item quantity
 					else if(itemAttribute.equalsIgnoreCase("quantity")){
-						dbAccess.updateItemQuantity(attributeValue,itemId);
+						dbAccess.updateItemQuantity(itemId,attributeValue);
 						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 					}
 					//update item description or type
 					else if(itemAttribute.equalsIgnoreCase("desc")){
-						dbAccess.updateItemDesc(attributeValue,itemId);
+						dbAccess.updateItemDesc(itemId,attributeValue);
 						updateStatus="+++++++++++Above item has been updated to database+++++++++++\n";
 					}
 					//nothing matches

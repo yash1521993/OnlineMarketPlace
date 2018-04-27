@@ -213,4 +213,26 @@ public class DbAccess{
 		}
 	}
 
+	//admin can add items to the inventory
+	public void insertItems(int itemId,String itemName,String itemType,String itemPrice, int itemQuantity){
+		//exception handling block
+		try{
+			//insert admin input items into dataase
+			PreparedStatement insertItem = remoteConn.prepareStatement("Insert into tbl_items values(?,?,?,?,?)");
+			//set positional params
+			insertItem.setInt(1,itemId);
+			insertItem.setString(2,itemName);
+			insertItem.setString(3,itemType);
+			insertItem.setString(4,itemPrice);
+			insertItem.setInt(5,itemQuantity);
+			//executes the insert statement with above params
+			insertItem.executeUpdate();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Insert Item Exception: " +e.getMessage());
+		}
+		
+	}
+
 }
