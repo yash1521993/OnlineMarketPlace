@@ -238,9 +238,7 @@ public class OnlineMarketModel {
 		try{
 			System.out.println("======Accessed Customer Add Items to Cart Method======");
 			//setup to execture a sql statement
-			statement = remoteConn.createStatement();
-			//retrieves all items with given itemId
-			ResultSet selectedItem=statement.executeQuery("Select * from tbl_items where item_id="+itemId);
+			ResultSet selectedItem=dbAccess.getItem(itemId);
 			while(selectedItem.next()){  
 				currentStock=selectedItem.getInt("quantity");
 				itemName=selectedItem.getString("item_name");
@@ -249,20 +247,14 @@ public class OnlineMarketModel {
 			if(itemQuantity<=currentStock){
 				
 				//retrieves cart_id of the logged in customer
-				prepStat=remoteConn.prepareStatement("select cart_id from tbl_cart join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where username=?");
-				prepStat.setString(1,userId);
-				ResultSet rsltSet1=prepStat.executeQuery();
+				
+				rsltSet1=dbAccess.getCartId();
 				while(rsltSet1.next()){
 					retrievedCId=rsltSet1.getInt(1);
 				}
 
 				//updates cart table with the customer purchased item id
-				prepStat=remoteConn.prepareStatement("Insert into tbl_itemcart values(?,?,?)");
-				prepStat.setInt(1,retrievedCId);
-				prepStat.setInt(2,itemId);
-				prepStat.setInt(3,itemQuantity);
-
-				prepStat.executeUpdate();
+				dbAccess.insertItemsToCart(retrievedCId,itemId,itemQuantity);
 				return "Your item "+itemName+" has been added to cart successfully"	;			
 			}
 			else{

@@ -104,6 +104,22 @@ public class DbAccess{
 		return cartItems;
 	}
 
+	public ResultSet getCartId(){
+		//exception handling block
+		try{
+			//retrieves all the items from db
+			prepStat=remoteConn.prepareStatement("select cart_id from tbl_cart join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where username=?");
+			prepStat.setString(1,userId);
+			rsltSet=prepStat.executeQuery();
+			
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App Exception- Get Cart Id: " +e.getMessage());
+		}
+
+		return rsltSet;
+	}
+
 	//view customers allows a admin to browse over the app
 	public ResultSet viewCustomers(){
 
@@ -312,6 +328,24 @@ public class DbAccess{
 		}
 		catch (SQLException e) {
 			System.out.println("Online Market App - Insert Item Exception: " +e.getMessage());
+		}
+		
+	}
+
+	public void insertItemsToCart(int retrievedCId,int itemId,int itemQuantity){
+		//exception handling block
+		try{
+			//insert admin input items into dataase
+			prepStat=remoteConn.prepareStatement("Insert into tbl_itemcart values(?,?,?)");
+			prepStat.setInt(1,retrievedCId);
+			prepStat.setInt(2,itemId);
+			prepStat.setInt(3,itemQuantity);
+
+			prepStat.executeUpdate();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Insert Items to Cart Exception: " +e.getMessage());
 		}
 		
 	}
