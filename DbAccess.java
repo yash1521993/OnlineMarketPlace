@@ -137,6 +137,53 @@ public class DbAccess{
 		return rsltSet;
 	}
 
+	//getCustomer method retrieves a unique customer from database
+	public ResultSet getCustomerByUserName(String userName){
+		
+		try{
+			//retrieve admin input username if exists
+			prepStat=remoteConn.prepareStatement("Select * from tbl_customers where username=?");
+			prepStat.setString(1,userName);
+			rsltSet=prepStat.executeQuery();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Get Customer By Username Exception: " +e.getMessage());
+		}
+		return rsltSet;
+	}
+
+	public void insertCustomer(String firstName,String lastName, String userName, String password){
+		
+		try{
+			prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			//set positional params
+			prepStat.setString(1,firstName);
+			prepStat.setString(2,lastName);
+			prepStat.setString(3,userName);
+			prepStat.setString(4,password);
+
+			//executes the insert statement with above params
+			prepStat.executeUpdate();
+
+			//retrieves last inserted customer id
+			rsltSet=prepStat.getGeneratedKeys();
+			if(rsltSet.next()){
+				custId=rsltSet.getInt(1);
+			}
+
+			//creates cart for each newly registered customer
+			prepStat=remoteConn.prepareStatement("Insert into tbl_cart(customer_id) values(?)");
+			prepStat.setInt(1,custId);
+			prepStat.executeUpdate();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Add Customer Exception: " +e.getMessage());
+		}
+	}
+
+
 	public void deleteCustomer(int customerId){
 		
 		try{
