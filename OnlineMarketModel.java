@@ -84,9 +84,7 @@ public class OnlineMarketModel {
 		if(regType.equalsIgnoreCase("Customer")){
 			try{
 				//checks if a customer already exists with same user name
-				prepStat=remoteConn.prepareStatement("Select * from tbl_customers where username=?");
-				prepStat.setString(1,userName);
-				rsltSet=prepStat.executeQuery();
+				rsltSet=dbAccess.getCustomerByUserName(userName);
 				while(rsltSet.next()){  
 					//System.out.println("while");
 					retrievedUId=rsltSet.getString("username");
@@ -100,26 +98,7 @@ public class OnlineMarketModel {
 				//if no match then insert a record to customers table and a cart table
 				else{
 					//insert customer registration details into dataase
-					prepStat = remoteConn.prepareStatement("Insert into tbl_customers(first_name,last_name,username,password) values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-					//set positional params
-					prepStat.setString(1,firstName);
-					prepStat.setString(2,lastName);
-					prepStat.setString(3,userName);
-					prepStat.setString(4,password);
-
-					//executes the insert statement with above params
-					prepStat.executeUpdate();
-
-					//retrieves last inserted customer id
-					rsltSet=prepStat.getGeneratedKeys();
-					if(rsltSet.next()){
-						custId=rsltSet.getInt(1);
-					}
-
-					//creates cart for each newly registered customer
-					prepStat=remoteConn.prepareStatement("Insert into tbl_cart(customer_id) values(?)");
-					prepStat.setInt(1,custId);
-					prepStat.executeUpdate();
+					dbAccess.insertCustomer(firstName,lastName,userName,password);
 					creationStatus="You have now successfully created a Customer account";
 				}
 			}	//end try
@@ -133,10 +112,8 @@ public class OnlineMarketModel {
 		else if(regType.equalsIgnoreCase("Admin")){
 			//System.out.println("admin");
 			try{
-				//checks if a customer already exists with same user name
-				prepStat=remoteConn.prepareStatement("Select username from tbl_admin where username=?");
-				prepStat.setString(1,userName);
-				rsltSet=prepStat.executeQuery();
+				//checks if a admin already exists with same user name
+				rsltSet=dbAccess.getAdminByUserName(userName);
 				while(rsltSet.next()){  
 					retrievedUId=rsltSet.getString("username");
 				}
@@ -147,18 +124,10 @@ public class OnlineMarketModel {
 					creationStatus= "New Admin Creation failed-User name already exists";
 				}
 
-				//if no match then insert a record to customers table and a cart table
+				//if no match then insert a record to admin table
 				else{
-					//insert customer registration details into dataase
-					prepStat = remoteConn.prepareStatement("Insert into tbl_admin(first_name,last_name,username,password) values(?,?,?,?)");
-					//set positional params
-					prepStat.setString(1,firstName);
-					prepStat.setString(2,lastName);
-					prepStat.setString(3,userName);
-					prepStat.setString(4,password);
-
-					//executes the insert statement with above params
-					prepStat.executeUpdate();
+					//insert admin registration details into dataase
+					dbAccess.insertAdmin(firstName,lastName,userName,password);
 
 					creationStatus="You have now successfully created a Admin account";
 				}

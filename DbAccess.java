@@ -153,6 +153,40 @@ public class DbAccess{
 		return rsltSet;
 	}
 
+	public ResultSet getAdminByUserName(String userName){
+		
+		try{
+			//retrieve admin input username if exists
+			prepStat=remoteConn.prepareStatement("Select username from tbl_admin where username=?");
+			prepStat.setString(1,userName);
+			rsltSet=prepStat.executeQuery();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Get Admin By Username Exception: " +e.getMessage());
+		}
+		return rsltSet;
+	}
+
+	public void insertAdmin(String firstName,String lastName, String userName, String password){
+		
+		try{
+			prepStat = remoteConn.prepareStatement("Insert into tbl_admin(first_name,last_name,username,password) values(?,?,?,?)");
+			//set positional params
+			prepStat.setString(1,firstName);
+			prepStat.setString(2,lastName);
+			prepStat.setString(3,userName);
+			prepStat.setString(4,password);
+
+			//executes the insert statement with above params
+			prepStat.executeUpdate();
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Add Admin Exception: " +e.getMessage());
+		}
+	}
+
 	public void insertCustomer(String firstName,String lastName, String userName, String password){
 		
 		try{
