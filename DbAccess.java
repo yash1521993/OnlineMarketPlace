@@ -274,6 +274,19 @@ public class DbAccess{
 		
 	}
 
+	public void removeCartItem(int cartId){
+		
+		try{
+			prepStat=remoteConn.prepareStatement("Delete from tbl_itemcart where cart_id="+cartId);
+			prepStat.executeUpdate();	
+
+		}
+		catch (SQLException e) {
+			System.out.println("Online Market App - Remove Cart Item Exception: " +e.getMessage());
+		}
+		
+	}
+
 	public void updateItemPrice(int itemId,String attributeValue){
 		try{
 			prepStat=remoteConn.prepareStatement("Update tbl_items set price=? where item_id=?");

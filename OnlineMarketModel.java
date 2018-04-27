@@ -279,37 +279,41 @@ public class OnlineMarketModel {
 		try{
 			System.out.println("======Accessed Customer Check Out Method======");
 			
-			//setup to execture a sql statement
-			statement = remoteConn.createStatement();
 			//retrieves all items with given itemId
-			prepStat = remoteConn.prepareStatement("Select * from tbl_itemcart join tbl_cart on tbl_cart.cart_id=tbl_itemcart.cart_id join tbl_customers on tbl_customers.customer_id=tbl_cart.customer_id where tbl_customers.username=?");
-			prepStat.setString(1,userId);
-			rsltSet=prepStat.executeQuery(); 
+			
+			rsltSet=dbAccess.viewCart();
 			while(rsltSet.next()){  
+								System.out.println("while");
 				cartStock.add(i,rsltSet.getInt("quantity"));
 				itemList.add(i,rsltSet.getInt("item_id"));
 				cartId=rsltSet.getInt("cart_id");
+				System.out.println("valuesaaaa"+rsltSet.getInt("quantity")+"---"+rsltSet.getInt("item_id")+"c"+rsltSet.getInt("cart_id"));
 				i++;
+				System.out.println("valuesaaaa"+rsltSet.getInt("quantity")+"---"+rsltSet.getInt("item_id")+"c"+rsltSet.getInt("cart_id"));
 			}
 			
 			//loop through all the cart items
-			for(i = 0; i< cartStock.size();i++){
+			for(i = 0; i< cartStock.size();i++){System.out.println("for"+cartStock.size());
 					//retrieve items original stock
+					/*statement = remoteConn.createStatement();
 					rsltSet1 = statement.executeQuery("Select quantity from tbl_items where item_id="+itemList.get(i));
+								System.out.println("select"+itemList.get(i));*/
+					rsltSet1=dbAccess.getItem(itemList.get(i));
 					while(rsltSet1.next()){
 						itemQuantity=rsltSet1.getInt("quantity");
 					}
 
-					//System.out.println("values"+cartStock.get(i)+"---"+itemQuantity);
+					System.out.println("values"+cartStock.get(i)+"---"+itemQuantity);
 					//condition check for item out of stock
 					if(itemQuantity >= cartStock.get(i)){
-						//System.out.println("ifff");
+						System.out.println("ifff");
 						//updates items table quantity
-						prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
+						/*prepStat=remoteConn.prepareStatement("Update tbl_items set quantity=? where item_id=?");
 						
 						prepStat.setInt(1,itemQuantity-cartStock.get(i));
 						prepStat.setInt(2,itemList.get(i));
-						prepStat.executeUpdate();
+						prepStat.executeUpdate(itemList.get(i));*/
+						dbAccess.updateItemQuantity(itemList.get(i),Integer.toString(itemQuantity-cartStock.get(i)));
 						returnStatement = returnStatement+" <<<<< "+itemList.get(i)+ " Purchase Successful >>>>\n";
 								
 					}
@@ -321,8 +325,7 @@ public class OnlineMarketModel {
 					}
 			}
 			//clears cart of respective customer
-			prepStat=remoteConn.prepareStatement("Delete from tbl_itemcart where cart_id="+cartId);
-			prepStat.executeUpdate();
+			dbAccess.removeCartItem(cartId);
 			return 	returnStatement;
 		}
 		catch (SQLException e) {
@@ -348,7 +351,7 @@ public class OnlineMarketModel {
 		int itemPrice=0,itemQuantity=0;
 		//exception handling block
 		try{
-			//retrieve admin input item id if exists
+			//retrieve admin input item id if exists.
 			rsltSet=dbAccess.getItem(itemId);
 
 			while(rsltSet.next()){
