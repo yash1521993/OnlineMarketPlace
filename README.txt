@@ -3,7 +3,7 @@
 **************************************************************************************************
 1	-Open a session of putty after uploading all java source files and makefiles to Tesla.
 2	-Server used for this assignement is on //10.234.136.55:5432/ machine
-3	-For SQL Connection, jar file is placed in this path: /home/yashkuru/OOAD/5Assignment/mysql-connector-java-5.1.46.jar
+3	-For SQL Connection, jar file is placed in this path: /home/yashkuru/OOAD/6Assignment/mysql-connector-java-5.1.46.jar
 4	-Run the RMI registry either normally or in background on the above server 55. To do this in background use:	
 		$rmiregistry 5432&
 5	-Run the makefileS.sh to run the server side files using(on server 10.234.136.55)
