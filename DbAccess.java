@@ -65,7 +65,7 @@ public class DbAccess{
 	
 	//browseItems allows a customer to browse over the app
 	public ResultSet browseItems(){
-		System.out.println("======Your can Browse Market App to shop======");
+		
 		//exception handling block
 		try{
 			//retrieves all the items from db
