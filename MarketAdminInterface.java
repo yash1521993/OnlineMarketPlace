@@ -9,7 +9,7 @@
 	Admin interface containing adminINfo
 */
 public interface MarketAdminInterface{
-	//partially implemented admin related methods
+	//admin related methods
 	public void adminInfo();
 	public void addItems(Session session);
 	public void updateItems(Session session);

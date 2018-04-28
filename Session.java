@@ -17,10 +17,9 @@ public class Session implements java.io.Serializable{
 
 	// FIXED: Made the variable private
 	private String loginType;
-	//boolean loginStatus;
+	
 	public Session(String loginType){
 		this.loginType=loginType;
-		//this.loginStatus=loginStatus;
 	}
 
 	//returns login type

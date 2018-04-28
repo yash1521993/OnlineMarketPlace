@@ -11,21 +11,21 @@
 */
 public class AddMarketItems implements AdminCmdInterface{
 	//object declaration
-	private MarketAdminInterface custCommand;
+	private MarketAdminInterface adminCommand;
 	// Ryan: Should this really be publicly visible?
 
 	// FIXED: Made the variable private
 	private Session session;
 	//constructor initializing session and customer commands
-	public AddMarketItems(MarketAdminInterface custCommand, Session session){
-      this.custCommand = custCommand;
+	public AddMarketItems(MarketAdminInterface adminCommand, Session session){
+      this.adminCommand = adminCommand;
       this.session=session;
 	}
 	
 	//calling addItems() method
 	@Override
 	public void adminTasks(){
-		custCommand.addItems(session);
+		adminCommand.addItems(session);
 		
 	}
 }

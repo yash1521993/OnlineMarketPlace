@@ -139,8 +139,8 @@ public class OnlineMarketModel {
 		if(loginType.equalsIgnoreCase("Admin")){
 			try{
 				ResultSet rs= dbAccess.validateLogin(inputId,inputPwd,loginType);
+				//checks for a matched record from db
 				if(rs.next()){
-					
 					System.out.println("Admin Login Success");
 					loginCheck=true;
 				}
@@ -159,6 +159,7 @@ public class OnlineMarketModel {
 		if(loginType.equalsIgnoreCase("Customer")){
 			try{
 				ResultSet rs= dbAccess.validateLogin(inputId,inputPwd,loginType);
+				//checks for a matched record from db
 				if(rs.next()){
 					userId=inputId;
 					System.out.println("Customer Login Success");
@@ -180,7 +181,7 @@ public class OnlineMarketModel {
 	//browseItems allows a customer to browse over the app
 	@SuppressWarnings("unchecked")
 	public ArrayList browseItems(){
-		System.out.println("======Your can Browse Market App to shop======");
+		
 		//exception handling block
 		try{
 			browsedItems=dbAccess.browseItems();
@@ -200,7 +201,7 @@ public class OnlineMarketModel {
 	//view cart allows a customer to browse over the app
 	@SuppressWarnings("unchecked")
 	public ArrayList viewCart(){
-		System.out.println("======Accessed cart view method======");
+		
 		//exception handling block
 		try{
 			cartItems=dbAccess.viewCart();
@@ -223,7 +224,7 @@ public class OnlineMarketModel {
 		String itemName="";
 		//exception handling block
 		try{
-			System.out.println("======Accessed Customer Add Items to Cart Method======");
+			
 			//setup to execture a sql statement
 			ResultSet selectedItem=dbAccess.getItem(itemId);
 			while(selectedItem.next()){  
@@ -261,10 +262,9 @@ public class OnlineMarketModel {
 		ArrayList<Integer> cartStock = new ArrayList<Integer>();
 		int i =0;
 		String returnStatement = "";
+
 		//exception handling block
-		try{
-			System.out.println("======Accessed Customer Check Out Method======");
-			
+		try{			
 			//retrieves all items from cart
 			rsltSet=dbAccess.viewCart();
 			while(rsltSet.next()){  
@@ -304,11 +304,8 @@ public class OnlineMarketModel {
 
 	//admin can add items to the inventory
 	public String addItems(int itemId,String itemName,String itemType,String itemPrice, int itemQuantity){
-
 		//insert admin input items into dataase
 		dbAccess.insertItems(itemId,itemName,itemType,itemPrice,itemQuantity);
-	
-		System.out.println("======Accessed Admin add method======");
 		return "+++++++++++Above item has been added to database+++++++++++\n";		
 	}
 
@@ -360,7 +357,6 @@ public class OnlineMarketModel {
 		catch (SQLException e) {
 			System.out.println("Online Market App - Update Items Exception: " +e.getMessage());
 		}
-		System.out.println("======Accessed Admin Update method======");
 		return updateStatus;		
 	}
 
@@ -395,7 +391,6 @@ public class OnlineMarketModel {
 	//view customers allows a admin to browse over the app
 	@SuppressWarnings("unchecked")
 	public ArrayList viewCustomers(){
-		System.out.println("======Accessed view all customers method======");
 		//exception handling block
 		try{
 			customerList=dbAccess.viewCustomers();

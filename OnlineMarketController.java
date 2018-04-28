@@ -41,7 +41,6 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	public boolean validateAdminLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.validateLogin(inputId,inputPwd,loginType);
-	
 	}
 
 	//overridden method to validate customer login
@@ -49,7 +48,6 @@ public class OnlineMarketController extends UnicastRemoteObject implements Onlin
 	public boolean validateCustomerLogin(String inputId,String inputPwd,String loginType) throws RemoteException{
 		OnlineMarketModel modelObj= new OnlineMarketModel();
 		return modelObj.validateLogin(inputId,inputPwd,loginType);
-	
 	}
 
 	//overridden sync method to browse items

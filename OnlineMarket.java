@@ -17,19 +17,17 @@ import java.util.ArrayList;
 //interface should extend from Remote super class
 public interface OnlineMarket extends java.rmi.Remote {
 	
-	//this method registers a new customer
-	String registerCustomer(String firstName,String lastName,String userName,String password) throws java.rmi.RemoteException;
-	
 	//this method verifies for a valid admin based on role
-	//@AnnotateInterface("admin")
 	boolean validateAdminLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
 	//role based login verification for customer
-	//@AnnotateInterface("customer")
 	boolean validateCustomerLogin(String inputId,String inputPwd,String loginType) throws java.rmi.RemoteException;
 
+	//this method registers a new customer
+	@AnnotateInterface("customer")
+	String registerCustomer(String firstName,String lastName,String userName,String password) throws java.rmi.RemoteException;
+	
 	//role based access for customer to browse items
-	//@AnnotateInterface("customer")
 	@SuppressWarnings("unchecked")
 	public ArrayList browseItems(Session session) throws java.rmi.RemoteException;
 

@@ -12,9 +12,7 @@
 public class ViewCart implements CustomerCmdInterface{
 	//object declaration
 	private MarketCustomerInterface custCommand;
-	// Ryan: Should this really be publicly visible?
-
-	// FIXED: Made the variable private
+	
 	private Session session;
 	//constructor initializing customer commands and session
 	public ViewCart(MarketCustomerInterface custCommand, Session session){

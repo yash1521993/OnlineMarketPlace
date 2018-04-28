@@ -41,7 +41,7 @@ public class MarketViewController{
 			System.out.println("----- "+userDetails+" ----");
 		}
 		catch(Exception e){
-				System.out.println("Online Market App Exception: " +e.getMessage());
+			System.out.println("Online Market App Exception: " +e.getMessage());
 		}
 	}
 
@@ -57,12 +57,10 @@ public class MarketViewController{
 			if(loginType.equalsIgnoreCase("admin")) {
 				loginStatus=marketApp.validateAdminLogin(inputId,inputPwd,loginType);
 				System.out.println("Login Status:" + loginStatus);
-				//return loginStatus;
 			}
 			else if(loginType.equalsIgnoreCase("customer")){
 				loginStatus=marketApp.validateCustomerLogin(inputId,inputPwd,loginType);
 				System.out.println("Login Status:" + loginStatus);
-				//return loginStatus;
 			}
 			else
 				System.out.println(">>>>>Input should be only from either of the above roles<<<<<<");
@@ -226,13 +224,6 @@ public class MarketViewController{
 			String name = "//10.234.136.55:5432/OnlineMarketServer";
 			marketApp = (OnlineMarket) Naming.lookup(name);
 			
-			//calling interface implemented methods
-			//regId = marketApp.regId();
-			
-			//register=marketApp.registerCustomer(regType,firstName,lastName,loginId,password);
-			//System.out.println("Registration ID: " + regId);
-			
-			//System.out.println("Registration Status: "+register);
 			//market common view instance
 			MarketCommonView marketView=new MarketCommonView();
 			//loop for continuous input i.e., either login or register
@@ -250,7 +241,7 @@ public class MarketViewController{
 			}
 		} 
 		catch(Exception e){
-			System.out.println("Online Market App Exception: " +e.getMessage());
+			System.out.println("Online Market App - View Controller Exception: " +e.getMessage());
 		}
 		
 		System.exit(0);

@@ -18,7 +18,7 @@ import java.rmi.RemoteException;
 */
 public class DbAccess{
 
-	//creating  a new instance for mysql connection
+	//creating  a new instance for mysql connection if null
 	private SqlConnection connectSql=new SqlConnection();
 	private Connection remoteConn=connectSql.connectMySql();
 	private PreparedStatement prepStat;

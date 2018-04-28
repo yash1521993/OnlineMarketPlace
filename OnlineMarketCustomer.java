@@ -20,6 +20,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 	private MarketViewController mvc=new MarketViewController();
 	private String samp;
 	private ArrayList browseItem,cartItem;
+
 	//overriding interface method
 	@Override
 	public void customerInfo(){
@@ -28,15 +29,15 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 		System.out.println("------------------------------------");
 	}
 
-	//member method- purchaseItems helps a customer to purchase items
+	//member method- addItemsToCart helps a customer to add items to cart
 	@Override
 	public void addItemsToCart(Session session){
 		try{
 			System.out.print("+++++++++++Add items to cart here+++++++++++\n");
 			//scanner class allows the admin to enter his/her input
 			Scanner scanner = new Scanner(System.in);
+
 			//read input item name and quantity
-			
 			System.out.print("Enter Item Id of the above Items you wish: ");
 			int itemId = scanner.nextInt();
 
@@ -44,7 +45,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 			int itemQuantity = scanner.nextInt();
 
 			samp=mvc.addItemsToCart(session,itemId,itemQuantity);
-			//System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+			
 			System.out.println(samp);
 		}
 		catch(Exception e){
@@ -61,7 +62,7 @@ public class OnlineMarketCustomer implements MarketCustomerInterface{
 			//scanner class allows the admin to enter his/her input
 
 			samp=mvc.purchaseItems(session);
-			//System.out.println("ItemId"+"  "+"ItemName"+"  "+"ItemPrice"+"  "+"ItemQuantity");
+			
 			System.out.println(samp);
 		}
 		catch(Exception e){

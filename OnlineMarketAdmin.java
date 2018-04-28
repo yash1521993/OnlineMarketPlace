@@ -19,12 +19,14 @@ import java.util.Scanner;
 //this file contains the view
 
 /*
- *	OnlineMarketAdmin - Creates admin view
+ *	OnlineMarketAdmin - Creates admin view implements admin interface
  */
 public class OnlineMarketAdmin implements MarketAdminInterface{
+
 	private MarketViewController mvc=new MarketViewController();
 	private String samp;
 	private ArrayList browseItem,viewCustomers;
+
 	//overriding
 	@Override
 	public void adminInfo(){
